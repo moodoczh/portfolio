@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>YOUR NAME — Selected Works</title>
+<meta name="description" content="综合创作者 · 设计 / 开发 / 实验 作品集" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#08080a;
+  --bg2:#0d0d10;
+  --ink:#f4f4f2;
+  --muted:#8a8a90;
+  --faint:#3a3a40;
+  --line:rgba(255,255,255,.09);
+  --accent:#c9c4ff;
+  --card:#101014;
+  --pad: clamp(20px, 5vw, 80px);
+  --serif:"Instrument Serif", Georgia, "Times New Roman", serif;
+  --sans:"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+html,body{background:var(--bg);color:var(--ink);font-family:var(--sans)}
+body{overflow-x:hidden;line-height:1.5;-webkit-font-smoothing:antialiased;letter-spacing:-.01em}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+::selection{background:var(--accent);color:#000}
+
+/* ---------- custom cursor ---------- */
+.cursor,.cursor-dot{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;border-radius:50%;
+  transform:translate(-50%,-50%);will-change:transform;mix-blend-mode:difference}
+.cursor{width:36px;height:36px;border:1px solid #fff;transition:width .3s cubic-bezier(.22,1,.36,1),height .3s cubic-bezier(.22,1,.36,1),background .3s,opacity .3s}
+.cursor-dot{width:5px;height:5px;background:#fff}
+.cursor.grow{width:74px;height:74px;background:rgba(255,255,255,.12);border-color:transparent}
+.cursor.grow-text::after{content:attr(data-label);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:10px;letter-spacing:.12em;color:#fff;text-transform:uppercase}
+@media (hover:none),(pointer:coarse){.cursor,.cursor-dot{display:none}}
+
+/* scroll progress */
+.progress{position:fixed;top:0;left:0;height:2px;width:100%;transform:scaleX(0);transform-origin:0 50%;
+  background:linear-gradient(90deg,var(--accent),#7d76ff);z-index:9000}
+
+/* ---------- preloader ---------- */
+.loader{position:fixed;inset:0;z-index:10000;background:var(--bg);display:flex;align-items:flex-end;justify-content:space-between;
+  padding:var(--pad);transition:transform 1s cubic-bezier(.76,0,.24,1)}
+.loader.done{transform:translateY(-100%)}
+.loader .num{font-family:var(--serif);font-size:clamp(64px,18vw,220px);line-height:.82;letter-spacing:-.03em}
+.loader .lbl{font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);padding-bottom:.6em}
+
+/* ---------- background canvas ---------- */
+#bg{position:fixed;inset:0;z-index:-2;opacity:.9}
+.grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode:overlay}
+
+/* ---------- nav ---------- */
+nav{position:fixed;top:0;left:0;width:100%;z-index:800;display:flex;align-items:center;justify-content:space-between;
+  padding:22px var(--pad);transition:background .4s,padding .4s,backdrop-filter .4s}
+nav.solid{background:rgba(8,8,10,.6);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding-top:16px;padding-bottom:16px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:600;font-size:14px;letter-spacing:.02em}
+.brand .mark{width:26px;height:26px;border-radius:7px;background:conic-gradient(from 210deg,#7d76ff,#c9c4ff,#7d76ff);display:grid;place-items:center;font-family:var(--serif);color:#0a0a0a;font-size:16px;font-style:italic}
+.navlinks{display:flex;gap:34px;font-size:13px;color:var(--muted)}
+.navlinks a{position:relative;transition:color .3s}
+.navlinks a::after{content:"";position:absolute;left:0;bottom:-4px;height:1px;width:0;background:var(--ink);transition:width .35s cubic-bezier(.22,1,.36,1)}
+.navlinks a:hover{color:var(--ink)}
+.navlinks a:hover::after{width:100%}
+.navcta{border:1px solid var(--line);padding:9px 18px;border-radius:100px;font-size:12.5px;letter-spacing:.03em;
+  display:flex;align-items:center;gap:8px;transition:background .35s,color .35s,border-color .35s}
+.navcta:hover{background:var(--ink);color:#0a0a0a;border-color:var(--ink)}
+.navcta .dot{width:6px;height:6px;border-radius:50%;background:#4ade80;box-shadow:0 0 0 0 rgba(74,222,128,.6);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(74,222,128,.5)}70%{box-shadow:0 0 0 8px rgba(74,222,128,0)}100%{box-shadow:0 0 0 0 rgba(74,222,128,0)}}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px}
+.burger span{width:22px;height:2px;background:var(--ink);transition:.3s}
+
+/* ---------- hero ---------- */
+.hero{min-height:100svh;position:relative;display:flex;flex-direction:column;justify-content:center;padding:0 var(--pad);padding-top:80px}
+.hero h1{font-size:clamp(44px,8.4vw,150px);line-height:.94;font-weight:600;letter-spacing:-.035em;max-width:15ch}
+.hero h1 .em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.01em;color:var(--accent)}
+.reveal-line{display:block;overflow:hidden}
+.reveal-line>span{display:block;transform:translateY(110%);transition:transform 1s cubic-bezier(.22,1,.36,1)}
+.hero.in .reveal-line>span{transform:translateY(0)}
+.hero .sub{margin-top:34px;max-width:42ch;color:var(--muted);font-size:clamp(15px,1.4vw,18px);opacity:0;transform:translateY(20px);transition:.9s .5s cubic-bezier(.22,1,.36,1)}
+.hero.in .sub{opacity:1;transform:none}
+.hero .row{margin-top:44px;display:flex;align-items:center;gap:26px;flex-wrap:wrap;opacity:0;transform:translateY(20px);transition:.9s .68s cubic-bezier(.22,1,.36,1)}
+.hero.in .row{opacity:1;transform:none}
+.btn{display:inline-flex;align-items:center;gap:14px;background:var(--ink);color:#0a0a0a;padding:15px 26px;border-radius:100px;
+  font-size:13px;letter-spacing:.05em;text-transform:uppercase;font-weight:600;overflow:hidden;position:relative}
+.btn span{position:relative;z-index:2}
+.btn::before{content:"";position:absolute;inset:0;background:var(--accent);transform:translateY(101%);transition:transform .5s cubic-bezier(.76,0,.24,1);z-index:1}
+.btn:hover::before{transform:translateY(0)}
+.btn .arw{transition:transform .4s;position:relative;z-index:2}
+.btn:hover .arw{transform:translate(4px,-4px)}
+.hero .meta{color:var(--muted);font-size:13px}
+
+/* rotating badge */
+.badge{position:absolute;top:22%;right:var(--pad);width:132px;height:132px;pointer-events:none;opacity:0;transition:opacity 1s 1s}
+.hero.in .badge{opacity:1}
+.badge svg{width:100%;height:100%;animation:spin 18s linear infinite}
+.badge text{font-size:8.2px;letter-spacing:.24em;fill:var(--muted);text-transform:uppercase;font-family:var(--sans)}
+.badge .arrow{position:absolute;inset:0;display:grid;place-items:center;font-size:22px;color:var(--ink)}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.scrollcue{position:absolute;bottom:30px;left:var(--pad);display:flex;align-items:center;gap:12px;font-size:11px;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.scrollcue .bar{width:44px;height:1px;background:var(--faint);position:relative;overflow:hidden}
+.scrollcue .bar::after{content:"";position:absolute;inset:0;background:var(--ink);transform:translateX(-100%);animation:sweep 2.2s infinite}
+@keyframes sweep{50%{transform:translateX(0)}100%{transform:translateX(100%)}}
+
+/* ---------- marquee ---------- */
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:26px 0;overflow:hidden;white-space:nowrap;background:var(--bg2)}
+.marquee .track{display:inline-flex;gap:52px;will-change:transform}
+.marquee span{font-family:var(--serif);font-style:italic;font-size:clamp(26px,4vw,54px);color:var(--faint);display:inline-flex;align-items:center;gap:52px}
+.marquee span::after{content:"✦";font-size:.5em;color:var(--accent);font-style:normal}
+
+/* ---------- section shell ---------- */
+section{position:relative}
+.works{padding:clamp(70px,10vw,140px) var(--pad) 40px}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;margin-bottom:14px}
+.sec-head h2{font-size:clamp(13px,1.3vw,15px);text-transform:uppercase;letter-spacing:.18em;color:var(--muted);font-weight:500;display:flex;align-items:center;gap:12px}
+.sec-head h2::before{content:"";width:34px;height:1px;background:var(--faint)}
+.sec-head .count{font-family:var(--serif);font-size:clamp(40px,6vw,86px);line-height:1;letter-spacing:-.02em}
+
+/* filter */
+.filter{display:flex;gap:8px;flex-wrap:wrap;margin:36px 0 54px}
+.filter button{border:1px solid var(--line);background:transparent;color:var(--muted);padding:10px 20px;border-radius:100px;
+  font-size:13px;cursor:pointer;font-family:var(--sans);transition:.35s;letter-spacing:.02em}
+.filter button:hover{color:var(--ink);border-color:var(--muted)}
+.filter button.active{background:var(--ink);color:#0a0a0a;border-color:var(--ink)}
+
+/* group heading */
+.group{margin-bottom:clamp(60px,8vw,120px)}
+.group-title{display:grid;grid-template-columns:1fr;gap:8px;margin-bottom:34px}
+.group-title h3{font-size:clamp(30px,5vw,64px);font-weight:600;letter-spacing:-.03em;line-height:1}
+.group-title h3 .idx{font-family:var(--serif);font-style:italic;color:var(--accent);font-size:.5em;vertical-align:super;margin-right:.3em}
+.group-title p{color:var(--muted);font-size:14px;max-width:46ch}
+
+/* grid */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,30px)}
+.card{position:relative;cursor:pointer;opacity:0;transform:translateY(46px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+.card.in{opacity:1;transform:none}
+.card .thumb{position:relative;aspect-ratio:336/252;border-radius:14px;overflow:hidden;background:var(--card);border:1px solid var(--line);
+  transform-style:preserve-3d;transition:box-shadow .5s}
+.card .thumb img{width:100%;height:100%;object-fit:cover;transform:scale(1.02);transition:transform .8s cubic-bezier(.22,1,.36,1);filter:saturate(1.05)}
+.card:hover .thumb img{transform:scale(1.08)}
+.card .thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.55));opacity:0;transition:opacity .5s}
+.card:hover .thumb::after{opacity:1}
+.card .view{position:absolute;left:16px;bottom:16px;z-index:3;display:flex;align-items:center;gap:9px;font-size:12px;letter-spacing:.05em;
+  text-transform:uppercase;color:#fff;opacity:0;transform:translateY(10px);transition:.5s}
+.card:hover .view{opacity:1;transform:none}
+.card .view .ic{width:30px;height:30px;border-radius:50%;background:var(--ink);color:#0a0a0a;display:grid;place-items:center}
+.card .meta{display:flex;justify-content:space-between;align-items:flex-start;padding:16px 4px 0;gap:16px}
+.card .meta .no{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums;padding-top:3px}
+.card .meta .t{font-size:16px;font-weight:600;letter-spacing:-.01em}
+.card .meta .d{font-size:13px;color:var(--muted);margin-top:2px}
+.card .meta .tag{font-size:11px;color:var(--muted);border:1px solid var(--line);padding:4px 10px;border-radius:100px;white-space:nowrap}
+.card.hide{display:none}
+
+/* ---------- stats ---------- */
+.stats{padding:clamp(70px,10vw,130px) var(--pad);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);gap:30px}
+.stat .n{font-family:var(--serif);font-size:clamp(50px,8vw,110px);line-height:1;letter-spacing:-.02em}
+.stat .n .plus{color:var(--accent)}
+.stat .c{color:var(--muted);font-size:13px;margin-top:10px;letter-spacing:.02em}
+
+/* ---------- contact ---------- */
+.contact{padding:clamp(80px,12vw,180px) var(--pad);border-top:1px solid var(--line);position:relative;overflow:hidden}
+.contact h2{font-size:clamp(44px,10vw,170px);line-height:.92;font-weight:600;letter-spacing:-.035em}
+.contact h2 .em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--accent)}
+.contact .lead{margin-top:30px;color:var(--muted);max-width:44ch;font-size:clamp(15px,1.5vw,18px)}
+.contact .mail{display:inline-flex;align-items:center;gap:16px;margin-top:44px;font-size:clamp(20px,3vw,40px);
+  font-family:var(--serif);border-bottom:1px solid var(--faint);padding-bottom:10px;transition:border-color .4s}
+.contact .mail:hover{border-color:var(--ink)}
+.contact .mail .arw{font-family:var(--sans);transition:transform .4s}
+.contact .mail:hover .arw{transform:translate(6px,-6px)}
+.socials{margin-top:60px;display:flex;gap:30px;flex-wrap:wrap;font-size:14px}
+.socials a{color:var(--muted);position:relative;transition:color .3s}
+.socials a:hover{color:var(--ink)}
+
+/* ---------- footer ---------- */
+footer{padding:36px var(--pad);border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;
+  gap:20px;flex-wrap:wrap;color:var(--muted);font-size:12.5px}
+footer .brand2{display:flex;align-items:center;gap:10px;color:var(--ink)}
+.totop{cursor:pointer;display:flex;align-items:center;gap:8px;transition:color .3s}
+.totop:hover{color:var(--ink)}
+
+/* reveal util */
+.rise{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
+.rise.in{opacity:1;transform:none}
+
+/* ---------- responsive ---------- */
+@media (max-width:1024px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .stats{grid-template-columns:repeat(2,1fr);gap:44px 30px}
+  .badge{width:104px;height:104px;top:18%}
+}
+@media (max-width:640px){
+  .navlinks,.navcta{display:none}
+  .burger{display:flex}
+  .grid{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  .badge{display:none}
+  .hero{padding-top:96px}
+  .sec-head{align-items:flex-start}
+  .card{opacity:1;transform:none} /* ensure content shows even if observer misses */
+  .card.js .card-inner{}
+}
+/* mobile menu (hidden entirely on desktop; only shown < 640px) */
+.mobmenu{display:none;position:fixed;inset:0;z-index:850;background:var(--bg);flex-direction:column;justify-content:center;gap:8px;
+  padding:var(--pad);transform:translateY(-100%);transition:transform .7s cubic-bezier(.76,0,.24,1);pointer-events:none}
+@media (max-width:640px){.mobmenu{display:flex}}
+.mobmenu.open{transform:none;pointer-events:auto}
+.mobmenu a{font-size:12vw;font-weight:600;letter-spacing:-.03em}
+.mobmenu .close{position:absolute;top:22px;right:var(--pad);font-size:14px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+.mobmenu .mm-foot{margin-top:40px;font-size:14px;color:var(--muted);font-weight:400;letter-spacing:0}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms!important;transition-duration:.001ms!important}
+  .reveal-line>span{transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="progress" id="progress"></div>
+
+<!-- preloader -->
+<div class="loader" id="loader">
+  <div class="num" id="loadNum">00</div>
+  <div class="lbl">Selected Works — 2024 / 2026</div>
+</div>
+
+<!-- animated background -->
+<canvas id="bg"></canvas>
+<div class="grain"></div>
+
+<!-- nav -->
+<nav id="nav">
+  <a href="#top" class="brand" data-cursor><span class="mark">Y</span> YOUR NAME</a>
+  <div class="navlinks">
+    <a href="#works">Works</a>
+    <a href="#about">About</a>
+    <a href="#lab">Lab</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="#contact" class="navcta" data-cursor><span class="dot"></span> 可接洽合作</a>
+  <div class="burger" id="burger"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- mobile menu -->
+<div class="mobmenu" id="mobmenu">
+  <div class="close" id="mmClose">Close ✕</div>
+  <a href="#works">Works</a>
+  <a href="#about">About</a>
+  <a href="#lab">Lab</a>
+  <a href="#contact">Contact</a>
+  <div class="mm-foot">hello@yourname.com</div>
+</div>
+
+<!-- hero -->
+<header class="hero" id="top">
+  <h1>
+    <span class="reveal-line"><span>打造有 <span class="em">情绪</span></span></span>
+    <span class="reveal-line"><span>与秩序的</span></span>
+    <span class="reveal-line"><span>数字作品。</span></span>
+  </h1>
+  <p class="sub">综合创作者 —— 游走于设计、开发与实验之间。这里昀l��这�选项目spa入口,加载更轻��访问更快,完整�集" />
+另附span>pdiv class="mm-forow  <a href="#works">Works="burgertna-cursor><span clas>探索�集" n> 可� class="revearan">↗n></span>a <span class="revea.tag">Destem���Enop:eer/
+.g��Exse;iSerisn>
+  </h1>
+ 
+<!-- v class="burgerdispa-cursor><span<span cvgport-Box="gba(;tr(;tr  <a hrv clefs><pathcursorirclePatha-c="M50,50 m-37,0 a37,37ba(;,1 74,0 a37,37ba(;,1 -74,0"/v>
+<efs><a hrv ctran>ctranPath="#contacirclePatha>MINIMALg��EMOTIONALg��CRAFTEDg��</tranPath></trann<span 3E")n<span lass="burge{posi">↗n>  <a hre 
+<!-- v class="burgelcue .bar"n class="dot">barpan> 可�Scue .>
+</div>
+r clas-- mobilee -------v class="mobmene ----"mmClose ----"div class="mm-fo{disp" <span clas>", -afacen><span></spaM:redun><span></spamFont,sn><span></spaPrhov'fran><span></spaB datn><span></spamhclasn>
+    <span clas>", -afacen><span></spaM:redun><span></spamFont,sn><span></spaPrhov'fran><span></spaB datn><span></spamhclasn>
+    <sp>
+</div>
+
+<!-- hero ">Wor---v con shell="mm-fo">WorksmClo">Works v class="burgelad .counin{o" <span h2>ted Works</titleh2><span lass="burge{fonta-cursorfont="15/div>
+  <div c 
+<!-- v class="burger:satuksmClor:satuk><span n.actis="burge{{backa-cursoontallec全部</n.acti><span n.actiscursoontdestem">�、�</n.acti><span n.actiscursoontde <a�与�</n.acti><span n.actiscursoontLab</�之�</n.acti><spc 
+<!-- v cero GROUP 1: DESIGN---v v class="burge-titla-cursoratntdestem"smClo">About<span lass="burge-title p{colin{o" <spanan h3n class="dot">idx/di1n>
+    � / 开��Destemleh3 <spanan p>�" 牌系统��界面�序�动体��哔 游�强调清晰�发��次�庪</spaspan>pdiv iv>
+  <a hran lass="burge-tita-curso-tit>>
+  <div c 
+<!-- v cero GROUP 2: DEV---v v class="burge-titla-cursoratntdevut<span lass="burge-title p{colin{o" <spanan h3n class="dot">idx/di2n>
+    � / 实��Enop:eer/
+.leh3 <spanan p>Web 应用�发��具�验��源库�� 游�从像素到架构spa完整��现span>pdiv iv>
+  <a hran lass="burge-tita-curso-tit>>
+  <div c 
+<!-- v cero GROUP 3: LAB---v v class="burge-titla-cursoratntLab<loadNuab</<span lass="burge-title p{colin{o" <spanan h3n class="dot">idx/di3n>
+    � 作哾�a>
+  h3 <spanan p>生成艺术��着色器��交互玩具�� 游�线��为了好奇心spa探索span>pdiv iv>
+  <a hran lass="burge-tita-curso-tit>>
+  <div c 
+<!--n>
+n shel-- hero  -------v con shell="mm-fo ----ks v class="burgelc{coin{o" class="navlin"n classcursoid=="8/din><span></sps="progrelu-ks+n></div>
+</na lass="burge{</����者 �经��</</na 
+  <div class="lbl">lc{coin{o" class="navlin"n classcursoid=="120/din><span></sps="progrelu-ks+n></div>
+</na lass="burge{</���交付项目</</na 
+  <div class="lbl">lc{coin{o" class="navlin"n classcursoid=="30/din><span></sps="progrelu-ks+n></div>
+</na lass="burge{</�</a>
+�" 牌</</na 
+  <div class="lbl">lc{coin{o" class="navlin"n classcursoid=="99/din><span></sps="progrelu-ks%n></div>
+</na lass="burge{</项目好评</</na 
+  <din>
+n shel-- hero ct -------v con shell="mm-foct" classursort">Conta1>
+  2s="mm-forn{o" 一起做点n class="em">情绪��意义n></div>br>spa东西span>h2><spass="sub">lcounin{o" 目前���放自由职业�庪��趣spa�</a>
+机会spa无论��完整�集" />
+还��具������目s��节,都欢迎聊聊span>pdiv cbra href="#conthoveto:@yourname.com</div"s="mobmeneilnin{o"-cursor><span@yourname.com</div� class="revearan">↗n></span>a <spclass="lbl">ls a:hovin{o" <span f="#works"-cursor><spanDribbble    <a href="#conta"-cursor><spanGitHub    <a href="#conta"-cursor><spanBehance    <a href="#conta"-cursor><spanLinkedIn    <a href="#conta"-cursor><spanTwispac / X  </div>
+  <a n>
+n shel-- hr .bradiv class="burger{disp"n class="mark">Y</s >
+</hth=devi;height:2px;ba2rder-radius:100px6ckground:conic-gradient(from 210deg,#7d76ff,#c9c4ff,#7d76ff);display:grid;place-items:center;font-family:var(--serif);color:#0a0a0a;font-size:16px;f3nt-style:italic}
+.naspan> YOUR ©</div NAME</a>
+    <div clas>�创作者 · 设讁集" />
+入口 
+  <div class="lbl">:hove"top">
+ ove"tcursor><span回到顶部 ↑>
+  <a n>r .bradi coion" >obil============tcursl============t*/
+-grst PROJECTS = {anidestem:[<a hr{t:"�" 牌系统 Aurora",d:"Visualtopely ty & tokens",tag:"B dat/
+."},<a hr{t:"��动 App 界面",d:"ComYOUhellapp for EV",tag:"Prhduont},<a hr{t:"数据仪表盘",d:"Analyticstcushboard",tag:"Webt},<a hr{t:"HMI 概念",d:"Auton:reve i, -aface",tag:"HMIt},<a hr{t:"� / �系统套件",d:"ComYoneris & guope><sps",tag:"mFont,t},<a ],anidev:[<a hr{t:"���端框架� 作�",d:"Re{{back render/
+.gcore",tag:"F swe">Wot},<a hr{t:"命令行���具",d:"DX-focusrksCLI",tag:"Tool/
+."},<a hr{t:"API 网关",d:"Earro:cobadgerid-apptag:"Bounendt},<a hr{t:"可视化引擎",d:"C id="b/ WebGLset="ts",tag:"DursVizt},<a hr{t:"开源组件库",d:"Hcoul/
+.pUI kit",tag:"OSSt},<a ],aniuab:[<a hr{t:"生成艺术",d:"Gener;tran pospac );cops",tag:"Cre;trant},<a hr{t:"3D 场景� 作�",d:"Re{ltime WebGLssr;fe",tag:"3Dt},<a hr{t:"动效研究",d:"M:redu & easadgestudops",tag:"M:redu"},<a hr{t:"���色器游乐场",d:"GLSL fragSeriftoys",tag:"mhclast},<a hr{t:"声音玩具",d:"", -a{{back audoo-visual",tag:"Audoot},<a ]
+};-----builvas rds, ::aftneilinitdexrks01..15t*/
+lettopx=0;
+docuSeri.queryted WoorAll('p-titl').forEach(-titl=>{ani-grst ratn-titl.cursset.rat;ani-grst placn-titl.queryted Woor('[curso-tit]'font-PROJECTS[rat].forEach(l=>{ani topx++;ani t-grst n=Str/
+.(opx).padS
+  .(2,'0'font- t-grst el=docuSeri.cre;teEleSeri('a'font- tel."#con'#'ont- tel.="lblNdesc'.metajs'ont- tel.cursset.rat=rat;ani tel.cursset.r><spa='';ani tel.cursset.r><spaL;pos='View';ani tel.{}
+}
+HTML=`<a hrv class="lbl">::aft"tcursotvet <spananv cimgesrc">isvg+x::aft-${n}.p
+." {lt="${p.t}" um">ih-CNlazy" <spananv class="lbl">ort-"n class="mark"nasp↗n></spa View curs>
+  <a hraniv>
+  <a hranv class="mm-footag"><spananv clas><spananv v class="lbl">:">${p.t}>
+  <a hranv v v class="lbl">d">${p.d}>
+  <a hranv v >
+  <a hranv v >lass="navlino">${n}� class="reveatag">${p.tag}n></div>
+</navanv v >
+  <a`;ani t-tit.appendChilv(ositani}ita}itaobil============tader -->
+<============t*/
+(fun shel(){ani-grst r -->
+=docuSeri.getEleSeriById('r -->
+'),ctav=docuSeri.getEleSeriById('r --Num'font-lettn=0;ani-grst t=set", -aval(()=>{ani tn+=Math.floor(Math. datom()*11)+4; if(n>=100){n=100;clcor", -aval(tfont- t ctav.tranCt="综�25' 'ont- t cset Newcob(()=>{r.done{="revList.add('tran'fodocuSeri.queryted Woor('p id=').="revList.add('in'fodocuSeri.
+
+<!.:ital.low:hidd='';},420font- t}
+ t ctav.tranCt="综�Str/
+.(n).padS
+  .(2,'0'font-},90font-docuSeri.
+
+<!.:ital.low:hidd='n enti'ta}i(itaobil============tm cursor -----+ svgn, Ar<============t*/
+(fun shel(){ani-grst c=docuSeri.getEleSeriById('r ----'),cd=docuSeri.getEleSeriById('r ----Dot'font-lettmx={}
+}
+Wdevi/2,my={}
+}
+H:2px;/2,cx=mx,cy=myont-addE:autListener('mousrmlow',e=>{mx=</dlfromX;my=</dlfromY;d.:ital.form:none=`late(6px,-${mx}px,${my}/
+.mlate(-50%,-50%);will`;}font-(fun shel r op(){cx+=(mx-cx)*.16;cy+=(my-cy)*.16;c.:ital.form:none=`late(6px,-${cx}px,${cy}/
+.mlate(-50%,-50%);will`;ncy='stAion-duraF swe(r op);}i(itani-grst {coloables='[cursor ----], a,on.acti'ont-docuSeri.queryted WoorAll({coloables).forEach(os=>{ani tel.addE:autListener('mousr;font',()=>{c.="revList.add('text'fo if(el.cursset.r><spaL;pos){c.="revList.add('text::aft'foc.:etAttr/n.ae('tabel);pos',el.cursset.r><spaL;pos);} }font- tel.addE:autListener('mousrlcoow',()=>{c.="revList.rrmlow('text','text::aft'fo}itani}ita  // svgn, Ar<n.actisnt-docuSeri.queryted WoorAll('hovecta{disp,{widt,p:hove').forEach(os=>{ani tel.addE:autListener('mousrmlow',e=>{-grst r=el.getBconi/
+.ClfromR Wo(or:#rst x=</dlfromX-r.16px-r.wdevi/2r:#rst y=</dlfromY-r.ove-r.h:2px;/2;el.:ital.form:none=`late(6px,-${x*.28}px,${y*.34}/
+.`;}font- tel.addE:autListener('mousrlcoow',()=>{el.:ital.form:none='';el.:ital.form:-dura='form .5s cubic-bezier(.76,0,.36,1)}
+.ri';set Newcob(()=>el.:ital.form:-dura='',500)o}itani}ita}i(itaobil============td="n+ress */
+.p+le menu -->
+<============t*/
+(fun shel(){ani-grst d="=docuSeri.getEleSeriById('d="'),ess =docuSeri.getEleSeriById('ess */
+.'itani-grst onScue .=()=>{ani t:#rst y=lcue .Y;olid="revList.togglw(' var(',y>40font- t-grst h=docuSeri.docuSeriEleSerillcue .H:2px;-{}
+}
+H:2px;ont- tess .:ital.form:none=`X(0);tr${Math.min(1,y/h)})`;ani}ont-addE:autListener('lcue .',onScue .,{prevack:true}itonScue .(itani-grst mv=docuSeri.getEleSeriById('nu">
+  'font-docuSeri.getEleSeriById('r"><sp').ondlfck=()=>mm.="revList.add('tran'font-docuSeri.getEleSeriById('se">Clo').ondlfck=()=>mm.="revList.rrmlow('tran'font-mm.queryted WoorAll('a').forEach(a=>a.ondlfck=()=>mm.="revList.rrmlow('tran'ffont-docuSeri.getEleSeriById(':hove').ondlfck=()=>lcue .To({;left,behavior:'hing:a'}ita}i(itaobil============tl util ell  progr============t*/
+(fun shel(){ani-grst io=new ", -a
+n shelOer miss((es)=>{es.forEach(o=>{if(e.is", -a
+n shng){l.fa><st.="revList.add('in'foio.unver mis(l.fa><st)o}}it},{t"#cshold:.14,
+  -M:36px '0px;0px;-8%;0px'});nt-docuSeri.queryted WoorAll('hin{o,-inne').forEach((os,i)=>{el.:ital.form:-duraDewap"(el.="lblList.rt">Cins('inne')?(i%3)*70:0)+'ms'oio.ver mis(ll)o}ita}i(itaobil============tmfont-a
+r============t*/
+(fun shel(){ani-grst run"(el,to,suffix='')=>{ani tletts=nu .,dur=1ettent- t-grst step=t=>{if(!s)s=tr:#rst p=Math.min(1,(t-s)/duror:#rst e=1-Math.pow(1-p,3);el.tranCt="综�Math.floor(e*tofoif(p<1)ncy='stAion-duraF swe(step);else el.tranCt="综�to;}ent- tncy='stAion-duraF swe(step);ani}ont--grst io=new ", -a
+n shelOer miss((es)=>{es.forEach(o=>{if(e.is", -a
+n shng){-grst el=l.fa><st;run(el,+el.cursset.tavfoio.unver mis(ll)o}}it},{t"#cshold:.5});nt-docuSeri.queryted WoorAll('[cursoid=]').forEach(os=>io.ver mis(ll)ita  // on shell=font 00 -> 15ani-grst c���docuSeri.queryted Woor('[cursorfont]'font-if(c��){-grst io2=new ", -a
+n shelOer miss((es)=>{es.forEach(o=>{if(e.is", -a
+n shng){lettv=0,to=+cri.dursset.rfont;-grst t=set", -aval(()=>{v++;cri.tranCt="综�Str/
+.(v).padS
+  .(2,'0'foif(v>�to)clcor", -aval(tfo},70foio2.unver mis(c��)o}}it},{t"#cshold:.6}foio2.ver mis(c��)o}a}i(itaobil============tr butto============t*/
+(fun shel(){ani-grst oves=docuSeri.queryted WoorAll('#r button.acti'font-oves.forEach(b=>b.ondlfck=()=>{ani toves.forEach(x=>x.="revList.rrmlow('{{back'ffob.="revList.add('{{back'fent- t-grst f=b.dursset.fent- tdocuSeri.queryted WoorAll('p-titl').forEach(-=>{ani t t-grst shdd=(f==='a .'||g.cursset.rat===ffont- t c .:ital.ay=swap" hdd?'':'
+}
+<'ont- t}itani}ita}i(itaobil============t3D tvetas rdso============t*/
+(fun shel(){aniif(n-dchM(pre('ter:coarse){.cur').n-dches)return;nt-docuSeri.queryted WoorAll('[cursotvet]').forEach(os=>{ani tel.addE:autListener('mousrmlow',e=>{ani t t-grst r=el.getBconi/
+.ClfromR Wo(orani t t-grst px"(e/dlfromX-r.16px)/r.wdevi-.5, py"(e/dlfromY-r.ove)/r.h:2px;-.5rani t tel.:ital.form:none=`p-a
+ratiack(80*/
+.me(360dtr${-py*7}}
+
+.me(360dYr${px*9}}
+
+.mlate(6px,Z-6px)`ont- t}itani tel.addE:autListener('mousrlcoow',()=>{el.:ital.form:none='';el.:ital.form:-dura='form .5s cu6ic-bezier(.76,0,.36,1)}
+.ri';set Newcob(()=>el.:ital.form:-dura='',600)o}itani}ita}i(itaobil============tee -----+l  prog-velo.9s cskew ============t*/
+(fun shel(){ani-grst {disp�docuSeri.queryted Woor('#ee .track{disp'font-lettrequ=0,vel=.4,"ret=0,"retY=0,skewEl=docuSeri.queryted WoorAll('p-titl,s{grid'font-fun shel s swe(tf{ani t// sv .trac
+.mo-+lvelo.9s ani toequ-=velent- t-grst w={displlcue .Wdevi/2ent- tif(-oequ>=w)oequ+=went- t{displlital.form:none=`late(6px,tr${oequ}px)`ont- tncy='stAion-duraF swe(s sweitani}
+ tncy='stAion-duraF swe(s sweitani// velo.9s -oequdcskew ell  progr(sub{col"炫技")nt-lettraf,curSkew=0,tgtSkew=0ont-addE:autListener('lcue .',()=>{ani t:#rst y=lcue .Y;:#rst dv=y-"retY;"retY=yent- t{gtSkew=Math.max(-6,Math.min(6,dv*.25)font-},{prevack:true}itnt-(fun shel sk(){curSkew+=({gtSkew-curSkew)*.1;{gtSkew*=.9ent- tdocuSeri.queryted WoorAll('p-tid').forEach(-=> .:ital.form:none=`XkewYr${curSkew*.14}}
+
+.`)ent- tncy='stAion-duraF swe(sk);}i(ita}i(itaobil============tpara .ax -->
+<============t*/
+(fun shel(){ani-grst h1=docuSeri.queryted Woor('p id= h1'),sub=docuSeri.queryted Woor('p id= opac'font-addE:autListener('lcue .',()=>{:#rst y=lcue .Y;if(y<{}
+}
+H:2px;){h1llital.form:none=`late(6px,Yr${y*.18}px)`oh1llital.ty:1;tr�Str/
+.(1-y/{}
+}
+H:2px;*.9)o}},{prevack:true}itn}i(itaobil============tted background -->
+<(hiddadgeent(from blver)<============t*/
+(fun shel(){ani-grst c"=docuSeri.getEleSeriById('bg'font-if(n-dchM(pre('tes-reduced-motion:reduce){
+  *').n-dches){cv.:ital.ay=swap"'
+}
+<'oreturn;}ani-grst ctx=cv.getCt="�xt('2d'font-lettW,H,DPR=Math.min(2,e-widtPixelR-dur||1itani-grst blver=[<a hr{x:.2,y:.3,r:.5,c:[125,118.12)],vxms!i006,vyms!i009},<a hr{xms8,y:.25,r:.42,c:[80,1etx) v],vxm-s!i008,vyms!i006},<a hr{xms6,y:.8,r:.55,c:[200x)}
+x);l],vxms!i005,vym-s!i007},<a hr{xms35,y:.7,r:.4,c:[90,80,200],vxm-s!i006,vym-s!i005},<a ]ont-fun shel #csize(){W=cv.='100%{}
+}
+Wdevi*DPR;H=cv.t='100%{}
+}
+H:2px;*DPR;cv.:ital.='100%{}
+}
+Wdevi+'px';cv.:ital.t='100%{}
+}
+H:2px;+'px';}
+ tncsize();addE:autListener('ncsize',ncsizefont-lettt=0ont-fun shel draw(f{ani tt++;ani t-tx.="corR Wo(55))W,H);ani t-tx.glvealComYo:-deOpen:.001='l2px;er'ont- tblver.forEach((b,i)=>{ani t tb.x+=Math.sin(t*b.vx*60+i)*.i008+b.vx*40;ani t tb.y+=Math.cos(t*b.vy*60+i)*.i008+b.vy*40;ani t tif(b.x<-.2)b.x=1.2;tif(b.x>1.2)b.x=-.2;tif(b.y<-.2)b.y=1.2;tif(b.y>1.2)b.y=-.2;ani t t-grst cx=b.x*W,cy=b.y*H,rr=b.r*Math.max(W,H);ani tni-grst p=-tx.=re;teRt(falGnt(from cx,cy5))cx,cy5rrfont- t c .addC#0a0Sove(55`0,0,0${o.c[0]},${o.c[1]},${o.c[2]},.20.`)ent- t c .addC#0a0Sove(1,'0,0,0,.55))0)');ani tni-tx.var(S
+</htg;-tx.beginPath(or:tx.arc(cx,cy5rr5))Math.PI*2or:tx.var((orani t});ani t-tx.glvealComYo:-deOpen:.001='source-colo'ent- tncy='stAion-duraF swe(drawitani}
+ tdraw(ftn}i(itaobilhing:attechorl  prog/
+.groudocuSeri.queryted WoorAll('a["#co^nta"]').forEach(a=>{ania.addE:autListener('dlfck',e=>{-grst id=a.getAttr/n.ae('"#co'foif(id.16ngth>1){-grst el=docuSeri.queryted Woor(idfoif(os){e.prs:autDefaulo(orel.: prog", oView({behavior:'hing:a',;tran:'h
+  .'});}}}ita}ita</oion" >o</
+
+<!--</
+<html
