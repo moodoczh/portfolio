@@ -15,31 +15,31 @@
   var p = list[i];
   var next = list[(i + 1) % list.length];
 
-  /* cover + gallery from the project's own folder */
+  /* cover hero */
   document.getElementById("dCover").src = p.folder + "/" + (p.cover || "cover.png");
-  (function () {
-    var gal = document.getElementById("dGallery"), galH = document.querySelector(".d-gallery-h");
-    var shots = p.shots || [];
-    if (shots.length) {
-      gal.innerHTML = shots.map(function (s) {
-        return "<div class='blk reveal'><img src='" + p.folder + "/" + s + "' alt=''></div>";
-      }).join("");
-    } else { gal.style.display = "none"; if (galH) galH.style.display = "none"; }
-  })();
 
-  /* optional videos (multiple): each is a local file path OR a YouTube/Vimeo/Bilibili link.
-     Local videos size to their own aspect ratio (width-adaptive); embeds use 16:9. */
+  /* unified media: ordered list of images + videos, each shown at its own ratio (width-adaptive).
+     item = { t:"img"|"vid"|"embed", src:"01.webp" | "02.mp4" | "https://youtu.be/..." } */
   (function () {
-    var wrap = document.getElementById("dVideo");
-    var vids = p.videos || (p.video ? [p.video] : []);
-    if (!vids.length) { wrap.style.display = "none"; return; }
-    wrap.innerHTML = vids.map(function (url) {
-      var m, embed = null;
-      if ((m = url.match(/(?:youtube\.com\/.*[?&]v=|youtu\.be\/)([\w-]+)/))) embed = "https://www.youtube.com/embed/" + m[1];
-      else if ((m = url.match(/vimeo\.com\/(\d+)/))) embed = "https://player.vimeo.com/video/" + m[1];
-      else if ((m = url.match(/bilibili\.com\/video\/(BV[\w]+)/i))) embed = "https://player.bilibili.com/player.html?bvid=" + m[1] + "&autoplay=0";
-      if (embed) return "<div class='d-vid embed reveal'><iframe src='" + embed + "' allow='autoplay; fullscreen; picture-in-picture' allowfullscreen loading='lazy'></iframe></div>";
-      return "<div class='d-vid local reveal'><video src='" + url + "' controls autoplay muted loop playsinline preload='metadata'></video></div>";
+    var wrap = document.getElementById("dMedia"), h = document.getElementById("dMediaH");
+    var media = p.media || [];
+    if (!media.length && ((p.shots && p.shots.length) || (p.videos && p.videos.length))) { // backward compat
+      media = [];
+      (p.shots || []).forEach(function (s) { media.push({ t: "img", src: s }); });
+      (p.videos || []).forEach(function (v) { media.push({ t: /^https?:/.test(v) ? "embed" : "vid", src: v }); });
+    }
+    if (!media.length) { wrap.style.display = "none"; if (h) h.style.display = "none"; return; }
+    wrap.innerHTML = media.map(function (it) {
+      if (it.t === "embed") {
+        var m, e = it.src;
+        if ((m = it.src.match(/(?:youtube\.com\/.*[?&]v=|youtu\.be\/)([\w-]+)/))) e = "https://www.youtube.com/embed/" + m[1];
+        else if ((m = it.src.match(/vimeo\.com\/(\d+)/))) e = "https://player.vimeo.com/video/" + m[1];
+        else if ((m = it.src.match(/bilibili\.com\/video\/(BV[\w]+)/i))) e = "https://player.bilibili.com/player.html?bvid=" + m[1] + "&autoplay=0";
+        return "<div class='d-m embed reveal'><iframe src='" + e + "' allow='autoplay; fullscreen; picture-in-picture' allowfullscreen loading='lazy'></iframe></div>";
+      }
+      var src = (it.src.indexOf("http") === 0 || it.src.indexOf("works/") === 0) ? it.src : p.folder + "/" + it.src;
+      if (it.t === "vid") return "<div class='d-m vid reveal'><video src='" + src + "' controls autoplay muted loop playsinline preload='metadata'></video></div>";
+      return "<div class='d-m img reveal'><img src='" + src + "' loading='lazy' alt=''></div>";
     }).join("");
   })();
 
@@ -68,7 +68,7 @@
   document.getElementById("lang").addEventListener("click", function (e) { var b = e.target.closest("button"); if (b) applyLang(b.dataset.lang); });
 
   /* fade images in on load */
-  document.querySelectorAll(".d-cover img, .d-gallery .blk img").forEach(function (img) {
+  document.querySelectorAll(".d-cover img, .d-m.img img").forEach(function (img) {
     if (img.complete && img.naturalWidth) { img.classList.add("loaded"); return; }
     img.addEventListener("load", function () { img.classList.add("loaded"); });
     img.addEventListener("error", function () { img.classList.add("loaded"); });
