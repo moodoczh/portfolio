@@ -43,7 +43,7 @@ img{display:block;max-width:100%}
 /* ---------- nav ---------- */
 nav{position:fixed;top:0;left:0;width:100%;height:var(--nav-h);z-index:800;display:flex;align-items:center;justify-content:space-between;padding:0 var(--pad);transition:background .4s,backdrop-filter .4s,border-color .4s;border-bottom:1px solid transparent}
 nav.solid{background:rgba(8,8,10,.72);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-.brand{display:flex;align-items:center;gap:11px;font-weight:600;font-size:14px;letter-spacing:.02em}
+.brand{display:inline-flex;align-items:baseline;font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(20px,1.7vw,25px);letter-spacing:0;color:var(--ink);line-height:1}
 .brand .mark{width:26px;height:26px;border-radius:7px;background:conic-gradient(from 210deg,var(--accent2),var(--accent),var(--accent2));display:grid;place-items:center;font-family:var(--serif);color:#0a0a0a;font-size:16px;font-style:italic}
 .navlinks{display:flex;gap:30px;font-size:13px;color:var(--muted);position:absolute;left:50%;transform:translateX(-50%)}
 .navlinks a{position:relative;transition:color .3s}
