@@ -63,7 +63,7 @@
         a.innerHTML =
           "<div class='thumb' data-tilt>" +
           "<span class='tagline'></span>" +
-          "<img src='" + p.folder + "/cover.png' alt='' loading='lazy'>" +
+          "<img src='" + p.folder + "/" + (p.thumb || p.cover || "cover.png") + "' alt='' loading='lazy'>" +
           "<div class='view'><span class='ic'>↗</span> <span class='vt'></span></div>" +
           "</div>" +
           "<div class='meta'><div><div class='t'></div><div class='d'></div></div><div class='no'>" + String(idx).padStart(2, "0") + "</div></div>";
