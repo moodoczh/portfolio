@@ -228,28 +228,28 @@ window.PROJECTS = [
     }
   },
   {
-    "id": "VOLVO APP",
-    "cat": "app",
-    "folder": "works/App/VOLVO APP",
+    "id": "QT group",
+    "cat": "hmi",
+    "folder": "works/HMI/QT group",
     "year": "2026",
     "role": {
-      "en": "UI/UX",
-      "zh": "UI/UX"
+      "en": "Shot Planning/Motion",
+      "zh": "Shot Planning/Motion"
     },
     "title": {
-      "en": "VOLVO APP",
-      "zh": "VOLVO APP"
+      "en": "QT group",
+      "zh": "QT group"
     },
     "desc": {
-      "en": "Remote control & status",
-      "zh": "远程控制与状态"
+      "en": "First Demo of Qt-based Civilian HMI Engine Trial",
+      "zh": "QT 尝试民用HMI 引擎的第一个DEMO"
     },
     "about": {
       "en": [
-        "The original design has been greatly optimized, transforming the fully static interface into a WYSIWYG dynamic page. The button layout is more reasonable, completely solving the drawback that buttons were out of thumb reach in the old version."
+        "In this project, I was fully responsible for motion effect planning, development and integration of the Qt demo. I would like to thank my colleagues for providing 3D technical support. Meanwhile, I used AI tools to produce IPA demo animations, serving as references for the implementation of 3D visual effects."
       ],
       "zh": [
-        "大幅升级原有设计，将纯静态界面重构为所见即所得的动态交互页面。同时优化按键排布逻辑，彻底解决旧版操作时按键偏远、拇指难以触及的使用痛点。"
+        "本项目中，我全权负责 Qt 演示工程的动效策划、开发与集成落地，同时感谢同事提供专业 3D 技术支持。此外我借助 AI 工具制作 IPA 演示动画，为 3D 视觉效果的开发落地提供参考依据。"
       ]
     },
     "thumb": "thumb.webp",
@@ -258,22 +258,6 @@ window.PROJECTS = [
       {
         "t": "vid",
         "src": "01.mp4"
-      },
-      {
-        "t": "vid",
-        "src": "02.mp4"
-      },
-      {
-        "t": "vid",
-        "src": "03.mp4"
-      },
-      {
-        "t": "img",
-        "src": "04.webp"
-      },
-      {
-        "t": "img",
-        "src": "05.webp"
       }
     ]
   },
@@ -524,5 +508,67 @@ window.PROJECTS = [
         "从紧凑的手机到宽屏桌面都能自如伸缩,不破坏层级。"
       ]
     }
+  },
+  {
+    "id": "QT group",
+    "cat": "hmi",
+    "folder": "works/HMI/QT group",
+    "year": "2026",
+    "role": {
+      "en": "Shot Planning/Motion",
+      "zh": "Shot Planning/Motion"
+    },
+    "title": {
+      "en": "QT group",
+      "zh": "QT group"
+    },
+    "desc": {
+      "en": "First Demo of Qt-based Civilian HMI Engine Trial",
+      "zh": "QT 尝试民用HMI 引擎的第一个DEMO"
+    },
+    "about": {
+      "en": [
+        "In this project, I was fully responsible for motion effect planning, development and integration of the Qt demo. I would like to thank my colleagues for providing 3D technical support. Meanwhile, I used AI tools to produce IPA demo animations, serving as references for the implementation of 3D visual effects."
+      ],
+      "zh": [
+        "本项目中，我全权负责 Qt 演示工程的动效策划、开发与集成落地，同时感谢同事提供专业 3D 技术支持。此外我借助 AI 工具制作 IPA 演示动画，为 3D 视觉效果的开发落地提供参考依据。"
+      ]
+    },
+    "thumb": "thumb.webp",
+    "cover": "cover.webp",
+    "media": [
+      {
+        "t": "vid",
+        "src": "01.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "02.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "03.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "04.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "05.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "06.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "07.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "08.mp4"
+      }
+    ]
   }
 ];
