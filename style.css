@@ -146,6 +146,7 @@ nav.solid{background:rgba(8,8,10,.72);backdrop-filter:blur(14px);border-bottom:1
 /* ---------- footer ---------- */
 footer{padding:32px var(--pad);border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;color:var(--muted);font-size:12.5px}
 footer .brand2{display:flex;align-items:center;gap:10px;color:var(--ink)}
+footer .sig{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--muted)}
 footer .brand2 .mark{width:22px;height:22px;border-radius:6px;background:conic-gradient(from 210deg,var(--accent2),var(--accent),var(--accent2));display:grid;place-items:center;font-family:var(--serif);color:#0a0a0a;font-size:13px;font-style:italic}
 .totop{cursor:pointer;transition:color .3s}
 .totop:hover{color:var(--ink)}

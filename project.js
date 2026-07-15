@@ -49,7 +49,7 @@
     document.documentElement.setAttribute("lang", lang === "zh" ? "zh-CN" : "en");
     document.querySelectorAll("[data-i18n]").forEach(function (el) { el.textContent = t(el.getAttribute("data-i18n")); });
 
-    document.title = p.title[lang] + " — YOUR NAME";
+    document.title = p.title[lang] + " — Morimoto Zhang";
     document.getElementById("dCat").textContent = t("cat_" + p.cat);
     document.getElementById("dTitle").textContent = p.title[lang];
     document.getElementById("dMetaCat").textContent = t("cat_" + p.cat);

@@ -57,7 +57,7 @@
         idx++;
         var a = document.createElement("a");
         a.className = "card reveal";
-        a.href = "project.html?id=" + p.id;
+        a.href = "project.html?id=" + encodeURIComponent(p.id);
         a.dataset.cursor = "";
         a.dataset.cursorLabel = t("view");
         a.innerHTML =
