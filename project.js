@@ -16,27 +16,31 @@
   var next = list[(i + 1) % list.length];
 
   /* cover + gallery from the project's own folder */
-  document.getElementById("dCover").src = p.folder + "/cover.png";
+  document.getElementById("dCover").src = p.folder + "/" + (p.cover || "cover.png");
   (function () {
     var gal = document.getElementById("dGallery"), galH = document.querySelector(".d-gallery-h");
-    var n = p.shots || 0;
-    if (n > 0) {
-      var html = "";
-      for (var k = 1; k <= n; k++) html += "<div class='blk reveal'><img src='" + p.folder + "/" + String(k).padStart(2, "0") + ".png' alt=''></div>";
-      gal.innerHTML = html;
+    var shots = p.shots || [];
+    if (shots.length) {
+      gal.innerHTML = shots.map(function (s) {
+        return "<div class='blk reveal'><img src='" + p.folder + "/" + s + "' alt=''></div>";
+      }).join("");
     } else { gal.style.display = "none"; if (galH) galH.style.display = "none"; }
   })();
 
-  /* optional video: local file path OR YouTube / Vimeo / Bilibili link */
+  /* optional videos (multiple): each is a local file path OR a YouTube/Vimeo/Bilibili link.
+     Local videos size to their own aspect ratio (width-adaptive); embeds use 16:9. */
   (function () {
     var wrap = document.getElementById("dVideo");
-    if (!p.video) { wrap.style.display = "none"; return; }
-    var url = p.video, embed = null, m;
-    if ((m = url.match(/(?:youtube\.com\/.*[?&]v=|youtu\.be\/)([\w-]+)/))) embed = "https://www.youtube.com/embed/" + m[1];
-    else if ((m = url.match(/vimeo\.com\/(\d+)/))) embed = "https://player.vimeo.com/video/" + m[1];
-    else if ((m = url.match(/bilibili\.com\/video\/(BV[\w]+)/i))) embed = "https://player.bilibili.com/player.html?bvid=" + m[1] + "&autoplay=0";
-    if (embed) wrap.innerHTML = "<div class='d-video'><iframe src='" + embed + "' allow='autoplay; fullscreen; picture-in-picture' allowfullscreen loading='lazy'></iframe></div>";
-    else wrap.innerHTML = "<div class='d-video'><video src='" + url + "' controls autoplay muted loop playsinline preload='metadata'></video></div>";
+    var vids = p.videos || (p.video ? [p.video] : []);
+    if (!vids.length) { wrap.style.display = "none"; return; }
+    wrap.innerHTML = vids.map(function (url) {
+      var m, embed = null;
+      if ((m = url.match(/(?:youtube\.com\/.*[?&]v=|youtu\.be\/)([\w-]+)/))) embed = "https://www.youtube.com/embed/" + m[1];
+      else if ((m = url.match(/vimeo\.com\/(\d+)/))) embed = "https://player.vimeo.com/video/" + m[1];
+      else if ((m = url.match(/bilibili\.com\/video\/(BV[\w]+)/i))) embed = "https://player.bilibili.com/player.html?bvid=" + m[1] + "&autoplay=0";
+      if (embed) return "<div class='d-vid embed reveal'><iframe src='" + embed + "' allow='autoplay; fullscreen; picture-in-picture' allowfullscreen loading='lazy'></iframe></div>";
+      return "<div class='d-vid local reveal'><video src='" + url + "' controls autoplay muted loop playsinline preload='metadata'></video></div>";
+    }).join("");
   })();
 
   function applyLang(lang) {
