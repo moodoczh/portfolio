@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Project — YOUR NAME</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.className+=' js-anim';</script>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="progress" id="progress"></div>
+<canvas id="bg"></canvas>
+<div class="grain"></div>
+
+<nav id="nav">
+  <a href="index.html#top" class="brand" data-cursor><span class="mark">Y</span> YOUR NAME</a>
+  <div class="navlinks">
+    <a href="index.html#works" data-i18n="nav_works">Works</a>
+    <a href="index.html#contact" data-i18n="nav_contact">Contact</a>
+  </div>
+  <div class="navright">
+    <div class="lang" id="lang">
+      <button data-lang="en" class="on">EN</button>
+      <button data-lang="zh">中</button>
+    </div>
+    <span class="badge-avail" data-cursor><span class="dot"></span> <span data-i18n="badge">Available for work</span></span>
+    <div class="burger" id="burger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<div class="mobmenu" id="mobmenu">
+  <div class="cl" id="mmClose">Close ✕</div>
+  <a href="index.html#works" data-i18n="nav_works">Works</a>
+  <a href="index.html#contact" data-i18n="nav_contact">Contact</a>
+  <div class="mf">hello@yourname.com</div>
+</div>
+
+<article class="detail" id="detail">
+  <a href="index.html#works" class="backlink" data-cursor><span class="ar">←</span> <span data-i18n="back">Works</span></a>
+  <div class="d-cat" id="dCat"></div>
+  <h1 id="dTitle" class="reveal"></h1>
+  <div class="d-meta reveal">
+    <div class="item"><div class="k" data-i18n="category">Category</div><div class="v" id="dMetaCat"></div></div>
+    <div class="item"><div class="k" data-i18n="year">Year</div><div class="v" id="dMetaYear"></div></div>
+    <div class="item"><div class="k" data-i18n="role">Role</div><div class="v" id="dMetaRole"></div></div>
+  </div>
+  <div class="d-cover reveal"><img id="dCover" src="" alt=""></div>
+  <div class="d-video-wrap reveal" id="dVideo"></div>
+
+  <div class="d-body">
+    <div><div class="oh" data-i18n="overview">Overview</div></div>
+    <div id="dBody"></div>
+  </div>
+
+  <div class="d-gallery-h reveal" data-i18n="gallery">Selected screens</div>
+  <div class="d-gallery" id="dGallery"></div>
+
+  <div class="d-next">
+    <div class="k" data-i18n="next">Next project</div>
+    <a id="dNext" href="#" data-cursor></a>
+  </div>
+</article>
+
+<footer>
+  <div class="brand2"><span class="mark">Y</span> © 2026 YOUR NAME</div>
+  <div data-i18n="footer_role">Independent Designer — Portfolio</div>
+  <div class="totop" id="totop" data-cursor data-i18n="to_top">Back to top</div>
+</footer>
+
+<script src="projects.js"></script>
+<script src="project.js"></script>
+</body>
+</html>
