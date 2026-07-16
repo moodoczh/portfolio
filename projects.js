@@ -209,20 +209,57 @@ window.PROJECTS = [
     }
   },
   {
-    "id": "central-console",
+    "id": "N80",
     "cat": "hmi",
-    "folder": "works/HMI/central-console",
-    "thumb": "cover.png",
-    "cover": "cover.png",
-    "media": [],
+    "folder": "works/HMI/N80",
+    "thumb": "thumb.webp",
+    "cover": "cover.webp",
+    "media": [
+      {
+        "t": "vid",
+        "src": "01.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "02.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "03.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "04.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "05.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "06.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "07.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "08.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "09.mp4"
+      }
+    ],
     "year": "2025",
     "role": {
-      "en": "Interaction Design",
-      "zh": "交互设计"
+      "en": "Motion",
+      "zh": "Motion"
     },
     "title": {
-      "en": "Central Console",
-      "zh": "中控交互系统"
+      "en": "N80 Instrument & Central Control System-level Interactive Motion Design",
+      "zh": "N80 仪表及中控系统级交互动效"
     },
     "desc": {
       "en": "In-car central interface",
@@ -230,12 +267,12 @@ window.PROJECTS = [
     },
     "about": {
       "en": [
-        "A central console that organizes media, climate and vehicle controls into a spatial hierarchy the driver can operate without looking twice.",
-        "Large tap targets, persistent shortcuts and a dark, low-glare palette keep interaction safe at speed."
+        "Together with my colleague (a two-person team), I took charge of all interactive motion effects for N80. The work covered dashboard and central control system, including millisecond-level animation tuning and bezier curve definition, all independently designed by ourselves.",
+        "Below are motion effect demos. If they fail to load, you may need a VPN or wait patiently."
       ],
       "zh": [
-        "把媒体、空调与车辆控制组织成清晰的空间层级,让驾驶者几乎无需二次确认即可操作。",
-        "大点击区域、常驻快捷入口与低眩光深色配色,保证高速行驶中的安全交互。"
+        "我与搭档二人共同全权负责 N80 车型全套交互动效设计工作，覆盖仪表全域及车载中控系统，从毫秒级动效节奏调校到贝塞尔运动曲线定义均为独立原创设计。",
+        "以下为动效 demo, 如果加载不了则可能需要 VPN 或耐心等待片刻."
       ]
     }
   },
