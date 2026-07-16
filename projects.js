@@ -211,6 +211,130 @@ window.PROJECTS = [
     }
   },
   {
+    "id": "VOLVO 451 CSD",
+    "cat": "hmi",
+    "folder": "works/HMI/VOLVO 451 CSD",
+    "thumb": "thumb.webp",
+    "cover": "cover.webp",
+    "media": [
+      {
+        "t": "img",
+        "src": "01.webp"
+      },
+      {
+        "t": "vid",
+        "src": "02.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "03.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "04.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "05.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "06.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "07.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "08.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "09.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "10.mp4"
+      }
+    ],
+    "year": "2026",
+    "role": {
+      "en": "UI / Systems",
+      "zh": "Motion"
+    },
+    "title": {
+      "en": "VOLVO 451 CSD Motion",
+      "zh": "VOLVO 451 CSD Motion"
+    },
+    "desc": {
+      "en": "The most challenging motion design project throughout my career",
+      "zh": "职业生涯以来最具挑战的动效项目"
+    },
+    "about": {
+      "en": [
+        "I led two team members to accomplish this arduous task. The project involves more than 600 refined motion effects. After three months of hard work, we successfully passed Volvo's stringent acceptance standards.",
+        "The most difficult module is Relax Mode. To achieve high-fidelity restoration while controlling costs and ensuring easy later maintenance, I adopted the solution of applying real materials with simulated light and shadow effects. This method is similar to using fake reflections in games to reduce performance consumption."
+      ],
+      "zh": [
+        "我带领两名组员协力完成此项高难度项目，项目内细分动效数量超 600 余项。历经三个月全力攻坚，最终项目成果顺利通过沃尔沃严苛标准的正式验收。",
+        "项目难度最高的模块为舒缓驾乘模式（Relax Mode）。为做到视觉高度还原，同时兼顾成本管控与后期维护便捷性，我统筹采用实材质 + 拟态光影的制作方案，原理等同于游戏行业里用模拟反射替代实时光追，以此大幅优化性能开销。"
+      ]
+    },
+    "locked": false
+  },
+  {
+    "id": "VOLVO 451 DIM",
+    "cat": "hmi",
+    "folder": "works/HMI/VOLVO 451 DIM",
+    "thumb": "thumb.webp",
+    "cover": "cover.webp",
+    "media": [
+      {
+        "t": "img",
+        "src": "01.webp"
+      },
+      {
+        "t": "vid",
+        "src": "02.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "03.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "04.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "05.mp4"
+      }
+    ],
+    "year": "2025",
+    "role": {
+      "en": "Motion",
+      "zh": "Motion"
+    },
+    "title": {
+      "en": "VOLVO 451 DIM Motion",
+      "zh": "VOLVO 451 DIM Motion"
+    },
+    "desc": {
+      "en": "Restrained and rigorous dashboard motion effects",
+      "zh": "简约克制、风格严谨的车载仪表动效设计"
+    },
+    "about": {
+      "en": [
+        "Volvo imposes extremely strict standards and requirements on motion effects. I was fully aware of the challenges before launching this project, yet all difficulties were well resolved with meticulous attention to detail."
+      ],
+      "zh": [
+        "沃尔沃对车载动效有着极为严苛的设计标准与规范。接手该项目时我深知其难度，但凭借细致严谨的工作态度，各类难点均顺利攻克。"
+      ]
+    },
+    "locked": false
+  },
+  {
     "id": "N80",
     "cat": "hmi",
     "folder": "works/HMI/N80",
@@ -275,88 +399,6 @@ window.PROJECTS = [
       "zh": [
         "我与搭档二人共同全权负责 N80 车型全套交互动效设计工作，覆盖仪表全域及车载中控系统，从毫秒级动效节奏调校到贝塞尔运动曲线定义均为独立原创设计。",
         "以下为动效 demo, 如果加载不了则可能需要 VPN 或耐心等待片刻."
-      ]
-    }
-  },
-  {
-    "id": "VOLVO 451 DIM",
-    "cat": "hmi",
-    "folder": "works/HMI/VOLVO 451 DIM",
-    "thumb": "thumb.webp",
-    "cover": "cover.webp",
-    "media": [
-      {
-        "t": "img",
-        "src": "01.webp"
-      },
-      {
-        "t": "vid",
-        "src": "02.mp4"
-      },
-      {
-        "t": "vid",
-        "src": "03.mp4"
-      },
-      {
-        "t": "vid",
-        "src": "04.mp4"
-      },
-      {
-        "t": "vid",
-        "src": "05.mp4"
-      }
-    ],
-    "year": "2025",
-    "role": {
-      "en": "Motion",
-      "zh": "Motion"
-    },
-    "title": {
-      "en": "VOLVO 451 DIM Motion",
-      "zh": "VOLVO 451 DIM Motion"
-    },
-    "desc": {
-      "en": "Restrained and rigorous dashboard motion effects",
-      "zh": "简约克制、风格严谨的车载仪表动效设计"
-    },
-    "about": {
-      "en": [
-        "Volvo imposes extremely strict standards and requirements on motion effects. I was fully aware of the challenges before launching this project, yet all difficulties were well resolved with meticulous attention to detail."
-      ],
-      "zh": [
-        "沃尔沃对车载动效有着极为严苛的设计标准与规范。接手该项目时我深知其难度，但凭借细致严谨的工作态度，各类难点均顺利攻克。"
-      ]
-    },
-    "locked": false
-  },
-  {
-    "id": "navigation-ui",
-    "cat": "hmi",
-    "folder": "works/HMI/navigation-ui",
-    "thumb": "cover.png",
-    "cover": "cover.png",
-    "media": [],
-    "year": "2024",
-    "role": {
-      "en": "UI / Systems",
-      "zh": "界面 / 系统"
-    },
-    "title": {
-      "en": "Navigation UI",
-      "zh": "导航界面"
-    },
-    "desc": {
-      "en": "Clear, focused wayfinding",
-      "zh": "清晰专注的导航"
-    },
-    "about": {
-      "en": [
-        "A navigation interface that strips the map to what matters at each moment — the next maneuver, distance and lane guidance.",
-        "Adaptive contrast keeps it legible from bright daylight to night driving."
-      ],
-      "zh": [
-        "把地图精简到当下最重要的信息:下一个动作、距离与车道指引。",
-        "自适应对比度,从强光白天到夜间行车都清晰可读。"
       ]
     }
   },
