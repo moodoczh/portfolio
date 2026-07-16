@@ -584,6 +584,72 @@ window.PROJECTS = [
     "locked": false
   },
   {
+    "id": "Capsule Craft",
+    "cat": "tools",
+    "folder": "works/Tools/Capsule Craft",
+    "thumb": "thumb.webp",
+    "cover": "cover.webp",
+    "media": [],
+    "year": "2026",
+    "role": {
+      "en": "Product / Development",
+      "zh": "Product / Development"
+    },
+    "title": {
+      "en": "Icon Library",
+      "zh": "Capsule Craft (Figma Plugin)"
+    },
+    "desc": {
+      "en": "First self-developed Figma plugin",
+      "zh": "首款独立自研 Figma 插件"
+    },
+    "about": {
+      "en": [
+        "This plugin is independently developed entirely based on free AI resources. The whole development process was extremely challenging. Free AI services come with very limited token quotas and poor data throughput consistency. When fixing subsequent bugs, the previous code was often simplified or accidentally deleted. Through continuous efforts, I finally completed this Figma plugin focused on design standardization verification. The core features are as follows:",
+        "* Design Linter",
+        "Supports custom grid systems (8pt, 4pt, 10pt, etc.). Automatically checks coordinates, spacing, sizes, corner radius, and Design Tokens to help maintain pixel-perfect consistency.",
+        "* Smart Filtering",
+        "Automatically ignores images during token validation and supports underscore-based naming conventions to reduce false positives and noisy reports.",
+        "* Auto-Rename",
+        "Instantly convert messy layer names into clean PascalCase or snake_case formats for scalable and maintainable design structures.",
+        "* Hand-off Cleanup",
+        "Remove hidden layers and empty groups with one click to reduce file size and improve delivery quality.",
+        "* Library Audit",
+        "Detect and audit all external component instances in the current file. Quickly identify non-approved libraries and ensure teams stay aligned with the official design system.",
+        "* Time Saved Tracking",
+        "Automatically estimates and displays time saved after every operation, helping designers quantify workflow efficiency improvements in real time.",
+        "* Statistics Dashboard",
+        "View accumulated scan results, issue counts, cleanup totals, rename statistics, and overall productivity metrics in a dedicated analytics panel.",
+        "* Issue Visualization",
+        "Clearly groups and displays detected design issues for faster troubleshooting and component localization.",
+        "* Bilingual Interface",
+        "Seamlessly switch between English and Chinese interfaces for cross-team collaboration and localized workflows."
+      ],
+      "zh": [
+        "本插件为纯依托免费AI资源独立开发，研发过程极具挑战。免费AI的Token额度十分有限，且数据输出一致性较差，在迭代修复后续程序漏洞时，时常会出现前置代码被精简或误删的问题。经过反复调试与持续攻坚，最终成功完成这款以设计规范化校验为核心的Figma插件。以下为插件核心功能：",
+        "1. 设计规范校验工具 / Design Linter",
+        "中文：支持自定义8pt、4pt、10pt等网格系统，自动校验图层坐标、间距、尺寸、圆角及设计令牌，保障像素级的设计统一。",
+        "2. 智能筛选校验 / Smart Filtering",
+        "中文：在校验设计令牌时自动忽略图片图层，支持下划线命名规范，有效减少误判和无效报错，提升校验精准度。",
+        "3. 图层自动重命名 / Auto-Rename",
+        "中文：一键将杂乱的图层名称批量转换为标准大驼峰（PascalCase）或蛇形（snake_case）命名，搭建可拓展、易维护的设计文件结构。",
+        "4. 交付文件清理 / Hand-off Cleanup",
+        "中文：一键清理隐藏图层与空图层组，精简文件体积，优化前端交付质量，提升协作效率。",
+        "5. 组件库合规审计 / Library Audit",
+        "中文：检测并统计当前文件中所有外部组件实例，快速识别非官方合规组件库，确保团队设计体系统一、规范落地。",
+        "6. 省时效率统计 / Time Saved Tracking",
+        "中文：每次操作后自动估算并展示节省的工作时长，实时量化设计工作流的效率提升成果。",
+        "7. 数据统计看板 / Statistics Dashboard",
+        "中文：内置专属数据面板，汇总展示扫描结果、问题数量、清理数据、重命名统计及各项效率指标，可视化呈现工作成果。",
+        "8. 问题可视化定位 / Issue Visualization",
+        "中文：对检测出的设计问题进行分类聚合展示，便于快速排查问题、定位异常组件，提升整改效率。",
+        "9. 双语操作界面 / Bilingual Interface",
+        "中文：支持中英文界面无缝切换，适配跨团队、多语言协作场景，适配不同使用习惯。"
+      ]
+    },
+    "locked": false
+  },
+  {
     "id": "lottie performance analyzer",
     "cat": "tools",
     "folder": "works/Tools/lottie performance analyzer",
@@ -630,37 +696,6 @@ window.PROJECTS = [
         "支持直接拖拽导入 Lottie 文件及各类复杂压缩包，一键解析即可直观查看各类性能参数，同步生成可视化数据图表与综合评分。",
         "核心亮点新增一键封装功能，可将多文件组合的复杂资源包快速整合输出为标准 JSON 格式文件。",
         "你可下载下方测试 JSON 文件进行实操体验。"
-      ]
-    }
-  },
-  {
-    "id": "icon-library",
-    "cat": "tools",
-    "folder": "works/Tools/icon-library",
-    "thumb": "cover.png",
-    "cover": "cover.png",
-    "media": [],
-    "year": "2025",
-    "role": {
-      "en": "Systems / Craft",
-      "zh": "系统 / 精修"
-    },
-    "title": {
-      "en": "Icon Library",
-      "zh": "图标库"
-    },
-    "desc": {
-      "en": "Consistent icon set",
-      "zh": "统一图标系统"
-    },
-    "about": {
-      "en": [
-        "A cohesive icon library drawn on a shared grid, balanced for both dense UI and large display use.",
-        "Exported as an easy-to-adopt package for designers and engineers alike."
-      ],
-      "zh": [
-        "建立在统一栅格上的图标库,兼顾密集界面与大尺寸展示的平衡。",
-        "以易于接入的方式打包,供设计师与工程师直接使用。"
       ]
     }
   },
