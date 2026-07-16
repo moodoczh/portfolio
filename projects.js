@@ -73,6 +73,68 @@ window.CATEGORIES = ["hmi","app","3d","tools"];
 
 window.PROJECTS = [
   {
+    "id": "QT group",
+    "cat": "hmi",
+    "folder": "works/HMI/QT group",
+    "year": "2026",
+    "role": {
+      "en": "Shot Planning/Motion",
+      "zh": "Shot Planning/Motion"
+    },
+    "title": {
+      "en": "QT group HMI demo",
+      "zh": "QT group HMI demo"
+    },
+    "desc": {
+      "en": "First Demo of Qt-based Civilian HMI Engine Trial",
+      "zh": "QT 尝试民用HMI 引擎的第一个DEMO"
+    },
+    "about": {
+      "en": [
+        "This is Qt's first HMI demo for civilian vehicles, marking Qt Group's official entry into the civilian automotive 3D engine market. It aims to carve out a niche in the market currently dominated by Unity and Unreal Engine.In this project, I was responsible for motion effect planning and production of the Qt demo project. I appreciate my colleagues for their professional 3D technical support. In addition, I created IPA demo animations with AI tools to serve as references for the development and implementation of 3D visual effects."
+      ],
+      "zh": [
+        "这是 Qt 首款面向民用汽车领域的 HMI 演示项目，标志着 Qt 团队正式入局民用车载 3D 引擎赛道，力求在 Unity 与虚幻引擎占据的市场中开辟专属发展空间。本项目中，我负责 Qt 演示工程的动效策划、动效制作，同时感谢同事提供专业 3D 技术支持。此外我借助 AI 工具制作 IPA 演示动画，为 3D 视觉效果的开发落地提供参考依据。"
+      ]
+    },
+    "thumb": "thumb.webp",
+    "cover": "cover.webp",
+    "media": [
+      {
+        "t": "vid",
+        "src": "01.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "02.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "03.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "04.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "05.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "06.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "07.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "08.mp4"
+      }
+    ]
+  },
+  {
     "id": "cluster-hmi",
     "cat": "hmi",
     "folder": "works/HMI/cluster-hmi",
@@ -228,36 +290,52 @@ window.PROJECTS = [
     }
   },
   {
-    "id": "QT group",
-    "cat": "hmi",
-    "folder": "works/HMI/QT group",
+    "id": "VOLVO APP",
+    "cat": "app",
+    "folder": "works/App/VOLVO APP",
     "year": "2026",
     "role": {
-      "en": "Shot Planning/Motion",
-      "zh": "Shot Planning/Motion"
+      "en": "UI/UX/Motion",
+      "zh": "UI/UX/Motion"
     },
     "title": {
-      "en": "QT group",
-      "zh": "QT group"
+      "en": "VOLVO APP",
+      "zh": "VOLVO APP"
     },
     "desc": {
-      "en": "First Demo of Qt-based Civilian HMI Engine Trial",
-      "zh": "QT 尝试民用HMI 引擎的第一个DEMO"
+      "en": "Remote control & status",
+      "zh": "远程控制与状态"
     },
     "about": {
       "en": [
-        "In this project, I was fully responsible for motion effect planning, development and integration of the Qt demo. I would like to thank my colleagues for providing 3D technical support. Meanwhile, I used AI tools to produce IPA demo animations, serving as references for the implementation of 3D visual effects."
+        "The original design has been greatly optimized, transforming the fully static interface into a WYSIWYG dynamic page. The button layout is more reasonable, completely solving the drawback that buttons were out of thumb reach in the old version."
       ],
       "zh": [
-        "本项目中，我全权负责 Qt 演示工程的动效策划、开发与集成落地，同时感谢同事提供专业 3D 技术支持。此外我借助 AI 工具制作 IPA 演示动画，为 3D 视觉效果的开发落地提供参考依据。"
+        "大幅升级原有设计，将纯静态界面重构为所见即所得的动态交互页面。同时优化按键排布逻辑，彻底解决旧版操作时按键偏远、拇指难以触及的使用痛点。"
       ]
     },
     "thumb": "thumb.webp",
     "cover": "cover.webp",
     "media": [
       {
+        "t": "img",
+        "src": "01.webp"
+      },
+      {
+        "t": "img",
+        "src": "02.webp"
+      },
+      {
         "t": "vid",
-        "src": "01.mp4"
+        "src": "03.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "04.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "05.mp4"
       }
     ]
   },
@@ -570,5 +648,30 @@ window.PROJECTS = [
         "src": "08.mp4"
       }
     ]
+  },
+  {
+    "id": "companion-app",
+    "cat": "app",
+    "folder": "works/App/companion-app",
+    "year": "",
+    "role": {
+      "en": "",
+      "zh": ""
+    },
+    "title": {
+      "en": "companion-app",
+      "zh": "companion-app"
+    },
+    "desc": {
+      "en": "",
+      "zh": ""
+    },
+    "about": {
+      "en": [],
+      "zh": []
+    },
+    "thumb": "cover.png",
+    "cover": "cover.png",
+    "media": []
   }
 ];

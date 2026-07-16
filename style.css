@@ -153,10 +153,11 @@ footer .brand2 .mark{width:22px;height:22px;border-radius:6px;background:conic-g
 
 /* ============ project detail ============ */
 .detail{padding:calc(var(--nav-h) + clamp(40px,7vw,90px)) var(--pad) 0}
-.backlink{display:inline-flex;align-items:center;gap:9px;color:var(--muted);font-size:13px;letter-spacing:.03em;transition:color .3s;margin-bottom:40px}
-.backlink:hover{color:var(--ink)}
-.backlink .ar{transition:transform .3s}
-.backlink:hover .ar{transform:translateX(-4px)}
+.backlink{display:inline-flex;align-items:center;gap:10px;color:var(--muted);font-size:13px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);padding:11px 20px 11px 17px;border-radius:100px;transition:color .3s,border-color .3s,background .3s;margin-bottom:44px}
+.backlink:hover{color:var(--ink);border-color:var(--line2);background:rgba(255,255,255,.04)}
+.backlink .ar{display:inline-block;font-size:16px;transition:transform .3s;animation:backNudge 1.9s ease-in-out infinite}
+.backlink:hover .ar{animation:none;transform:translateX(-5px)}
+@keyframes backNudge{0%,100%{transform:translateX(0)}50%{transform:translateX(-6px)}}
 .detail .d-cat{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
 .detail h1{font-size:clamp(40px,8vw,120px);line-height:.96;font-weight:600;letter-spacing:-.035em}
 .d-meta{display:flex;gap:clamp(30px,6vw,90px);flex-wrap:wrap;margin-top:44px;padding-bottom:44px;border-bottom:1px solid var(--line)}

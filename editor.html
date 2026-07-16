@@ -102,8 +102,10 @@
   var CATMAP={hmi:"HMI",app:"App","3d":"3D",tools:"Tools"};
   var CATS=(window.CATEGORIES&&window.CATEGORIES.slice())||["hmi","app","3d","tools"];
   var I18N=window.I18N||{};
-  var cur=-1, dirHandle=null, pvLang="en", dragSrc=null;
+  var cur=-1, dirHandle=null, pvLang="en", dragSrc=null, curProj=null, pendingDeletes=[];
   var FS=("showDirectoryPicker" in window);
+  function updFolder(){var e=document.getElementById("pv_folder");if(e)e.textContent="works/"+(CATMAP[val("f_cat")]||val("f_cat"))+"/"+(val("f_id")||"untitled")+"/";}
+  function onFormInput(){if(!curProj)return;saveTextLive(curProj);updFolder();renderPreview(curProj);renderList();}
   var projects=FS?[]:JSON.parse(JSON.stringify(window.PROJECTS||[])); /* FS: 连接后再加载;Safari: 用内置数据 */
   var THUMB={w:720,h:540}, COVER={w:1600,h:900}, MEDIAW=1600, Q=0.9;
   var side=document.getElementById("side"),form=document.getElementById("form"),preview=document.getElementById("preview"),cnt=document.getElementById("cnt");
@@ -124,6 +126,16 @@
   async function writeBlob(root,parts,blob){var dh=await getDir(root,parts.slice(0,-1),true);var fh=await dh.getFileHandle(parts[parts.length-1],{create:true});var w=await fh.createWritable();await w.write(blob);await w.close();}
   async function readFile(root,parts){var dh=await getDir(root,parts.slice(0,-1),false);var fh=await dh.getFileHandle(parts[parts.length-1]);return await fh.getFile();}
   async function moveFolder(root,oldParts,newParts){var oldDir;try{oldDir=await getDir(root,oldParts,false);}catch(e){return;}var newDir=await getDir(root,newParts,true);for await(const ent of oldDir.entries()){var name=ent[0],h=ent[1];if(h.kind==="file"){var f=await h.getFile();var nf=await newDir.getFileHandle(name,{create:true});var w=await nf.createWritable();await w.write(f);await w.close();}}try{var parent=await getDir(root,oldParts.slice(0,-1),false);await parent.removeEntry(oldParts[oldParts.length-1],{recursive:true});}catch(e){}}
+  async function removeFolderPath(root,parts){try{var parent=await getDir(root,parts.slice(0,-1),false);await parent.removeEntry(parts[parts.length-1],{recursive:true});}catch(e){}}
+  /* read existing thumb/cover/media files into object URLs (reliable preview, no relative-path/caching issues) */
+  async function resolveExistingURLs(p){
+    if(!dirHandle)return;var fp=fParts(p);
+    try{if(!p._thumbURL&&p.thumb){var tf=await readFile(dirHandle,fp.concat(p.thumb));p._thumbURL=URL.createObjectURL(tf);}}catch(e){}
+    try{if(!p._coverURL&&p.cover){var cf=await readFile(dirHandle,fp.concat(p.cover));p._coverURL=URL.createObjectURL(cf);}}catch(e){}
+    if(p._media!=null){for(var i=0;i<p._media.length;i++){var it=p._media[i];if(it.t==="img"&&!it.url&&it.existing){try{var f=await readFile(dirHandle,fp.concat(it.existing));it.url=URL.createObjectURL(f);}catch(e){}}}}
+  }
+  /* remove numbered media files on disk that are not referenced by p.media (orphans / 0-byte leftovers) */
+  async function pruneOrphans(root,parts,keep){try{var dir=await getDir(root,parts,false);var rm=[];for await(const ent of dir.entries()){var name=ent[0],h=ent[1];if(h.kind==="file"&&/^\d\d\.(webp|jpe?g|png|gif|mp4|webm|mov|m4v)$/i.test(name)&&keep.indexOf(name)<0)rm.push(name);}for(var i=0;i<rm.length;i++)await dir.removeEntry(rm[i]);}catch(e){}}
   async function clearNumberedMedia(root,parts){try{var dir=await getDir(root,parts,false);var rm=[];for await(const ent of dir.entries()){var name=ent[0],h=ent[1];if(h.kind==="file"&&/^\d\d\.(webp|jpe?g|png|gif|mp4|webm|mov|m4v)$/i.test(name))rm.push(name);}for(var i=0;i<rm.length;i++)await dir.removeEntry(rm[i]);}catch(e){}}
 
   /* ---------- scan folders → discover projects (incl. manually-added ones) ---------- */
@@ -162,7 +174,7 @@
       return true;
     }catch(e){return false;}
   }
-  document.getElementById("openBtn").onclick=async function(){var ok=await connectFolder(true);if(ok){cur=-1;renderList();form.innerHTML="<div class='empty'>已连接 ✓ 左边选作品开始。</div>";preview.innerHTML="";toast("已连接,保存会直接写入文件夹。","ok");}};
+  document.getElementById("openBtn").onclick=async function(){var ok=await connectFolder(true);if(ok){cur=-1;curProj=null;pendingDeletes=[];renderList();form.innerHTML="<div class='empty'>已连接 ✓ 左边选作品开始。</div>";preview.innerHTML="";toast("已连接,保存会直接写入文件夹。","ok");}};
 
   function renderList(){
     if(!dirHandle&&!projects.length){side.innerHTML="<div style='padding:22px 14px;color:var(--muted);font-size:12.5px;line-height:1.9'>点右上「打开作品文件夹」<br>连接后加载最新作品</div>";cnt.textContent="";return;}
@@ -209,10 +221,8 @@
       "<div style='margin-top:14px;display:flex;gap:8px'><button class='btn sm' id='upBtn'>作品上移</button><button class='btn sm' id='downBtn'>作品下移</button></div>"+
       "<div class='banner info'>点右上 <b>「保存全部 → 写入」</b> 才会把图/视频和 <code>projects.js</code> 写进文件夹。改了 ID/分类,保存时会自动把文件夹改名/搬走。</div>";
 
-    function updFolder(){document.getElementById("pv_folder").textContent="works/"+(CATMAP[val("f_cat")]||val("f_cat"))+"/"+(val("f_id")||"untitled")+"/";}
+    curProj=p;
     updFolder();
-    form.addEventListener("input",function(){saveTextLive(p);updFolder();renderPreview(p);renderList();});
-    document.getElementById("f_cat").addEventListener("change",function(){saveTextLive(p);updFolder();renderPreview(p);renderList();});
 
     var td=document.getElementById("thumbDrop"),tf=document.getElementById("thumbFile");
     setDropImg(td,p._thumbURL||(p.thumb?fPath(p)+"/"+p.thumb+"?"+Date.now():""));
@@ -231,9 +241,10 @@
     md.addEventListener("drop",function(e){e.preventDefault();md.classList.remove("drag");handleMedia(p,[].slice.call(e.dataTransfer.files));});
     document.getElementById("mediaLinkBtn").onclick=function(){var v=document.getElementById("mediaLink"),u=v.value.trim();if(!u)return;mediaItems(p).push({t:"embed",src:u});v.value="";p._dirty=true;renderMediaList(p);renderPreview(p);renderList();};
 
-    document.getElementById("delBtn").onclick=function(){if(confirm("删除这个作品?(文件夹里的文件不会自动删)")){projects.splice(cur,1);cur=-1;renderList();form.innerHTML="<div class='empty'>已删除。</div>";preview.innerHTML="";}};
+    document.getElementById("delBtn").onclick=function(){if(confirm("删除这个作品?保存后会连同它的文件夹一起从磁盘删除。")){var dp=projects[cur];if(dp&&dirHandle)pendingDeletes.push((dp._origFolder||fPath(dp)).split("/"));projects.splice(cur,1);cur=-1;curProj=null;renderList();form.innerHTML="<div class='empty'>已从列表删除,点「保存全部」后彻底移除。</div>";preview.innerHTML="";}};
     document.getElementById("upBtn").onclick=function(){moveProj(-1);};document.getElementById("downBtn").onclick=function(){moveProj(1);};
     renderList();renderPreview(p);
+    resolveExistingURLs(p).then(function(){if(curProj!==p)return;var td=document.getElementById("thumbDrop"),cd=document.getElementById("coverDrop");if(td)setDropImg(td,p._thumbURL||"");if(cd)setDropImg(cd,p._coverURL||"");renderMediaList(p);renderPreview(p);});
   }
 
   function dndImg(el,cb){el.addEventListener("dragover",function(e){e.preventDefault();el.classList.add("drag");});el.addEventListener("dragleave",function(){el.classList.remove("drag");});el.addEventListener("drop",function(e){e.preventDefault();el.classList.remove("drag");var f=[].slice.call(e.dataTransfer.files).filter(function(x){return x.type.indexOf("image")===0;})[0];if(f)cb(f);});}
@@ -252,10 +263,12 @@
       return "<div class='mitem'><div class='th'"+(tu?" style=\"background-image:url('"+tu+"')\"":"")+">"+(tu?"":mIcon(it))+"</div><span class='badge'>"+badge+"</span><span class='nm'>"+esc(mLabel(it))+"</span><button class='btn sm' data-mm='"+i+"' data-d='-1'>↑</button><button class='btn sm' data-mm='"+i+"' data-d='1'>↓</button><button class='btn sm danger' data-mr='"+i+"'>✕</button></div>";}).join("");
     w.querySelectorAll("[data-mm]").forEach(function(b){b.onclick=function(){var i=+b.dataset.mm,d=+b.dataset.d,j=i+d,L=p._media;if(j<0||j>=L.length)return;var t=L[i];L[i]=L[j];L[j]=t;p._dirty=true;renderMediaList(p);renderPreview(p);};});
     w.querySelectorAll("[data-mr]").forEach(function(b){b.onclick=function(){p._media.splice(+b.dataset.mr,1);p._dirty=true;renderMediaList(p);renderPreview(p);};});}
-  async function handleMedia(p,files){if(!files.length)return;var L=mediaItems(p);for(var k=0;k<files.length;k++){var f=files[k];
-      if(f.type.indexOf("image")===0){try{var r=await processMax(f,MEDIAW);L.push({t:"img",blob:r.blob,ext:r.ext,url:URL.createObjectURL(r.blob)});}catch(e){}}
-      else if(f.type.indexOf("video")===0){if(f.size>25*1024*1024)toast(f.name+" "+(f.size/1048576).toFixed(1)+"MB 超 25MB,建议压缩或用链接","warn");L.push({t:"vid",blob:f,ext:(f.name.split(".").pop()||"mp4").toLowerCase(),name:f.name});}}
-    p._dirty=true;renderMediaList(p);renderPreview(p);renderList();toast("已加入媒体,保存时写入");}
+  async function handleMedia(p,files){if(!files.length)return;var L=mediaItems(p),added=0;for(var k=0;k<files.length;k++){var f=files[k];
+      if(f.type.indexOf("image")===0){try{var r=await processMax(f,MEDIAW);L.push({t:"img",blob:r.blob,ext:r.ext,url:URL.createObjectURL(r.blob)});added++;}catch(e){}}
+      else if(f.type.indexOf("video")===0){if(f.size>25*1024*1024)toast(f.name+" "+(f.size/1048576).toFixed(1)+"MB 超 25MB,建议压缩或用链接","warn");
+        try{var buf=await f.arrayBuffer();L.push({t:"vid",blob:new Blob([buf],{type:f.type||"video/mp4"}),ext:(f.name.split(".").pop()||"mp4").toLowerCase(),name:f.name});added++;}
+        catch(e){toast("视频 "+f.name+" 读取失败,已跳过","warn");}}}
+    p._dirty=true;renderMediaList(p);renderPreview(p);renderList();toast(added+" 个媒体已加入(已读入内存),保存时写入");}
 
   function saveTextLive(p){var id=val("f_id");if(id)p.id=id;p.cat=val("f_cat");p.folder=fPath(p);p.year=val("f_year");p.role={en:val("f_role_en"),zh:val("f_role_zh")};p.title={en:val("f_title_en"),zh:val("f_title_zh")};p.desc={en:val("f_desc_en"),zh:val("f_desc_zh")};p.about={en:lines("f_about_en"),zh:lines("f_about_zh")};}
   function lines(id){var e=document.getElementById(id);return e?e.value.split("\n").map(function(x){return x.trim();}).filter(Boolean):[];}
@@ -290,7 +303,7 @@
   function download(name,blob){var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;a.click();}
 
   document.getElementById("saveAllBtn").onclick=async function(){
-    if(cur>=0)saveTextLive(projects[cur]);
+    if(curProj)saveTextLive(curProj);
     if(!dirHandle&&FS){toast("先选一下 moodoczh 文件夹授权…");var ok=await connectFolder(false);if(!ok){toast("没连文件夹,改为下载模式","warn");}}
     try{
       if(dirHandle){
@@ -305,15 +318,24 @@
               for(var mi=0;mi<p._media.length;mi++){var it=p._media[mi];
                 if(it.t==="embed"){resolved.push({t:"embed",src:it.src||it.existing});}
                 else if(it.blob){resolved.push({t:it.t,blob:it.blob,ext:it.ext});}
-                else if(it.existing){try{var f=await readFile(dirHandle,fp.concat(it.existing));resolved.push({t:it.t,blob:f,ext:(it.existing.split(".").pop()||"webp")});}catch(fe){/* 文件缺失,跳过该项 */}}}
+                else if(it.existing){try{var f=await readFile(dirHandle,fp.concat(it.existing));var buf=await f.arrayBuffer();resolved.push({t:it.t,blob:new Blob([buf],{type:f.type}),ext:(it.existing.split(".").pop()||"webp")});}catch(fe){/* 文件缺失/读取失败,跳过 */}}}
               await clearNumberedMedia(dirHandle,fp);
-              var media=[];
-              for(var r=0;r<resolved.length;r++){var it2=resolved[r];if(it2.t==="embed"){media.push({t:"embed",src:it2.src});}else{var nm=String(r+1).padStart(2,"0")+"."+it2.ext;await writeBlob(dirHandle,fp.concat(nm),it2.blob);media.push({t:it2.t,src:nm});}}
+              var media=[],fn=0,mfail=0;
+              for(var r=0;r<resolved.length;r++){var it2=resolved[r];
+                if(it2.t==="embed"){media.push({t:"embed",src:it2.src});}
+                else{fn++;var nm=String(fn).padStart(2,"0")+"."+it2.ext;
+                  try{await writeBlob(dirHandle,fp.concat(nm),it2.blob);media.push({t:it2.t,src:nm});}
+                  catch(we){fn--;mfail++;}}}
               p.media=media;
+              if(mfail)failed.push((p.id||"?")+"·"+mfail+"个媒体写入失败");
             }
+            var keepN=(p.media||[]).filter(function(x){return x.t!=="embed";}).map(function(x){return x.src;});
+            await pruneOrphans(dirHandle,fp,keepN);
             p._thumbBlob=null;p._thumbURL=null;p._coverBlob=null;p._coverURL=null;p._media=null;p._dirty=false;
           }catch(perr){failed.push((p.id||"?")+"("+(perr.name||"err")+")");}
         }
+        for(var d=0;d<pendingDeletes.length;d++){await removeFolderPath(dirHandle,pendingDeletes[d]);}
+        pendingDeletes=[];
         await writeBlob(dirHandle,["projects.js"],new Blob([buildOut()],{type:"text/javascript"}));
         renderList();if(cur>=0)selectItem(cur);
         if(failed.length)toast("已写入 · 这些作品有文件缺失被跳过:"+failed.join("、"),"warn");
@@ -330,6 +352,8 @@
     }catch(e){toast("写入出错:"+e.message,"err");}
   };
 
+  form.addEventListener("input",onFormInput);
+  form.addEventListener("change",onFormInput);
   renderList();
 })();
 </script>
