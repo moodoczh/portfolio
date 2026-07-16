@@ -584,68 +584,6 @@ window.PROJECTS = [
     "locked": false
   },
   {
-    "id": "realtime-scene",
-    "cat": "3d",
-    "folder": "works/3D/realtime-scene",
-    "thumb": "cover.png",
-    "cover": "cover.png",
-    "media": [],
-    "year": "2025",
-    "role": {
-      "en": "Realtime 3D",
-      "zh": "实时 3D"
-    },
-    "title": {
-      "en": "Realtime Scene",
-      "zh": "实时 3D 场景"
-    },
-    "desc": {
-      "en": "WebGL environment",
-      "zh": "WebGL 场景"
-    },
-    "about": {
-      "en": [
-        "An interactive WebGL scene exploring light, material and atmosphere as a product stage.",
-        "Optimized to stay fluid on the web without sacrificing depth."
-      ],
-      "zh": [
-        "一个交互式 WebGL 场景,把光线、材质与氛围当作产品的舞台去探索。",
-        "经过优化,在网页上保持流畅的同时不牺牲空间感。"
-      ]
-    }
-  },
-  {
-    "id": "product-render",
-    "cat": "3d",
-    "folder": "works/3D/product-render",
-    "thumb": "cover.png",
-    "cover": "cover.png",
-    "media": [],
-    "year": "2024",
-    "role": {
-      "en": "3D / Art Direction",
-      "zh": "3D / 艺术指导"
-    },
-    "title": {
-      "en": "Product Render",
-      "zh": "产品渲染"
-    },
-    "desc": {
-      "en": "Cinematic product visuals",
-      "zh": "电影感产品视觉"
-    },
-    "about": {
-      "en": [
-        "A series of cinematic product renders built to make hardware feel desirable and precise.",
-        "Lighting and composition studies that carry over into the live interfaces."
-      ],
-      "zh": [
-        "一组电影感产品渲染,让硬件显得精密而令人向往。",
-        "其中的光影与构图研究,也延续到了真实界面之中。"
-      ]
-    }
-  },
-  {
     "id": "lottie performance analyzer",
     "cat": "tools",
     "folder": "works/Tools/lottie performance analyzer",
@@ -818,30 +756,5 @@ window.PROJECTS = [
         "src": "08.mp4"
       }
     ]
-  },
-  {
-    "id": "companion-app",
-    "cat": "app",
-    "folder": "works/App/companion-app",
-    "year": "",
-    "role": {
-      "en": "",
-      "zh": ""
-    },
-    "title": {
-      "en": "companion-app",
-      "zh": "companion-app"
-    },
-    "desc": {
-      "en": "",
-      "zh": ""
-    },
-    "about": {
-      "en": [],
-      "zh": []
-    },
-    "thumb": "cover.png",
-    "cover": "cover.png",
-    "media": []
   }
 ];
