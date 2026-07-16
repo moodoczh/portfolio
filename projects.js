@@ -71,6 +71,8 @@ window.I18N = {
 
 window.CATEGORIES = ["hmi","app","3d","tools"];
 
+window.LOCK = {"h":"1abb7a7b6f47bc"};
+
 window.PROJECTS = [
   {
     "id": "QT group",
@@ -277,35 +279,55 @@ window.PROJECTS = [
     }
   },
   {
-    "id": "climate-control",
+    "id": "VOLVO 451 DIM",
     "cat": "hmi",
-    "folder": "works/HMI/climate-control",
-    "thumb": "cover.png",
-    "cover": "cover.png",
-    "media": [],
+    "folder": "works/HMI/VOLVO 451 DIM",
+    "thumb": "thumb.webp",
+    "cover": "cover.webp",
+    "media": [
+      {
+        "t": "img",
+        "src": "01.webp"
+      },
+      {
+        "t": "vid",
+        "src": "02.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "03.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "04.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "05.mp4"
+      }
+    ],
     "year": "2025",
     "role": {
-      "en": "UI Design",
-      "zh": "界面设计"
+      "en": "Motion",
+      "zh": "Motion"
     },
     "title": {
-      "en": "Climate Control",
-      "zh": "空调控制界面"
+      "en": "VOLVO 451 DIM Motion",
+      "zh": "VOLVO 451 DIM Motion"
     },
     "desc": {
-      "en": "Smart climate interaction",
-      "zh": "智能温控交互"
+      "en": "Restrained and rigorous dashboard motion effects",
+      "zh": "简约克制、风格严谨的车载仪表动效设计"
     },
     "about": {
       "en": [
-        "A tactile climate module where temperature, airflow and zones map to gestures that feel physical and immediate.",
-        "Micro-animations confirm every change so the driver stays informed without diverting attention from the road."
+        "Volvo imposes extremely strict standards and requirements on motion effects. I was fully aware of the challenges before launching this project, yet all difficulties were well resolved with meticulous attention to detail."
       ],
       "zh": [
-        "富有触感的空调模块,温度、风量与分区都对应直觉化的手势操作。",
-        "每次调整都有微动效确认,让驾驶者无需分心即可掌握状态。"
+        "沃尔沃对车载动效有着极为严苛的设计标准与规范。接手该项目时我深知其难度，但凭借细致严谨的工作态度，各类难点均顺利攻克。"
       ]
-    }
+    },
+    "locked": false
   },
   {
     "id": "navigation-ui",
