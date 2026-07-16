@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lottie Performance Analyzer Pro</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+:root{--bg:#0b0f14;--panel:#121821;--card:#18212c;--border:#243041;--text:#e8eef7;--muted:#8fa0b8;--accent:#4f8cff;--green:#22c55e;--yellow:#f59e0b;--red:#ef4444;}
+*{box-sizing:border-box}
+body{margin:0;padding:16px;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;height:100vh;overflow:hidden}
+.layout{display:grid;grid-template-columns:1fr 540px;gap:16px;height:100%}
+.panel{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:14px;overflow:hidden}
+.panel-right{overflow-y:auto;overflow-x:hidden;padding-right:6px}
+.panel-right::-webkit-scrollbar{width:8px}
+.panel-right::-webkit-scrollbar-thumb{background:#243041;border-radius:999px}
+#dropZone{border:2px dashed var(--accent);border-radius:14px;padding:18px;text-align:center;cursor:pointer;background:#101722}
+#preview{flex:1;background:#05070b;border-radius:14px;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid var(--border);position:relative}
+#previewScaler{transform-origin:center center;display:flex;align-items:center;justify-content:center}
+#lottieContainer{display:block}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px}
+.label{font-size:12px;color:var(--muted);margin-bottom:6px}.val{font-size:24px;font-weight:700;font-family:ui-monospace,monospace}
+select,button{width:100%;padding:12px;border-radius:12px;border:1px solid var(--border);background:#101722;color:var(--text)}
+button{background:var(--accent);border:none;font-weight:700;cursor:pointer}
+.control-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.toggle{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text)}
+canvas{max-height:220px}.warn{font-size:12px;line-height:1.6;color:#fbbf24}
+#langBtn{width:auto;padding:6px 14px;font-size:13px;border:1px solid var(--border);background:#101722;color:var(--text);border-radius:10px;font-weight:600;margin-top:8px}
+</style>
+</head>
+<body>
+<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;padding:4px 4px 0 4px;">
+  <div>
+    <div data-i18n="appTitle" style="font-size:28px;font-weight:800;line-height:1.2;">Lottie Automotive-Grade Performance Analyzer</div>
+    <div data-i18n="appSubtitle" style="font-size:13px;color:var(--muted);margin-top:6px;line-height:1.5;max-width:760px;">
+      M5 Benchmark-calibrated algorithm · Multi-dimensional structural complexity analysis · Automotive SoC performance simulation · Automatic risk diagnosis &amp; budget assessment
+    </div>
+  </div>
+  <div style="text-align:right;">
+    <div style="font-size:16px;font-weight:700;color:var(--accent);">Morimoto Zhang</div>
+    <div style="font-size:13px;color:var(--muted);margin-top:4px;">Pro v15.6</div>
+    <button id="langBtn">中文</button>
+  </div>
+</div>
+<div class="layout">
+<div class="panel">
+<div id="dropZone"><span data-i18n="dropZone">📂 Drop Lottie JSON / ZIP file</span><input type="file" id="fileInput" hidden accept=".json,.zip"></div>
+<div id="preview"><div id="previewScaler"><div id="lottieContainer"><span data-i18n="previewWait">👀 Waiting for Lottie...</span></div></div></div>
+</div>
+<div class="panel panel-right">
+<div class="grid">
+<div class="card"><div class="label" data-i18n="targetSoc">🚗 Target SoC</div><select id="targetSoc"><option>8155</option><option>8255</option><option selected>8295</option><option>8775</option><option>8797</option></select></div>
+<div class="card"><div class="label" data-i18n="previewBg">🎨 Preview Background</div><select id="bgSelect"><option value="#05070b" data-i18n="bgBlack">Black</option><option value="#6b7280" data-i18n="bgGray">Gray</option><option value="#ffffff" data-i18n="bgWhite">White</option><option value="checkerboard" data-i18n="bgChecker">Transparent Checkerboard</option></select><input id="customBgInput" placeholder="#RRGGBB" style="margin-top:8px;width:100%;padding:10px;border-radius:10px;border:1px solid var(--border);background:#101722;color:var(--text)" /></div>
+</div>
+<div class="card">
+<div class="label" data-i18n="playbackControl">▶️ Playback Control</div>
+<div class="grid">
+<div><select id="speedControl"><option value="0.5">0.5x</option><option value="1" selected>1x</option><option value="2">2x</option></select></div>
+<div class="toggle"><input type="checkbox" id="loopToggle" checked> <span data-i18n="loop">Loop</span></div>
+</div>
+<div class="control-row" style="margin-top:8px">
+<button id="pauseBtn" data-i18n="pause">⏸ Pause</button>
+<button id="stopBtn" data-i18n="stop">⏹ Stop</button>
+</div>
+</div>
+<div class="grid">
+<div class="card"><div class="label" data-i18n="compSize">📐 Composition Size</div><div class="val" id="compSize">-</div></div>
+<div class="card"><div class="label" data-i18n="srcFps">🎬 Source FPS</div><div class="val" id="srcFps">-</div></div>
+<div class="card"><div class="label" data-i18n="jsonSize">📦 JSON Size</div><div class="val" id="jsonSize">-</div></div>
+<div class="card"><div class="label" data-i18n="duration">⏳ Duration</div><div class="val" id="durationVal">-</div></div>
+<div class="card"><div class="label" data-i18n="jsonFileName">📄 JSON File Name</div><div class="val" id="fileNameVal" style="font-size:14px">-</div></div>
+<div class="card"><div class="label" data-i18n="complexity">🧠 Complexity</div><div class="val" id="complexityVal">0</div></div>
+</div>
+<div class="grid" id="structPanel"></div>
+<div class="grid">
+<div class="card"><div class="label" data-i18n="mem">💾 Android Memory</div><div class="val" id="memVal">0 MB</div></div>
+<div class="card"><div class="label" data-i18n="frameTime">🕓 Frame Time</div><div class="val" id="simMs">0 ms</div></div>
+<div class="card"><div class="label" data-i18n="estFps">🎞 Estimated FPS</div><div class="val" id="simFps">0</div></div>
+<div class="card"><div class="label" data-i18n="frameBudget">📊 Frame Budget</div><div class="val" id="budgetVal">0%</div></div>
+<div class="card"><div class="label" data-i18n="overBudget">🥵 Over Budget</div><div class="val" id="overVal">0%</div></div>
+<div class="card"><div class="label" data-i18n="grade">🏆 Performance Grade</div><div class="val" id="gradeVal">A</div></div>
+</div>
+<div class="card"><div class="label" data-i18n="riskTitle">🛑 Risk Diagnosis</div><div id="warningPanel" class="warn" data-i18n="riskWait">Awaiting analysis... 🤔</div></div>
+<div class="card"><div class="label" data-i18n="perfTrend">📈 Performance Trend</div><canvas id="perfChart"></canvas></div>
+<div class="card"><div class="label" data-i18n="assetPacking">📦 Asset Packing</div><button id="exportPackedBtn" data-i18n="exportBtn">🤮 Export Packed JSON (not recommended if &gt;1MB)</button></div>
+<button onclick="resetAndRun()" data-i18n="runTest">Run Test</button>
+</div>
+</div>
+<script>
+const I18N={
+ en:{
+  appTitle:"Lottie Automotive-Grade Performance Analyzer",
+  appSubtitle:"M5 Benchmark-calibrated algorithm · Multi-dimensional structural complexity analysis · Automotive SoC performance simulation · Automatic risk diagnosis & budget assessment",
+  dropZone:"📂 Drop Lottie JSON / ZIP file",
+  previewWait:"👀 Waiting for Lottie...",
+  targetSoc:"🚗 Target SoC",
+  previewBg:"🎨 Preview Background",
+  bgBlack:"Black",bgGray:"Gray",bgWhite:"White",bgChecker:"Transparent Checkerboard",
+  playbackControl:"▶️ Playback Control",
+  loop:"Loop",
+  pause:"⏸ Pause",resume:"▶️ Resume",stop:"⏹ Stop",
+  compSize:"📐 Composition Size",
+  srcFps:"🎬 Source FPS",
+  jsonSize:"📦 JSON Size",
+  duration:"⏳ Duration",
+  jsonFileName:"📄 JSON File Name",
+  complexity:"🧠 Complexity",
+  layers:"Layers",masks:"Masks",mattes:"Mattes",paths:"Paths",repeaters:"Repeaters",trimPaths:"Trim Paths",
+  mem:"💾 Android Memory",
+  frameTime:"🕓 Frame Time",
+  estFps:"🎞 Estimated FPS",
+  frameBudget:"📊 Frame Budget",
+  overBudget:"🥵 Over Budget",
+  grade:"🏆 Performance Grade",
+  riskTitle:"🛑 Risk Diagnosis",
+  riskWait:"Awaiting analysis... 🤔",
+  perfTrend:"📈 Performance Trend",
+  assetPacking:"📦 Asset Packing",
+  exportBtn:"🤮 Export Packed JSON (not recommended if >1MB)",
+  runTest:"Run Test",
+  noRisk:"No significant performance risk detected",
+  warnLayers:"High layer count, keep it under 50",
+  warnMasks:"Many masks, low-end platforms may drop frames",
+  warnRepeaters:"Multiple Repeaters present, high draw cost",
+  warnCanvas:"Canvas size is large, consider compressing the composition",
+  warnFps:"Export frame rate too high, check if necessary",
+  noAssets:"This file has no image assets",
+  langBtn:"中文"
+ },
+ zh:{
+  appTitle:"Lottie 动画车规性能分析工具",
+  appSubtitle:"基于 M5 Benchmark 校准算法 · 多维结构复杂度分析 · SoC 车规性能模拟 · 自动风险诊断与预算评估",
+  dropZone:"📂 拖入 Lottie JSON / ZIP 文件",
+  previewWait:"👀 等待加载 Lottie...",
+  targetSoc:"🚗 目标 SoC",
+  previewBg:"🎨 预览背景",
+  bgBlack:"黑",bgGray:"灰",bgWhite:"白",bgChecker:"透明棋盘",
+  playbackControl:"▶️ 播放控制",
+  loop:"循环播放",
+  pause:"⏸ 暂停",resume:"▶️ 继续",stop:"⏹ 停止",
+  compSize:"📐 合成尺寸",
+  srcFps:"🎬 源帧率",
+  jsonSize:"📦 JSON 大小",
+  duration:"⏳ 时长",
+  jsonFileName:"📄 JSON 文件名",
+  complexity:"🧠 复杂度",
+  layers:"图层",masks:"遮罩",mattes:"蒙版",paths:"路径",repeaters:"重复器",trimPaths:"修剪路径",
+  mem:"💾 Android 内存占用",
+  frameTime:"🕓 单帧耗时",
+  estFps:"🎞 预计帧率",
+  frameBudget:"📊 帧预算占用",
+  overBudget:"🥵 超预算比例",
+  grade:"🏆 性能评级",
+  riskTitle:"🛑 风险诊断",
+  riskWait:"等待分析... 🤔",
+  perfTrend:"📈 性能趋势",
+  assetPacking:"📦 资源封装",
+  exportBtn:"🤮 导出封装 JSON (大于 1MB 不建议封装)",
+  runTest:"运行测试",
+  noRisk:"未发现明显性能风险",
+  warnLayers:"图层数量较高，建议控制在 50 以内",
+  warnMasks:"遮罩较多，低端平台可能掉帧",
+  warnRepeaters:"存在多个 Repeater，绘制成本高",
+  warnCanvas:"画布尺寸偏大，建议压缩合成",
+  warnFps:"导出帧率过高，建议检查是否必要",
+  noAssets:"当前文件无图像资源",
+  langBtn:"EN"
+ }
+};
+let LANG='en';
+function t(key){const d=I18N[LANG];return (d&&d[key]!==undefined)?d[key]:(I18N.en[key]!==undefined?I18N.en[key]:key);}
+function applyI18n(){
+ document.documentElement.lang=LANG==='zh'?'zh-CN':'en';
+ document.querySelectorAll('[data-i18n]').forEach(el=>{el.textContent=t(el.getAttribute('data-i18n'));});
+ langBtn.textContent=t('langBtn');
+ pauseBtn.textContent=isPaused?t('resume'):t('pause');
+ if(currentStructureInfo){renderStructurePanel(currentStructureInfo);}
+ if(currentStructureInfo&&baseData){renderWarnings(currentStructureInfo,baseData);}
+ else{document.getElementById('warningPanel').textContent=t('riskWait');}
+}
+
+const HOST_BASELINE={cpu:8.2,mem:68};
+const SOC_PROFILE={8155:{cpu:1.45,mem:22,domPenalty:1.35},8255:{cpu:2.1,mem:28,domPenalty:1.28},8295:{cpu:3.8,mem:42,domPenalty:1.15},8775:{cpu:5.6,mem:58,domPenalty:1.08},8797:{cpu:7.2,mem:72,domPenalty:1.02}};
+const MAX_PREVIEW_WIDTH=960,MAX_PREVIEW_HEIGHT=540;
+let baseData=null,anim=null,currentStructureInfo=null,lastFrameTs=0,chart=null,isPaused=false;
+const preview=document.getElementById('preview');
+const previewScaler=document.getElementById('previewScaler');
+const lottieContainer=document.getElementById('lottieContainer');
+const targetSoc=document.getElementById('targetSoc');
+const bgSelect=document.getElementById('bgSelect');
+const customBgInput=document.getElementById('customBgInput');
+const speedControl=document.getElementById('speedControl');
+const loopToggle=document.getElementById('loopToggle');
+const pauseBtn=document.getElementById('pauseBtn');
+const stopBtn=document.getElementById('stopBtn');
+const langBtn=document.getElementById('langBtn');
+
+langBtn.onclick=()=>{LANG=LANG==='en'?'zh':'en';applyI18n();};
+
+bgSelect.onchange=()=>{
+ if(bgSelect.value==='checkerboard'){
+   preview.style.backgroundColor='#e5e7eb';
+   preview.style.backgroundImage=`
+     linear-gradient(45deg, #f3f4f6 25%, transparent 25%),
+     linear-gradient(-45deg, #f3f4f6 25%, transparent 25%),
+     linear-gradient(45deg, transparent 75%, #f3f4f6 75%),
+     linear-gradient(-45deg, transparent 75%, #f3f4f6 75%)`;
+   preview.style.backgroundSize='20px 20px';
+   preview.style.backgroundPosition='0 0, 0 10px, 10px -10px, -10px 0px';
+ }else{
+   preview.style.backgroundImage='none';
+   preview.style.backgroundColor=bgSelect.value;
+   preview.style.backgroundSize='';
+   preview.style.backgroundPosition='';
+ }
+};
+customBgInput.onchange=()=>{
+ const v=customBgInput.value.trim();
+ if(/^#([0-9A-Fa-f]{6})$/.test(v)){
+   preview.style.background=v;
+   bgSelect.value='';
+ }
+};
+targetSoc.onchange=()=>resetAndRun();
+speedControl.onchange=()=>anim&&anim.setSpeed(parseFloat(speedControl.value));
+loopToggle.onchange=()=>{if(anim)anim.loop=loopToggle.checked};
+pauseBtn.onclick=()=>{if(!anim)return;if(isPaused){anim.play();pauseBtn.textContent=t('pause');}else{anim.pause();pauseBtn.textContent=t('resume');}isPaused=!isPaused;};
+stopBtn.onclick=()=>{if(!anim)return;anim.stop();isPaused=true;pauseBtn.textContent=t('resume');};
+fileInput.onchange=e=>handleFile(e.target.files[0]);dropZone.onclick=()=>fileInput.click();
+window.addEventListener('dragover',e=>e.preventDefault());window.addEventListener('drop',e=>{e.preventDefault();handleFile(e.dataTransfer.files[0]);});
+
+function applyPreviewScale(compW,compH){
+ const scale=Math.min(1,MAX_PREVIEW_WIDTH/compW,MAX_PREVIEW_HEIGHT/compH);
+ previewScaler.style.width=compW+'px';
+ previewScaler.style.height=compH+'px';
+ previewScaler.style.transform=`scale(${scale})`;
+}
+
+async function handleFile(file){if(!file)return;let json;let totalImageMemory=0;let rawSize=file.size;let detectedJsonName=file.name;if(file.name.endsWith('.json')){json=JSON.parse(await file.text());}else{const zip=await JSZip.loadAsync(file);const jsonFile=Object.values(zip.files).find(f=>f.name.endsWith('.json')&&!f.name.includes('MACOSX'));detectedJsonName=jsonFile.name.split('/').pop();json=JSON.parse(await jsonFile.async('text'));if(json.assets){for(const asset of json.assets){if(asset.p){const normalizedPath=(asset.u||'')+asset.p;let imgFile=zip.file(normalizedPath);if(!imgFile){imgFile=Object.values(zip.files).find(f=>f.name.endsWith(asset.p));}if(imgFile){const blob=await imgFile.async('blob');asset.p=URL.createObjectURL(blob);asset.u='';if(asset.w&&asset.h){totalImageMemory+=asset.w*asset.h*4;}}}}}}
+const jsonMemory=new Blob([JSON.stringify(json)]).size*2.5;const totalMemoryMB=(jsonMemory+totalImageMemory)/1024/1024;
+document.getElementById('memVal').textContent=totalMemoryMB.toFixed(2)+' MB';
+document.getElementById('jsonSize').textContent=(rawSize/1024).toFixed(0)+' KB';
+document.getElementById('srcFps').textContent=json.fr||'-';
+document.getElementById('compSize').textContent=`${json.w||0}×${json.h||0}`;
+document.getElementById('durationVal').textContent=((json.op-json.ip)/(json.fr||60)).toFixed(2)+'s';
+document.getElementById('fileNameVal').textContent=detectedJsonName;
+applyPreviewScale(json.w||300,json.h||300);
+baseData=json;baseData.__jsonFileName=detectedJsonName;currentStructureInfo=analyzeLottieStructure(json);renderStructurePanel(currentStructureInfo);renderComplexity(currentStructureInfo,json);renderWarnings(currentStructureInfo,json);resetAndRun();}
+function analyzeLottieStructure(data){const i={layers:0,masks:0,mattes:0,paths:0,repeaters:0,trimPaths:0};const walk=(arr=[])=>arr.forEach(s=>{if(s.ty==='sh')i.paths++;if(s.ty==='rp')i.repeaters++;if(s.ty==='tm')i.trimPaths++;if(s.it)walk(s.it);});(data.layers||[]).forEach(l=>{i.layers++;if(l.hasMask||l.masksProperties)i.masks++;if(l.tt)i.mattes++;if(l.shapes)walk(l.shapes);});return i;}
+function renderStructurePanel(i){structPanel.innerHTML=`<div class='card'><div class='label'>${t('layers')}</div><div class='val'>${i.layers}</div></div><div class='card'><div class='label'>${t('masks')}</div><div class='val'>${i.masks}</div></div><div class='card'><div class='label'>${t('mattes')}</div><div class='val'>${i.mattes}</div></div><div class='card'><div class='label'>${t('paths')}</div><div class='val'>${i.paths}</div></div><div class='card'><div class='label'>${t('repeaters')}</div><div class='val'>${i.repeaters}</div></div><div class='card'><div class='label'>${t('trimPaths')}</div><div class='val'>${i.trimPaths}</div></div>`;}
+function renderComplexity(s,json){let score=Math.min(100,Math.round(s.layers*0.8+s.masks*8+s.mattes*7+s.paths*0.18+s.repeaters*12+s.trimPaths*5+((json.w||0)*(json.h||0))/50000));document.getElementById('complexityVal').textContent=score;}
+function renderWarnings(s,json){const keys=[];if(s.layers>50)keys.push('warnLayers');if(s.masks>3)keys.push('warnMasks');if(s.repeaters>1)keys.push('warnRepeaters');if((json.w||0)>800||(json.h||0)>800)keys.push('warnCanvas');if((json.fr||60)>60)keys.push('warnFps');const panel=document.getElementById('warningPanel');panel.innerHTML=keys.length?keys.map(k=>'• '+t(k)).join('<br>'):t('noRisk');}
+function simulateRealPlatformCost(baseNorm,s){const soc=SOC_PROFILE[targetSoc.value];const cpuRatio=HOST_BASELINE.cpu/soc.cpu;const memRatio=HOST_BASELINE.mem/soc.mem;const penalty=s.layers*0.012+s.masks*0.18+s.mattes*0.15+s.paths*0.006+s.repeaters*0.28+s.trimPaths*0.10;return baseNorm*cpuRatio*soc.domPenalty*(1+penalty)*Math.sqrt(memRatio)*0.35;}
+function resetAndRun(){if(!baseData)return;lottieContainer.innerHTML='';if(anim)anim.destroy();anim=lottie.loadAnimation({container:lottieContainer,renderer:'svg',loop:loopToggle.checked,autoplay:true,animationData:JSON.parse(JSON.stringify(baseData))});anim.setSpeed(parseFloat(speedControl.value));isPaused=false;pauseBtn.textContent=t('pause');lastFrameTs=performance.now();initChart();anim.addEventListener('enterFrame',()=>{const now=performance.now();const rawDelta=now-lastFrameTs;lastFrameTs=now;const baseNorm=Math.max(0.35,(rawDelta-16.67)*0.35+0.35);const simCost=simulateRealPlatformCost(baseNorm,currentStructureInfo);const fps=Math.min(60,Math.floor(1000/Math.max(simCost,16.67)));const budget=(simCost/16.67)*100;const over=Math.max(0,budget-100);document.getElementById('simMs').textContent=simCost.toFixed(1)+' ms';document.getElementById('simFps').textContent=fps;document.getElementById('budgetVal').textContent=Math.round(budget)+'%';document.getElementById('overVal').textContent=Math.round(over)+'%';document.getElementById('gradeVal').textContent=budget>150?'D':budget>120?'C':budget>100?'B':budget>75?'A':'S';pushChart(fps,budget);});}
+function initChart(){if(chart)chart.destroy();chart=new Chart(document.getElementById('perfChart'),{type:'line',data:{labels:Array(30).fill(''),datasets:[{data:Array(30).fill(60),borderColor:'#22c55e',pointRadius:0},{data:Array(30).fill(0),borderColor:'#4f8cff',pointRadius:0}]},options:{responsive:true,animation:false,plugins:{legend:{display:false}},scales:{y:{min:0,max:220}}}});}
+function pushChart(fps,budget){chart.data.datasets[0].data.shift();chart.data.datasets[1].data.shift();chart.data.datasets[0].data.push(fps);chart.data.datasets[1].data.push(budget);chart.update('none');}
+
+document.getElementById('exportPackedBtn').onclick = async () => {
+ if (!baseData) return;
+
+ const packed = JSON.parse(JSON.stringify(baseData));
+
+ if (!packed.assets || !packed.assets.length) {
+   alert(t('noAssets'));
+   return;
+ }
+
+ for (const asset of packed.assets) {
+   if (!asset.p) continue;
+
+   if (String(asset.p).startsWith('data:')) {
+     asset.e = 1;
+     continue;
+   }
+
+   try {
+     const response = await fetch(asset.p);
+     const blob = await response.blob();
+
+     const base64 = await new Promise((resolve) => {
+       const reader = new FileReader();
+       reader.onloadend = () => resolve(reader.result);
+       reader.readAsDataURL(blob);
+     });
+
+     asset.p = base64;
+     asset.u = 'images/';
+     asset.e = 1;
+
+   } catch (err) {
+     console.warn('Asset packing failed:', asset.p, err);
+   }
+ }
+
+ const blob = new Blob(
+   [JSON.stringify(packed, null, 2)],
+   { type: 'application/json' }
+ );
+
+ const a = document.createElement('a');
+ a.href = URL.createObjectURL(blob);
+ a.download = (baseData.__jsonFileName || 'packed_lottie')
+   .replace(/\.json$/, '') + '_packed.json';
+
+ a.click();
+ URL.revokeObjectURL(a.href);
+};
+
+applyI18n();
+</script>
+</body>
+</html>
