@@ -596,7 +596,7 @@ window.PROJECTS = [
       "zh": "Product / Development"
     },
     "title": {
-      "en": "Icon Library",
+      "en": "Capsule Craft (Figma Plugin)",
       "zh": "Capsule Craft (Figma Plugin)"
     },
     "desc": {
