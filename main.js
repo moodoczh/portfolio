@@ -60,9 +60,12 @@
         a.href = "project.html?id=" + encodeURIComponent(p.id);
         a.dataset.cursor = "";
         a.dataset.cursorLabel = t("view");
+        var lockBadge = p.locked
+          ? "<span class='lockbadge' title='Protected'><svg viewBox='0 0 24 24' width='13' height='13' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='4.5' y='10.5' width='15' height='10' rx='2'/><path d='M8 10.5V7a4 4 0 0 1 8 0v3.5'/></svg></span>"
+          : "";
         a.innerHTML =
           "<div class='thumb' data-tilt>" +
-          "<span class='tagline'></span>" +
+          "<span class='tagline'></span>" + lockBadge +
           "<img src='" + p.folder + "/" + (p.thumb || p.cover || "cover.png") + "' alt='' loading='lazy'>" +
           "<div class='view'><span class='ic'>↗</span> <span class='vt'></span></div>" +
           "</div>" +

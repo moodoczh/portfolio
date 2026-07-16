@@ -126,6 +126,8 @@ nav.solid{background:rgba(8,8,10,.72);backdrop-filter:blur(14px);border-bottom:1
 .card .thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 52%,rgba(0,0,0,.6));opacity:0;transition:opacity .5s}
 .card:hover .thumb::after{opacity:1}
 .card .tagline{position:absolute;top:14px;left:14px;z-index:3;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);background:rgba(8,8,10,.55);backdrop-filter:blur(6px);border:1px solid var(--line);padding:5px 10px;border-radius:100px}
+.card .lockbadge{position:absolute;top:12px;right:12px;z-index:4;width:30px;height:30px;border-radius:100px;display:flex;align-items:center;justify-content:center;color:var(--ink);background:rgba(8,8,10,.55);backdrop-filter:blur(6px);border:1px solid var(--line);transition:border-color .3s,background .3s}
+.card:hover .lockbadge{border-color:var(--line2);background:rgba(8,8,10,.72)}
 .card .view{position:absolute;left:14px;bottom:14px;z-index:3;display:flex;align-items:center;gap:9px;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:#fff;opacity:0;transform:translateY(10px);transition:.5s}
 .card:hover .view{opacity:1;transform:none}
 .card .view .ic{width:30px;height:30px;border-radius:50%;background:var(--ink);color:#0a0a0a;display:grid;place-items:center}
@@ -198,6 +200,22 @@ footer .brand2 .mark{width:22px;height:22px;border-radius:6px;background:conic-g
 .d-card .go,.d-card .cardgo{flex:none;width:38px;height:38px;border-radius:100px;display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--muted);border:1px solid var(--line);transition:color .3s,border-color .3s,transform .3s;margin-left:auto;z-index:1}
 .d-card.file:hover .go{transform:translateY(3px);color:var(--ink);border-color:var(--line2)}
 .d-card .cardgo:hover{color:var(--ink);border-color:var(--line2);transform:translate(2px,-2px);background:rgba(255,255,255,.05)}
+/* password gate (soft lock) */
+.d-lock{max-width:520px;margin:clamp(48px,7vw,88px) 0;padding:clamp(32px,4vw,48px) clamp(28px,3.5vw,44px);border:1px solid var(--line);border-radius:22px;background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.008));text-align:center;position:relative;overflow:hidden}
+.d-lock::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(90% 120% at 50% 0%,rgba(125,118,255,.12),transparent 62%)}
+.d-lock .lk-ic{width:64px;height:64px;margin:0 auto 22px;border-radius:18px;display:flex;align-items:center;justify-content:center;color:var(--accent);background:rgba(255,255,255,.04);border:1px solid var(--line2);position:relative}
+.d-lock .lk-h{font-size:clamp(22px,2.6vw,30px);font-weight:600;letter-spacing:-.02em;position:relative}
+.d-lock .lk-sub{margin-top:12px;color:var(--muted);font-size:14px;line-height:1.6;position:relative}
+.d-lock .lk-form{margin-top:26px;display:flex;gap:10px;position:relative}
+.d-lock input{flex:1;min-width:0;background:rgba(0,0,0,.25);border:1px solid var(--line2);color:var(--ink);border-radius:100px;padding:14px 20px;font-size:15px;font-family:inherit;letter-spacing:.14em;text-align:center;transition:border-color .3s}
+.d-lock input:focus{outline:none;border-color:var(--accent)}
+.d-lock .lk-btn{flex:none;background:var(--ink);color:#0a0a0a;border:0;border-radius:100px;padding:0 26px;font-size:12.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:transform .3s,opacity .3s}
+.d-lock .lk-btn:hover{transform:translateY(-1px);opacity:.9}
+.d-lock .lk-err{margin-top:16px;color:#ff8080;font-size:12.5px;letter-spacing:.04em;height:16px;opacity:0;transition:opacity .25s;position:relative}
+.d-lock .lk-err.show{opacity:1}
+.d-lock.shake{animation:lkShake .42s cubic-bezier(.36,.07,.19,.97)}
+@keyframes lkShake{10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(4px)}30%,50%,70%{transform:translateX(-8px)}40%,60%{transform:translateX(8px)}}
+@media(max-width:520px){.d-lock .lk-form{flex-direction:column}.d-lock .lk-btn{padding:13px}}
 /* iframe lightbox modal */
 html.modal-lock{overflow:hidden}
 .pmodal{position:fixed;inset:0;z-index:8000;display:flex;align-items:center;justify-content:center;padding:clamp(14px,3vw,40px);background:rgba(6,6,9,0);backdrop-filter:blur(0px);opacity:0;pointer-events:none;transition:opacity .4s,background .5s,backdrop-filter .5s}

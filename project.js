@@ -15,12 +15,29 @@
   var p = list[i];
   var next = list[(i + 1) % list.length];
 
-  /* cover hero */
-  document.getElementById("dCover").src = p.folder + "/" + (p.cover || "cover.png");
+  /* ---------- soft lock (password gate for the detail page) ---------- */
+  function lockHash(str) {
+    str = String(str);
+    var h1 = 0xdeadbeef, h2 = 0x41c6ce57;
+    for (var k = 0, ch; k < str.length; k++) {
+      ch = str.charCodeAt(k);
+      h1 = Math.imul(h1 ^ ch, 2654435761);
+      h2 = Math.imul(h2 ^ ch, 1597334677);
+    }
+    h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507); h1 ^= Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+    h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507); h2 ^= Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+    return (4294967296 * (2097151 & h2) + (h1 >>> 0)).toString(16);
+  }
+  var LOCKH = (window.LOCK && window.LOCK.h) ? window.LOCK.h : "";
+  function isUnlocked() { try { return localStorage.getItem("lk_" + LOCKH) === "1"; } catch (e) { return false; } }
+  var gated = !!(p.locked && LOCKH && !isUnlocked());
+
+  /* cover hero + media only load when not gated (avoids fetching protected media) */
+  if (!gated) document.getElementById("dCover").src = p.folder + "/" + (p.cover || "cover.png");
 
   /* unified media: ordered list of images + videos, each shown at its own ratio (width-adaptive).
      item = { t:"img"|"vid"|"embed", src:"01.webp" | "02.mp4" | "https://youtu.be/..." } */
-  (function () {
+  if (!gated) (function () {
     var wrap = document.getElementById("dMedia"), h = document.getElementById("dMediaH");
     var media = p.media || [];
     if (!media.length && ((p.shots && p.shots.length) || (p.videos && p.videos.length))) { // backward compat
@@ -113,7 +130,7 @@
     try { localStorage.setItem("lang", lang); } catch (e) {}
     document.documentElement.setAttribute("lang", lang === "zh" ? "zh-CN" : "en");
     document.querySelectorAll("[data-i18n]").forEach(function (el) { el.textContent = t(el.getAttribute("data-i18n")); });
-    document.querySelectorAll(".d-card [data-en][data-zh]").forEach(function (el) {
+    document.querySelectorAll("[data-en][data-zh]").forEach(function (el) {
       var txt = el.getAttribute("data-" + lang);
       if (el.classList.contains("cardgo")) el.setAttribute("title", txt); else el.textContent = txt;
     });
@@ -135,6 +152,45 @@
 
   applyLang(LANG);
   document.getElementById("lang").addEventListener("click", function (e) { var b = e.target.closest("button"); if (b) applyLang(b.dataset.lang); });
+
+  /* ---------- render the lock gate when this project is protected ---------- */
+  if (gated) {
+    ["dMediaH", "dMedia"].forEach(function (id) { var el = document.getElementById(id); if (el) el.style.display = "none"; });
+    var coverEl = document.querySelector(".d-cover"); if (coverEl) coverEl.style.display = "none";
+    var bodyEl = document.querySelector(".d-body"); if (bodyEl) bodyEl.style.display = "none";
+    var nextEl = document.querySelector(".d-next"); if (nextEl) nextEl.style.display = "none";
+
+    var gate = document.createElement("div");
+    gate.className = "d-lock reveal in";
+    gate.innerHTML =
+      "<div class='lk-ic'><svg viewBox='0 0 24 24' width='30' height='30' fill='none' stroke='currentColor' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><rect x='4' y='10.5' width='16' height='11' rx='2.2'/><path d='M8 10.5V7a4 4 0 0 1 8 0v3.5'/></svg></div>" +
+      "<h2 class='lk-h' data-en='Protected project' data-zh='内容已加密'></h2>" +
+      "<p class='lk-sub' data-en='Enter the password to view this project.' data-zh='请输入密码查看该作品的详情内容。'></p>" +
+      "<form class='lk-form' id='lkForm' autocomplete='off'>" +
+        "<input type='password' id='lkInput' aria-label='password' placeholder='••••••'>" +
+        "<button type='submit' class='lk-btn' data-en='Unlock' data-zh='解锁'></button>" +
+      "</form>" +
+      "<div class='lk-err' id='lkErr' data-en='Wrong password. Try again.' data-zh='密码不对,再试一次。'></div>";
+    var meta = document.querySelector(".d-meta");
+    if (meta && meta.parentNode) meta.parentNode.insertBefore(gate, meta.nextSibling);
+    else document.getElementById("detail").appendChild(gate);
+
+    applyLang(LANG); /* fill gate's bilingual text */
+
+    var form = document.getElementById("lkForm"), input = document.getElementById("lkInput"), err = document.getElementById("lkErr");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (lockHash(input.value) === LOCKH) {
+        try { localStorage.setItem("lk_" + LOCKH, "1"); } catch (er) {}
+        location.reload();
+      } else {
+        err.classList.add("show");
+        gate.classList.remove("shake"); void gate.offsetWidth; gate.classList.add("shake");
+        input.value = ""; input.focus();
+      }
+    });
+    setTimeout(function () { input.focus(); }, 400);
+  }
 
   /* fade images in on load */
   document.querySelectorAll(".d-cover img, .d-m.img img").forEach(function (img) {
