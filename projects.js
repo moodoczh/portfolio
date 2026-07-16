@@ -137,33 +137,72 @@ window.PROJECTS = [
     ]
   },
   {
-    "id": "cluster-hmi",
+    "id": "BMW PHUD AI TEST",
     "cat": "hmi",
-    "folder": "works/HMI/cluster-hmi",
-    "thumb": "cover.png",
-    "cover": "cover.png",
-    "media": [],
+    "folder": "works/HMI/BMW PHUD AI TEST",
+    "thumb": "thumb.webp",
+    "cover": "cover.webp",
+    "media": [
+      {
+        "t": "vid",
+        "src": "01.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "02.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "03.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "04.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "05.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "06.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "07.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "08.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "09.mp4"
+      }
+    ],
     "year": "2026",
     "role": {
-      "en": "Lead UI / Motion",
-      "zh": "主设计 / 动效"
+      "en": "Core product storyline planning/Motion",
+      "zh": "Core product storyline planning/Motion"
     },
     "title": {
-      "en": "Digital Cluster HMI",
-      "zh": "数字仪表 HMI"
+      "en": "BMW PHUD AI TEST",
+      "zh": "BMW PHUD AI TEST"
     },
     "desc": {
       "en": "Next-gen instrument cluster",
-      "zh": "新一代数字仪表"
+      "zh": "关于AI 应用在 BMW PHUD 上, 与驾驶深度融合的测试"
     },
     "about": {
       "en": [
-        "A driver-first instrument cluster built around clarity at a glance — speed, energy and navigation resolve in a single focal read while secondary data recedes.",
-        "The system scales across trims and screen sizes, with a motion language tuned for calm, confident transitions rather than decoration."
+        "This is a test project for BMW, demonstrating the in-depth integrated application of AI technology on BMW PHUD with driving scenarios.",
+        "I was in charge of designing the storyline for the integration between AI functions and driving scenarios, while my colleagues polished the opening and ending plots as well as detailed storyboards.",
+        "Eventually, I completed the full PHUD demo together with 3D team members. The project presentation achieved great success, helping our company sign a three-year framework cooperation agreement with BMW."
       ],
       "zh": [
-        "以驾驶者为中心的数字仪表,核心信息(车速、能量、导航)一眼可读,次要信息自然退后。",
-        "整套系统可适配不同配置与屏幕尺寸,动效语言追求沉稳、克制的过渡,而非炫目装饰。"
+        "本项目为宝马专项测试项目，主要演示 AI 技术落地应用于宝马抬头显示系统（PHUD），实现与驾驶场景深度融合的效果验证。",
+        "我主导规划了 AI 功能与驾驶场景相结合的整体叙事逻辑，同事负责完善首尾剧情及分镜细节。最终我联合 3D 同事共同完成整套 PHUD 演示 Demo。",
+        "本次项目汇报成效优异，助力公司顺利与宝马达成为期三年的框架战略合作协议。"
       ]
     }
   },
