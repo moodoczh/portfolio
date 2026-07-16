@@ -195,13 +195,15 @@ window.PROJECTS = [
     },
     "about": {
       "en": [
-        "This is a test project for BMW, demonstrating the in-depth integrated application of AI technology on BMW PHUD with driving scenarios.",
-        "I was in charge of designing the storyline for the integration between AI functions and driving scenarios, while my colleagues polished the opening and ending plots as well as detailed storyboards.",
-        "Eventually, I completed the full PHUD demo together with 3D team members. The project presentation achieved great success, helping our company sign a three-year framework cooperation agreement with BMW."
+        "This is a dedicated test project for BMW, which demonstrates the practical implementation of AI technology in BMW Panoramic Head-Up Display (PHUD) and verifies its deep integration with driving scenarios.",
+        "I led the planning of the overall narrative logic for combining AI functions with driving scenarios, while my colleagues refined the opening and closing plots as well as storyboard details. In the end, I finished the complete PHUD demo together with 3D team members.",
+        "One highlight of the storyline is that when Sam drives on mountain roads, the AI actively asks whether he prefers to take manual control, as driving pleasure is the essence of BMW. While the driver is at the wheel, the AI recommends appropriate steering angles and throttle ranges to help achieve ultimate vehicle control. These control parameters dynamically adjust according to real-time road conditions for highly authentic simulation.",
+        "The project presentation was a great success, helping our company sign a three-year framework cooperation agreement with BMW."
       ],
       "zh": [
         "本项目为宝马专项测试项目，主要演示 AI 技术落地应用于宝马抬头显示系统（PHUD），实现与驾驶场景深度融合的效果验证。",
         "我主导规划了 AI 功能与驾驶场景相结合的整体叙事逻辑，同事负责完善首尾剧情及分镜细节。最终我联合 3D 同事共同完成整套 PHUD 演示 Demo。",
+        "故事里最有趣的是: Sam 在遇到山路时, Ai 主动询问是否要手动驾驶, 驾驶是 BMW 的灵魂. Ai 在车主驾驶时, 推荐了转向幅度和油门深度区间, 方便车主更极致的操控车辆. 控制区间也是随着路况动态变化的, 这点模拟得很真实.",
         "本次项目汇报成效优异，助力公司顺利与宝马达成为期三年的框架战略合作协议。"
       ]
     }
