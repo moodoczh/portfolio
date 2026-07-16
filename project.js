@@ -5,6 +5,15 @@
   var LANG = "en";
   try { var s = localStorage.getItem("lang"); if (s === "en" || s === "zh") LANG = s; } catch (e) {}
   function t(k) { return (window.I18N[LANG] && window.I18N[LANG][k]) || window.I18N.en[k] || k; }
+  function escText(s) { return String(s == null ? "" : s).replace(/[&<>]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]; }); }
+  function fmt(s) { return escText(s).replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>"); }
+  /* group lines into paragraphs: a blank line = one paragraph break (adjacent lines = <br>) */
+  function renderAbout(arr) {
+    var html = "", g = [];
+    function flush() { if (g.length) { html += "<p>" + g.map(fmt).join("<br>") + "</p>"; g = []; } }
+    for (var i = 0; i < arr.length; i++) { if (arr[i] === "") flush(); else g.push(arr[i]); }
+    flush(); return html;
+  }
 
   /* find project by ?id= */
   function param(n) { var m = new RegExp("[?&]" + n + "=([^&]+)").exec(location.search); return m ? decodeURIComponent(m[1]) : null; }
@@ -47,6 +56,13 @@
     }
     if (!media.length) { wrap.style.display = "none"; if (h) h.style.display = "none"; return; }
     wrap.innerHTML = media.map(function (it) {
+      if (it.t === "code") {
+        return "<div class='d-code reveal'>" +
+          "<div class='dc-bar'><span class='dc-dots'><i></i><i></i><i></i></span>" +
+          "<span class='dc-title'>" + escText(it.title || "Changelog") + "</span>" +
+          "<button class='dc-toggle' type='button' data-en='Expand' data-zh='展开'></button></div>" +
+          "<pre class='dc-body'><code>" + escText(it.content || "") + "</code></pre></div>";
+      }
       if (it.t === "link" || it.t === "file") {
         var isFile = it.t === "file";
         var title = it.title || (isFile ? (LANG === "zh" ? "下载附件" : "Download") : (LANG === "zh" ? "查看" : "View"));
@@ -141,7 +157,7 @@
     document.getElementById("dMetaCat").textContent = t("cat_" + p.cat);
     document.getElementById("dMetaYear").textContent = p.year;
     document.getElementById("dMetaRole").textContent = p.role[lang];
-    document.getElementById("dBody").innerHTML = p.about[lang].map(function (para) { return "<p>" + para + "</p>"; }).join("");
+    document.getElementById("dBody").innerHTML = renderAbout(p.about[lang] || []);
 
     var nx = document.getElementById("dNext");
     nx.href = "project.html?id=" + next.id;
@@ -198,6 +214,21 @@
     img.addEventListener("load", function () { img.classList.add("loaded"); });
     img.addEventListener("error", function () { img.classList.add("loaded"); });
   });
+
+  /* code / changelog windows: collapse-by-default with an expand toggle */
+  (function codeWindows() {
+    var COLLAPSED = 220;
+    document.querySelectorAll(".d-code").forEach(function (box) {
+      var body = box.querySelector(".dc-body"), btn = box.querySelector(".dc-toggle");
+      if (body.scrollHeight <= COLLAPSED + 6) { box.classList.add("short"); return; }
+      btn.addEventListener("click", function () {
+        var open = box.classList.toggle("open");
+        btn.setAttribute("data-en", open ? "Collapse" : "Expand");
+        btn.setAttribute("data-zh", open ? "收起" : "展开");
+        btn.textContent = btn.getAttribute("data-" + LANG);
+      });
+    });
+  })();
 
   /* ---------- shared fx ---------- */
   var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }); }, { threshold: .12, rootMargin: "0px 0px -6% 0px" });

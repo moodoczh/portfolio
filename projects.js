@@ -94,10 +94,12 @@ window.PROJECTS = [
     "about": {
       "en": [
         "This is Qt's first HMI demo for civilian vehicles, marking Qt Group's official entry into the civilian automotive 3D engine market. It aims to carve out a niche in the market currently dominated by Unity and Unreal Engine.",
+        "",
         "In this project, I was responsible for motion effect planning and production of the Qt demo project. I appreciate my colleagues for their professional 3D technical support. In addition, I created IPA demo animations with AI tools to serve as references for the development and implementation of 3D visual effects."
       ],
       "zh": [
         "这是 Qt 首款面向民用汽车领域的 HMI 演示项目，标志着 Qt 团队正式入局民用车载 3D 引擎赛道，力求在 Unity 与虚幻引擎占据的市场中开辟专属发展空间。",
+        "",
         "本项目中，我负责 Qt 演示工程的动效策划、动效制作，同时感谢同事提供专业 3D 技术支持。此外我借助 AI 工具制作 IPA 演示动画，为 3D 视觉效果的开发落地提供参考依据。"
       ]
     },
@@ -136,7 +138,8 @@ window.PROJECTS = [
         "t": "vid",
         "src": "08.mp4"
       }
-    ]
+    ],
+    "locked": false
   },
   {
     "id": "BMW PHUD AI TEST",
@@ -198,17 +201,24 @@ window.PROJECTS = [
     "about": {
       "en": [
         "This is a dedicated test project for BMW, which demonstrates the practical implementation of AI technology in BMW Panoramic Head-Up Display (PHUD) and verifies its deep integration with driving scenarios.",
+        "",
         "I led the planning of the overall narrative logic for combining AI functions with driving scenarios, while my colleagues refined the opening and closing plots as well as storyboard details. In the end, I finished the complete PHUD demo together with 3D team members.",
+        "",
         "One highlight of the storyline is that when Sam drives on mountain roads, the AI actively asks whether he prefers to take manual control, as driving pleasure is the essence of BMW. While the driver is at the wheel, the AI recommends appropriate steering angles and throttle ranges to help achieve ultimate vehicle control. These control parameters dynamically adjust according to real-time road conditions for highly authentic simulation.",
-        "The project presentation was a great success, helping our company sign a three-year framework cooperation agreement with BMW."
+        "",
+        "**The project presentation was a great success, helping our company sign a three-year framework cooperation agreement with BMW.**"
       ],
       "zh": [
         "本项目为宝马专项测试项目，主要演示 AI 技术落地应用于宝马抬头显示系统（PHUD），实现与驾驶场景深度融合的效果验证。",
+        "",
         "我主导规划了 AI 功能与驾驶场景相结合的整体叙事逻辑，同事负责完善首尾剧情及分镜细节。最终我联合 3D 同事共同完成整套 PHUD 演示 Demo。",
+        "",
         "故事里最有趣的是: Sam 在遇到山路时, Ai 主动询问是否要手动驾驶, 驾驶是 BMW 的灵魂. Ai 在车主驾驶时, 推荐了转向幅度和油门深度区间, 方便车主更极致的操控车辆. 控制区间也是随着路况动态变化的, 这点模拟得很真实.",
-        "本次项目汇报成效优异，助力公司顺利与宝马达成为期三年的框架战略合作协议。"
+        "",
+        "**本次项目汇报成效优异，助力公司顺利与宝马达成为期三年的框架战略合作协议。**"
       ]
-    }
+    },
+    "locked": false
   },
   {
     "id": "VOLVO 451 CSD",
@@ -274,10 +284,12 @@ window.PROJECTS = [
     "about": {
       "en": [
         "I led two team members to accomplish this arduous task. The project involves more than 600 refined motion effects. After three months of hard work, we successfully passed Volvo's stringent acceptance standards.",
+        "",
         "The most difficult module is Relax Mode. To achieve high-fidelity restoration while controlling costs and ensuring easy later maintenance, I adopted the solution of applying real materials with simulated light and shadow effects. This method is similar to using fake reflections in games to reduce performance consumption."
       ],
       "zh": [
         "我带领两名组员协力完成此项高难度项目，项目内细分动效数量超 600 余项。历经三个月全力攻坚，最终项目成果顺利通过沃尔沃严苛标准的正式验收。",
+        "",
         "项目难度最高的模块为舒缓驾乘模式（Relax Mode）。为做到视觉高度还原，同时兼顾成本管控与后期维护便捷性，我统筹采用实材质 + 拟态光影的制作方案，原理等同于游戏行业里用模拟反射替代实时光追，以此大幅优化性能开销。"
       ]
     },
@@ -394,13 +406,16 @@ window.PROJECTS = [
     "about": {
       "en": [
         "Together with my colleague (a two-person team), I took charge of all interactive motion effects for N80. The work covered dashboard and central control system, including millisecond-level animation tuning and bezier curve definition, all independently designed by ourselves.",
+        "",
         "Below are motion effect demos. If they fail to load, you may need a VPN or wait patiently."
       ],
       "zh": [
         "我与搭档二人共同全权负责 N80 车型全套交互动效设计工作，覆盖仪表全域及车载中控系统，从毫秒级动效节奏调校到贝塞尔运动曲线定义均为独立原创设计。",
+        "",
         "以下为动效 demo, 如果加载不了则可能需要 VPN 或耐心等待片刻."
       ]
-    }
+    },
+    "locked": false
   },
   {
     "id": "driving-modes",
@@ -574,10 +589,12 @@ window.PROJECTS = [
       "en": [
         "I spent two weeks designing this Mayan Tzolk'in calendar ornament with gear structure. It is not overly difficult, yet the key lies in well-planned gear layout at the early stage and minimizing parts to ensure stable overall structure.",
         "I fixed the structure by using small gears to press the panel of large gears, and added protrusions on the base to reduce sliding friction. The whole ornament is assembled with only four components.",
+        "",
         "The finished products were painted in various colors by the client, so I stick to my original intention and present the original design style."
       ],
       "zh": [
         "历时两周完成这款带齿轮传动结构的玛雅卓尔金历摆件设计。项目技术难度适中，核心难点在于前期齿轮结构布局，同时精简零部件数量，保障整体结构稳固性。设计上采用小齿轮压紧大齿轮面板实现定位固定，底座增设凸起结构以减小滑动摩擦阻力，整款摆件仅由四个零部件组装成型。",
+        "",
         "后续成品经合作方做了多彩涂装处理，我依旧保留原创设计理念，对外呈现最初的原生设计样貌。"
       ]
     },
@@ -589,7 +606,13 @@ window.PROJECTS = [
     "folder": "works/Tools/Capsule Craft",
     "thumb": "thumb.webp",
     "cover": "cover.webp",
-    "media": [],
+    "media": [
+      {
+        "t": "code",
+        "title": "Update Log",
+        "content": "\n\n06 / 04 / 2026\n\nNew: Sequential Fill\n\nSelect multiple text layers, enter a pattern like No.1~No.* or 1.1.0~1.*.*, and the plugin fills them in F-pattern reading order (top-to-bottom, left-to-right). Multi-segment patterns auto-increment with base-10 carry.\n\nNew: Frame Badge\n\nSelect frames and generate numbered badges at each frame's top-right corner. Six color options, auto white text on dark backgrounds. Badges are placed at page root for easy management.\n\n\n\n06 / 02 / 2026\n\nV1.6 — Linter Upgrade + New Tools\n\nContrast Check (Major Upgrade)\n\nRebuilt from the ground up. Now supports WCAG AA & AAA compliance levels, handles gradient fills via pixel sampling, accounts for text opacity in calculations, and correctly resolves layered/nested backgrounds. Pick a standard, hit scan — every text layer gets a pass/fail verdict with its actual contrast ratio.\n\nNew: Color Audit\n\nLists every unique color on the current page with usage count and whether it's bound to a style or variable. Spot rogue hex values at a glance.\n\nNew: Font Audit\n\nScans all text layers and groups them by font family, size, and line height. Shows which ones are bound to a text style and which are not.\n\nNew: Stress Test\n\nFills selected text layers with extreme-length content (long Chinese, long English, or single characters) to verify your layout won't break.\n\nNew: Quick Select\n\nFilter and select layers by type — text, frames, components, images, or instances — across the current page.\n\nNew: Orphan Layer Detection\n\nFinds stray layers sitting directly on the canvas outside any frame. One click to select and clean them up.\n\nNew: Component Usage Stats\n\nCounts how many times each component is instanced on the current page. Quickly see what's heavily used and what might be dead weight.\n\nNew: Find & Replace\n\nBatch text replacement that preserves original formatting (font, weight, color) across all text layers.\n\n\n\n05 / 18 / 2026\n\nRemoved redundant [Spacing Grid] options\nOptimized UI style, and now English is displayed by default preferentially.\n\n\n05 / 09 / 2026\n\nAdd a design file size reduction feature with a new [Selection Scope Only] toggle to give designers finer control.\nAdd [Relink Missing Components] to automatically reconnect missing instances to local components with identical names (for use when copying assets from File A to File B).\n\n\n05 / 07 / 2026\n\nAdded real-time time-saving estimation for every operation, allowing designers to clearly track workflow efficiency improvements.\nAdded a new Layer Naming Validation feature to help maintain cleaner and more consistent file structures.\nEnhanced the batch renaming system with a new “Skip ALL CAPS Words” option, preserving tokens such as CTA, UI, and ID.\nFixed an issue where Standard Library Validation could not correctly detect and audit external component libraries.\nAdded full English / Chinese language switching support for a more localized user experience.\nIntroduced a brand-new Statistics Dashboard, which now displays:\n* Total time saved per natural day\n\n* Number of scanned / processed issues\n\n* Cleanup and optimization metrics across all plugin operations"
+      }
+    ],
     "year": "2026",
     "role": {
       "en": "Product / Development",
@@ -606,44 +629,61 @@ window.PROJECTS = [
     "about": {
       "en": [
         "This plugin is independently developed entirely based on free AI resources. The whole development process was extremely challenging. Free AI services come with very limited token quotas and poor data throughput consistency. When fixing subsequent bugs, the previous code was often simplified or accidentally deleted. Through continuous efforts, I finally completed this Figma plugin focused on design standardization verification. The core features are as follows:",
-        "* Design Linter",
+        "",
+        "*** Design Linter**",
         "Supports custom grid systems (8pt, 4pt, 10pt, etc.). Automatically checks coordinates, spacing, sizes, corner radius, and Design Tokens to help maintain pixel-perfect consistency.",
-        "* Smart Filtering",
+        "",
+        "*** Smart Filtering**",
         "Automatically ignores images during token validation and supports underscore-based naming conventions to reduce false positives and noisy reports.",
-        "* Auto-Rename",
+        "*** Auto-Rename**",
         "Instantly convert messy layer names into clean PascalCase or snake_case formats for scalable and maintainable design structures.",
-        "* Hand-off Cleanup",
+        "",
+        "*** Hand-off Cleanup**",
         "Remove hidden layers and empty groups with one click to reduce file size and improve delivery quality.",
-        "* Library Audit",
+        "",
+        "*** Library Audit**",
         "Detect and audit all external component instances in the current file. Quickly identify non-approved libraries and ensure teams stay aligned with the official design system.",
-        "* Time Saved Tracking",
+        "",
+        "*** Time Saved Tracking**",
         "Automatically estimates and displays time saved after every operation, helping designers quantify workflow efficiency improvements in real time.",
-        "* Statistics Dashboard",
+        "",
+        "*** Statistics Dashboard**",
         "View accumulated scan results, issue counts, cleanup totals, rename statistics, and overall productivity metrics in a dedicated analytics panel.",
-        "* Issue Visualization",
+        "",
+        "*** Issue Visualization**",
         "Clearly groups and displays detected design issues for faster troubleshooting and component localization.",
-        "* Bilingual Interface",
+        "",
+        "*** Bilingual Interface**",
         "Seamlessly switch between English and Chinese interfaces for cross-team collaboration and localized workflows."
       ],
       "zh": [
         "本插件为纯依托免费AI资源独立开发，研发过程极具挑战。免费AI的Token额度十分有限，且数据输出一致性较差，在迭代修复后续程序漏洞时，时常会出现前置代码被精简或误删的问题。经过反复调试与持续攻坚，最终成功完成这款以设计规范化校验为核心的Figma插件。以下为插件核心功能：",
-        "1. 设计规范校验工具 / Design Linter",
+        "",
+        "**1. 设计规范校验工具 / Design Linter**",
         "中文：支持自定义8pt、4pt、10pt等网格系统，自动校验图层坐标、间距、尺寸、圆角及设计令牌，保障像素级的设计统一。",
-        "2. 智能筛选校验 / Smart Filtering",
+        "",
+        "**2. 智能筛选校验 / Smart Filtering**",
         "中文：在校验设计令牌时自动忽略图片图层，支持下划线命名规范，有效减少误判和无效报错，提升校验精准度。",
-        "3. 图层自动重命名 / Auto-Rename",
+        "",
+        "**3. 图层自动重命名 / Auto-Rename**",
         "中文：一键将杂乱的图层名称批量转换为标准大驼峰（PascalCase）或蛇形（snake_case）命名，搭建可拓展、易维护的设计文件结构。",
-        "4. 交付文件清理 / Hand-off Cleanup",
+        "",
+        "**4. 交付文件清理 / Hand-off Cleanup**",
         "中文：一键清理隐藏图层与空图层组，精简文件体积，优化前端交付质量，提升协作效率。",
-        "5. 组件库合规审计 / Library Audit",
+        "",
+        "**5. 组件库合规审计 / Library Audit**",
         "中文：检测并统计当前文件中所有外部组件实例，快速识别非官方合规组件库，确保团队设计体系统一、规范落地。",
-        "6. 省时效率统计 / Time Saved Tracking",
+        "",
+        "**6. 省时效率统计 / Time Saved Tracking**",
         "中文：每次操作后自动估算并展示节省的工作时长，实时量化设计工作流的效率提升成果。",
-        "7. 数据统计看板 / Statistics Dashboard",
+        "",
+        "**7. 数据统计看板 / Statistics Dashboard**",
         "中文：内置专属数据面板，汇总展示扫描结果、问题数量、清理数据、重命名统计及各项效率指标，可视化呈现工作成果。",
-        "8. 问题可视化定位 / Issue Visualization",
+        "",
+        "**8. 问题可视化定位 / Issue Visualization**",
         "中文：对检测出的设计问题进行分类聚合展示，便于快速排查问题、定位异常组件，提升整改效率。",
-        "9. 双语操作界面 / Bilingual Interface",
+        "",
+        "**9. 双语操作界面 / Bilingual Interface**",
         "中文：支持中英文界面无缝切换，适配跨团队、多语言协作场景，适配不同使用习惯。"
       ]
     },
