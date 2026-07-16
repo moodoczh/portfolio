@@ -1,0 +1,6 @@
+# 这些不作为网站内容上传
+.git
+.gitignore
+.assetsignore
+.DS_Store
+**/.DS_Store
