@@ -30,6 +30,26 @@
     }
     if (!media.length) { wrap.style.display = "none"; if (h) h.style.display = "none"; return; }
     wrap.innerHTML = media.map(function (it) {
+      if (it.t === "link" || it.t === "file") {
+        var isFile = it.t === "file";
+        var title = it.title || (isFile ? (LANG === "zh" ? "下载附件" : "Download") : (LANG === "zh" ? "查看" : "View"));
+        var subEn = isFile ? "Download attachment" : "Open preview";
+        var subZh = isFile ? "下载附件" : "点开浮窗预览";
+        var icon = isFile
+          ? "<svg viewBox='0 0 24 24' width='20' height='20' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><path d='M12 3v12'/><path d='m7 11 5 5 5-5'/><path d='M5 21h14'/></svg>"
+          : "<svg viewBox='0 0 24 24' width='20' height='20' fill='none' stroke='currentColor' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='4' width='18' height='16' rx='2'/><path d='M3 9h18'/><circle cx='6' cy='6.5' r='.6' fill='currentColor'/><circle cx='8.4' cy='6.5' r='.6' fill='currentColor'/></svg>";
+        if (isFile) {
+          return "<a class='d-card file reveal' href='" + it.src + "' download target='_blank' rel='noopener' data-cursor>" +
+            "<span class='ic'>" + icon + "</span>" +
+            "<span class='ct'><span class='cn'>" + title + "</span><span class='cs' data-en='" + subEn + "' data-zh='" + subZh + "'>" + (LANG === "zh" ? subZh : subEn) + "</span></span>" +
+            "<span class='go'>↓</span></a>";
+        }
+        return "<div class='d-card link reveal'>" +
+          "<a class='cardmain' href='" + it.src + "' data-modal='1' data-title='" + (it.title ? it.title.replace(/'/g, "&#39;") : "") + "' data-cursor>" +
+          "<span class='ic'>" + icon + "</span>" +
+          "<span class='ct'><span class='cn'>" + title + "</span><span class='cs' data-en='" + subEn + "' data-zh='" + subZh + "'>" + (LANG === "zh" ? subZh : subEn) + "</span></span></a>" +
+          "<a class='cardgo' href='" + it.src + "' target='_blank' rel='noopener' data-en='Open in new window' data-zh='新窗口打开' title='" + (LANG === "zh" ? "新窗口打开" : "Open in new window") + "'>↗</a></div>";
+      }
       if (it.t === "embed") {
         var m, e = it.src;
         if ((m = it.src.match(/(?:youtube\.com\/.*[?&]v=|youtu\.be\/)([\w-]+)/))) e = "https://www.youtube.com/embed/" + m[1];
@@ -43,11 +63,60 @@
     }).join("");
   })();
 
+  /* ---------- link-card modal (iframe lightbox) ---------- */
+  (function modal() {
+    var m = document.createElement("div");
+    m.className = "pmodal";
+    m.innerHTML =
+      "<div class='pmodal-inner'>" +
+        "<div class='pmodal-bar'>" +
+          "<span class='pmodal-title'></span>" +
+          "<div class='pmodal-acts'>" +
+            "<a class='pmodal-new' target='_blank' rel='noopener' title='' aria-label='open in new window'>↗</a>" +
+            "<button class='pmodal-close' aria-label='close'>✕</button>" +
+          "</div>" +
+        "</div>" +
+        "<div class='pmodal-body'><div class='pmodal-load'>Loading…</div><iframe title='preview' loading='lazy'></iframe></div>" +
+      "</div>";
+    document.body.appendChild(m);
+    var frame = m.querySelector("iframe"), tEl = m.querySelector(".pmodal-title"), newA = m.querySelector(".pmodal-new"), load = m.querySelector(".pmodal-load");
+
+    function open(url, title) {
+      tEl.textContent = title || "";
+      newA.href = url;
+      load.style.display = "";
+      frame.style.opacity = "0";
+      frame.src = url;
+      m.classList.add("open");
+      document.documentElement.classList.add("modal-lock");
+    }
+    function close() {
+      m.classList.remove("open");
+      document.documentElement.classList.remove("modal-lock");
+      setTimeout(function () { frame.src = "about:blank"; }, 250);
+    }
+    frame.addEventListener("load", function () { load.style.display = "none"; frame.style.opacity = "1"; });
+    m.addEventListener("click", function (e) { if (e.target === m) close(); });
+    m.querySelector(".pmodal-close").addEventListener("click", close);
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && m.classList.contains("open")) close(); });
+
+    document.querySelectorAll(".d-card.link .cardmain").forEach(function (a) {
+      a.addEventListener("click", function (e) {
+        e.preventDefault();
+        open(a.getAttribute("href"), a.getAttribute("data-title") || "");
+      });
+    });
+  })();
+
   function applyLang(lang) {
     LANG = lang;
     try { localStorage.setItem("lang", lang); } catch (e) {}
     document.documentElement.setAttribute("lang", lang === "zh" ? "zh-CN" : "en");
     document.querySelectorAll("[data-i18n]").forEach(function (el) { el.textContent = t(el.getAttribute("data-i18n")); });
+    document.querySelectorAll(".d-card [data-en][data-zh]").forEach(function (el) {
+      var txt = el.getAttribute("data-" + lang);
+      if (el.classList.contains("cardgo")) el.setAttribute("title", txt); else el.textContent = txt;
+    });
 
     document.title = p.title[lang] + " — Morimoto Zhang";
     document.getElementById("dCat").textContent = t("cat_" + p.cat);

@@ -497,33 +497,52 @@ window.PROJECTS = [
     }
   },
   {
-    "id": "design-tokens",
+    "id": "lottie performance analyzer",
     "cat": "tools",
-    "folder": "works/Tools/design-tokens",
-    "thumb": "cover.png",
-    "cover": "cover.png",
-    "media": [],
+    "folder": "works/Tools/lottie performance analyzer",
+    "thumb": "thumb.webp",
+    "cover": "cover.webp",
+    "media": [
+      {
+        "t": "link",
+        "src": "https://www.moodoc.me/lottie/lottie_performance_analyzer_pro_v_15.html",
+        "title": "Lottie_performance_analyzer_pro_v_15.6"
+      },
+      {
+        "t": "file",
+        "src": "https://www.moodoc.me/lottie/wind2.jason",
+        "title": "Test jason"
+      },
+      {
+        "t": "img",
+        "src": "01.webp"
+      }
+    ],
     "year": "2026",
     "role": {
-      "en": "Design Systems",
-      "zh": "设计系统"
+      "en": "Tool Development",
+      "zh": "工具开发"
     },
     "title": {
-      "en": "Design Tokens",
-      "zh": "设计变量工具"
+      "en": "Lottie performance analyzer pro_v15.6",
+      "zh": "Lottie  性能检测仪 pro_v15.6"
     },
     "desc": {
-      "en": "Tokens & theming engine",
-      "zh": "变量与主题引擎"
+      "en": "Motion designers using Mac computers can simulate several mainstream vehicle chips to conduct performance tests.",
+      "zh": "基于使用苹果电脑的动效设计师, 可以模拟主流的几个车机芯片进行性能测试"
     },
     "about": {
       "en": [
-        "A token pipeline that keeps color, type and spacing consistent from design file to production code.",
-        "One source of truth, themeable across light, dark and brand variants."
+        "This is a practical self-designed tool developed with AI technology, mainly helping motion designers complete performance evaluation efficiently.",
+        "You can directly drag and drop Lottie files or complex compressed packages to view various performance parameters, along with visualized charts and scoring results.",
+        "Most importantly, it is equipped with an encapsulation function, which can integrate your complex compressed packages into a single JSON file with one click.",
+        "[You can download the test JSON file below for trial use.]"
       ],
       "zh": [
-        "一套变量流水线,让色彩、字体与间距从设计稿到生产代码保持一致。",
-        "单一事实来源,可在浅色、深色与品牌变体间自由主题化。"
+        "本工具为自主构思设计、依托 AI 技术开发的实用辅助程序，专为动效设计师打造，用于高效完成动效性能评估。",
+        "支持直接拖拽导入 Lottie 文件及各类复杂压缩包，一键解析即可直观查看各类性能参数，同步生成可视化数据图表与综合评分。",
+        "核心亮点新增一键封装功能，可将多文件组合的复杂资源包快速整合输出为标准 JSON 格式文件。",
+        "你可下载下方测试 JSON 文件进行实操体验。"
       ]
     }
   },

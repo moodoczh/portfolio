@@ -75,6 +75,12 @@
   .pv-media .pm{border-radius:9px;overflow:hidden;border:1px solid var(--line);background:#101014}
   .pv-media .pm img{width:100%;display:block}
   .pv-media .pmbox{padding:16px;text-align:center;color:var(--muted);font-size:12px;background:#000;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center}
+  .pv-media .pmcard{display:flex;align-items:center;gap:11px;padding:12px 13px;border:1px solid var(--line);border-radius:11px;background:var(--panel2)}
+  .pv-media .pmcard .ic{flex:none;width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;background:#101014;border:1px solid var(--line);font-size:16px}
+  .pv-media .pmcard .ct{flex:1;min-width:0}
+  .pv-media .pmcard .cn{font-size:13px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .pv-media .pmcard .cs{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+  .pv-media .pmcard .go{flex:none;color:var(--muted);font-size:14px}
   @media(max-width:1100px){.editor{grid-template-columns:1fr}.preview{position:static;height:auto;border-left:0;border-top:1px solid var(--line)}}
 </style>
 </head>
@@ -219,7 +225,10 @@
       "<div class='sec'><div class='sh'><span class='lab'>媒体(图 + 视频,交错排序)</span><span class='spec'>拖图或视频进来 · ↑↓ 调顺序 · 图按原比例(长图不裁)· 视频 ≤25MB</span></div>"+
         "<div class='mlist' id='mediaList'></div>"+
         "<div class='drop' id='mediaDrop' style='width:100%;min-height:58px'><div class='ph'>拖图片 / 视频到这里(可多选)或点击</div></div><input type='file' accept='image/*,video/*' multiple id='mediaFile' style='display:none'>"+
-        "<div style='display:flex;gap:8px;margin-top:8px'><input id='mediaLink' placeholder='粘贴 B站 / YouTube 视频链接'><button class='btn sm' id='mediaLinkBtn'>加视频链接</button></div></div>"+
+        "<div style='display:flex;gap:8px;margin-top:8px'><input id='mediaLink' placeholder='粘贴 B站 / YouTube 视频链接'><button class='btn sm' id='mediaLinkBtn'>加视频链接</button></div>"+
+        "<div style='display:flex;gap:8px;margin-top:8px'><input id='cardLinkTitle' placeholder='浮窗卡片标题' style='max-width:150px'><input id='cardLinkUrl' placeholder='点开弹浮窗的网址 https://…'><button class='btn sm' id='cardLinkBtn'>加浮窗卡片</button></div>"+
+        "<div style='display:flex;gap:8px;margin-top:8px'><input id='cardFileTitle' placeholder='附件卡片标题' style='max-width:150px'><input id='cardFileUrl' placeholder='附件下载地址 https://…'><button class='btn sm' id='cardFileBtn'>加下载附件</button></div>"+
+        "<div class='spec' style='margin-top:7px'>浮窗卡片:点开在站内大浮窗里打开网页(可点空白/✕关闭,或右上角新窗口打开)。附件卡片:点了直接下载。都只填地址,和图片视频一起拖动排序。</div></div>"+
       "<label>年份</label><input id='f_year' value=\""+esc(p.year||"")+"\" placeholder='2026'>"+
       "<div class='row'><div>"+fi("标题(英文) <span class='req'>*</span>","f_title_en",p.title.en,"Digital Cluster HMI")+"</div><div>"+fi("标题(中文) <span class='req'>*</span>","f_title_zh",p.title.zh,"数字仪表 HMI")+"</div></div>"+
       "<div class='row'><div>"+fi("副标题(英文)","f_desc_en",p.desc.en,"Next-gen instrument cluster")+"</div><div>"+fi("副标题(中文)","f_desc_zh",p.desc.zh,"新一代数字仪表")+"</div></div>"+
@@ -247,6 +256,8 @@
     md.addEventListener("dragleave",function(){md.classList.remove("drag");});
     md.addEventListener("drop",function(e){e.preventDefault();md.classList.remove("drag");handleMedia(p,[].slice.call(e.dataTransfer.files));});
     document.getElementById("mediaLinkBtn").onclick=function(){var v=document.getElementById("mediaLink"),u=v.value.trim();if(!u)return;mediaItems(p).push({t:"embed",src:u});v.value="";p._dirty=true;renderMediaList(p);renderPreview(p);renderList();};
+    document.getElementById("cardLinkBtn").onclick=function(){var tt=document.getElementById("cardLinkTitle"),uu=document.getElementById("cardLinkUrl"),url=uu.value.trim();if(!url)return;mediaItems(p).push({t:"link",src:url,title:tt.value.trim()});tt.value="";uu.value="";p._dirty=true;renderMediaList(p);renderPreview(p);renderList();toast("已加浮窗卡片");};
+    document.getElementById("cardFileBtn").onclick=function(){var tt=document.getElementById("cardFileTitle"),uu=document.getElementById("cardFileUrl"),url=uu.value.trim();if(!url)return;mediaItems(p).push({t:"file",src:url,title:tt.value.trim()});tt.value="";uu.value="";p._dirty=true;renderMediaList(p);renderPreview(p);renderList();toast("已加下载附件");};
 
     document.getElementById("delBtn").onclick=function(){if(confirm("删除这个作品?保存后会连同它的文件夹一起从磁盘删除。")){var dp=projects[cur];if(dp&&dirHandle)pendingDeletes.push((dp._origFolder||fPath(dp)).split("/"));projects.splice(cur,1);cur=-1;curProj=null;renderList();form.innerHTML="<div class='empty'>已从列表删除,点「保存全部」后彻底移除。</div>";preview.innerHTML="";}};
     document.getElementById("upBtn").onclick=function(){moveProj(-1);};document.getElementById("downBtn").onclick=function(){moveProj(1);};
@@ -261,12 +272,16 @@
   async function handleCover(p,file,td,cd){try{var rc=await processCrop(file,COVER.w,COVER.h);p._coverBlob=rc.blob;p._coverExt=rc.ext;p._coverURL=URL.createObjectURL(rc.blob);if(!p._thumbExplicit){var rt=await processCrop(file,THUMB.w,THUMB.h);p._thumbBlob=rt.blob;p._thumbExt=rt.ext;p._thumbURL=URL.createObjectURL(rt.blob);setDropImg(td,p._thumbURL);}p._dirty=true;setDropImg(cd,p._coverURL);renderPreview(p);renderList();toast("详情大图已处理"+(p._thumbExplicit?"":" + 自动缩略图")+"(WebP)");}catch(e){toast("大图失败:"+e.message,"err");}}
 
   /* ---------- media ---------- */
-  function mediaItems(p){if(p._media==null)p._media=(p.media||[]).map(function(it){return{t:it.t,existing:it.src};});return p._media;}
-  function mLabel(it){if(it.name)return it.name;if(it.t==="embed")return it.src||it.existing;if(it.existing)return it.existing;return (it.t==="vid"?"视频":"图片");}
+  function mediaItems(p){if(p._media==null)p._media=(p.media||[]).map(function(it){
+    if(it.t==="link"||it.t==="file")return {t:it.t,src:it.src,title:it.title||""};
+    if(it.t==="embed")return {t:"embed",src:it.src};
+    return {t:it.t,existing:it.src};});return p._media;}
+  function mLabel(it){if(it.t==="link"||it.t==="file")return it.title||it.src;if(it.name)return it.name;if(it.t==="embed")return it.src||it.existing;if(it.existing)return it.existing;return (it.t==="vid"?"视频":"图片");}
   function mThumbUrl(p,it){if(it.t==="img"){return it.url||(it.existing?fPath(p)+"/"+it.existing+"?"+Date.now():"");}return "";}
-  function mIcon(it){return it.t==="vid"?"🎬":it.t==="embed"?"🔗":"🖼";}
+  function mIcon(it){return it.t==="vid"?"🎬":it.t==="embed"?"🔗":it.t==="link"?"🪟":it.t==="file"?"📎":"🖼";}
+  function mBadge(it){return it.t==="img"?"图":it.t==="vid"?"视频":it.t==="embed"?"视频链接":it.t==="link"?"浮窗":it.t==="file"?"附件":"链接";}
   function renderMediaList(p){var w=document.getElementById("mediaList");if(!w)return;var list=mediaItems(p);if(!list.length){w.innerHTML="<div class='hint'>暂无媒体</div>";return;}
-    w.innerHTML=list.map(function(it,i){var tu=mThumbUrl(p,it);var badge=it.t==="img"?"图":it.t==="vid"?"视频":"链接";
+    w.innerHTML=list.map(function(it,i){var tu=mThumbUrl(p,it);var badge=mBadge(it);
       return "<div class='mitem'><div class='th'"+(tu?" style=\"background-image:url('"+tu+"')\"":"")+">"+(tu?"":mIcon(it))+"</div><span class='badge'>"+badge+"</span><span class='nm'>"+esc(mLabel(it))+"</span><button class='btn sm' data-mm='"+i+"' data-d='-1'>↑</button><button class='btn sm' data-mm='"+i+"' data-d='1'>↓</button><button class='btn sm danger' data-mr='"+i+"'>✕</button></div>";}).join("");
     w.querySelectorAll("[data-mm]").forEach(function(b){b.onclick=function(){var i=+b.dataset.mm,d=+b.dataset.d,j=i+d,L=p._media;if(j<0||j>=L.length)return;var t=L[i];L[i]=L[j];L[j]=t;p._dirty=true;renderMediaList(p);renderPreview(p);};});
     w.querySelectorAll("[data-mr]").forEach(function(b){b.onclick=function(){p._media.splice(+b.dataset.mr,1);p._dirty=true;renderMediaList(p);renderPreview(p);};});}
@@ -291,6 +306,8 @@
     var mlist=(p._media!=null)?p._media:(p.media||[]).map(function(it){return{t:it.t,existing:it.src};});
     var mediaHtml=mlist.map(function(it){
       if(it.t==="img"){var u=it.url||(it.existing?fPath(p)+"/"+it.existing:"");return "<div class='pm'><img src='"+u+"'></div>";}
+      if(it.t==="link"){return "<div class='pmcard'><span class='ic'>🪟</span><div class='ct'><div class='cn'>"+esc(it.title||it.src||"浮窗卡片")+"</div><div class='cs'>点开浮窗预览</div></div><span class='go'>↗</span></div>";}
+      if(it.t==="file"){return "<div class='pmcard'><span class='ic'>📎</span><div class='ct'><div class='cn'>"+esc(it.title||it.src||"下载附件")+"</div><div class='cs'>下载附件</div></div><span class='go'>↓</span></div>";}
       return "<div class='pmbox'>"+(it.t==="vid"?"🎬 视频(原比例自适应)":"🔗 视频链接(16:9)")+"</div>";
     }).join("");
     preview.innerHTML=
@@ -326,19 +343,21 @@
               var resolved=[];
               for(var mi=0;mi<p._media.length;mi++){var it=p._media[mi];
                 if(it.t==="embed"){resolved.push({t:"embed",src:it.src||it.existing});}
+                else if(it.t==="link"||it.t==="file"){resolved.push({t:it.t,src:it.src||it.existing,title:it.title||""});}
                 else if(it.blob){resolved.push({t:it.t,blob:it.blob,ext:it.ext});}
                 else if(it.existing){try{var f=await readFile(dirHandle,fp.concat(it.existing));var buf=await f.arrayBuffer();resolved.push({t:it.t,blob:new Blob([buf],{type:f.type}),ext:(it.existing.split(".").pop()||"webp")});}catch(fe){/* 文件缺失/读取失败,跳过 */}}}
               await clearNumberedMedia(dirHandle,fp);
               var media=[],fn=0,mfail=0;
               for(var r=0;r<resolved.length;r++){var it2=resolved[r];
                 if(it2.t==="embed"){media.push({t:"embed",src:it2.src});}
+                else if(it2.t==="link"||it2.t==="file"){media.push({t:it2.t,src:it2.src,title:it2.title||""});}
                 else{fn++;var nm=String(fn).padStart(2,"0")+"."+it2.ext;
                   try{await writeBlob(dirHandle,fp.concat(nm),it2.blob);media.push({t:it2.t,src:nm});}
                   catch(we){fn--;mfail++;}}}
               p.media=media;
               if(mfail)failed.push((p.id||"?")+"·"+mfail+"个媒体写入失败");
             }
-            var keepN=(p.media||[]).filter(function(x){return x.t!=="embed";}).map(function(x){return x.src;});
+            var keepN=(p.media||[]).filter(function(x){return x.t==="img"||x.t==="vid";}).map(function(x){return x.src;});
             await pruneOrphans(dirHandle,fp,keepN);
             p._thumbBlob=null;p._thumbURL=null;p._coverBlob=null;p._coverURL=null;p._media=null;p._dirty=false;
           }catch(perr){failed.push((p.id||"?")+"("+(perr.name||"err")+")");}
@@ -354,7 +373,7 @@
         for(var i2=0;i2<projects.length;i2++){var p2=projects[i2],fp2=fPath(p2);
           if(p2._thumbBlob){download("thumb."+p2._thumbExt,p2._thumbBlob);p2.thumb="thumb."+p2._thumbExt;count++;}
           if(p2._coverBlob){download("cover."+p2._coverExt,p2._coverBlob);p2.cover="cover."+p2._coverExt;count++;}
-          if(p2._media!=null){var md=[],n=0;for(var m2=0;m2<p2._media.length;m2++){var it3=p2._media[m2];if(it3.t==="embed"){md.push({t:"embed",src:it3.src||it3.existing});}else if(it3.blob){n++;var nm3=String(n).padStart(2,"0")+"."+it3.ext;download(nm3,it3.blob);md.push({t:it3.t,src:nm3});count++;}else if(it3.existing){n++;md.push({t:it3.t,src:it3.existing});}}p2.media=md;}}
+          if(p2._media!=null){var md=[],n=0;for(var m2=0;m2<p2._media.length;m2++){var it3=p2._media[m2];if(it3.t==="embed"){md.push({t:"embed",src:it3.src||it3.existing});}else if(it3.t==="link"||it3.t==="file"){md.push({t:it3.t,src:it3.src||it3.existing,title:it3.title||""});}else if(it3.blob){n++;var nm3=String(n).padStart(2,"0")+"."+it3.ext;download(nm3,it3.blob);md.push({t:it3.t,src:nm3});count++;}else if(it3.existing){n++;md.push({t:it3.t,src:it3.existing});}}p2.media=md;}}
         download("projects.js",new Blob([buildOut()],{type:"text/javascript"}));
         toast("已下载 projects.js 和 "+count+" 个文件,按各自路径手动放。建议用 Chrome 免手动。","warn");
       }

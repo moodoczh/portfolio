@@ -184,6 +184,36 @@ footer .brand2 .mark{width:22px;height:22px;border-radius:6px;background:conic-g
 .d-m.vid video{width:100%;height:auto;display:block;background:#000}
 .d-m.embed{position:relative;aspect-ratio:16/9}
 .d-m.embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+/* resource / attachment cards */
+.d-card{display:flex;align-items:center;gap:16px;padding:18px 20px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.028),rgba(255,255,255,.01));position:relative;overflow:hidden;transition:border-color .35s,transform .35s,background .35s}
+.d-card::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 140% at 0% 0%,rgba(125,118,255,.10),transparent 60%);opacity:0;transition:opacity .4s}
+.d-card:hover{border-color:var(--line2);transform:translateY(-2px)}
+.d-card:hover::before{opacity:1}
+.d-card .cardmain,.d-card.file{display:flex;align-items:center;gap:16px;flex:1;min-width:0;position:relative;z-index:1}
+.d-card .ic{flex:none;width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--accent);transition:color .3s,border-color .3s}
+.d-card:hover .ic{color:var(--ink);border-color:var(--line2)}
+.d-card .ct{display:flex;flex-direction:column;gap:3px;min-width:0}
+.d-card .cn{font-size:16px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.d-card .cs{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.d-card .go{flex:none;font-size:17px;color:var(--muted);transition:transform .35s,color .35s;margin-left:auto}
+.d-card.file:hover .go{transform:translateY(3px);color:var(--ink)}
+.d-card .cardgo{flex:none;width:40px;height:40px;border-radius:100px;display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--muted);border:1px solid var(--line);transition:color .3s,border-color .3s,transform .3s;margin-left:auto;z-index:1}
+.d-card .cardgo:hover{color:var(--ink);border-color:var(--line2);transform:translate(2px,-2px)}
+/* iframe lightbox modal */
+html.modal-lock{overflow:hidden}
+.pmodal{position:fixed;inset:0;z-index:8000;display:flex;align-items:center;justify-content:center;padding:clamp(14px,3vw,40px);background:rgba(6,6,9,.72);backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .3s}
+.pmodal.open{opacity:1;pointer-events:auto}
+.pmodal-inner{width:min(1180px,100%);height:min(84vh,900px);display:flex;flex-direction:column;background:var(--bg2);border:1px solid var(--line2);border-radius:18px;overflow:hidden;box-shadow:0 40px 120px rgba(0,0,0,.6);transform:scale(.97) translateY(10px);transition:transform .32s cubic-bezier(.22,1,.36,1)}
+.pmodal.open .pmodal-inner{transform:none}
+.pmodal-bar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 16px 13px 20px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.02)}
+.pmodal-title{font-size:14px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pmodal-acts{display:flex;align-items:center;gap:8px;flex:none}
+.pmodal-new,.pmodal-close{width:34px;height:34px;border-radius:100px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);color:var(--muted);font-size:15px;cursor:pointer;background:transparent;transition:color .25s,border-color .25s,background .25s}
+.pmodal-new:hover,.pmodal-close:hover{color:var(--ink);border-color:var(--line2);background:rgba(255,255,255,.05)}
+.pmodal-body{position:relative;flex:1;background:#fff}
+.pmodal-body iframe{position:absolute;inset:0;width:100%;height:100%;border:0;opacity:0;transition:opacity .3s;background:#fff}
+.pmodal-load{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#8a8a90;font-size:13px;letter-spacing:.1em;background:var(--bg2)}
+@media(max-width:640px){.pmodal-inner{height:88vh;border-radius:14px}.d-card{padding:15px 16px;gap:13px}.d-card .cn{font-size:15px}}
 .d-next{border-top:1px solid var(--line);padding:clamp(50px,8vw,100px) var(--pad);margin:0 calc(-1*var(--pad));text-align:center}
 .d-next .k{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
 .d-next a{font-size:clamp(32px,6vw,80px);font-weight:600;letter-spacing:-.03em;display:inline-flex;align-items:center;gap:18px;transition:color .3s}
