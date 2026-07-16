@@ -91,10 +91,12 @@ window.PROJECTS = [
     },
     "about": {
       "en": [
-        "This is Qt's first HMI demo for civilian vehicles, marking Qt Group's official entry into the civilian automotive 3D engine market. It aims to carve out a niche in the market currently dominated by Unity and Unreal Engine.In this project, I was responsible for motion effect planning and production of the Qt demo project. I appreciate my colleagues for their professional 3D technical support. In addition, I created IPA demo animations with AI tools to serve as references for the development and implementation of 3D visual effects."
+        "This is Qt's first HMI demo for civilian vehicles, marking Qt Group's official entry into the civilian automotive 3D engine market. It aims to carve out a niche in the market currently dominated by Unity and Unreal Engine.",
+        "In this project, I was responsible for motion effect planning and production of the Qt demo project. I appreciate my colleagues for their professional 3D technical support. In addition, I created IPA demo animations with AI tools to serve as references for the development and implementation of 3D visual effects."
       ],
       "zh": [
-        "这是 Qt 首款面向民用汽车领域的 HMI 演示项目，标志着 Qt 团队正式入局民用车载 3D 引擎赛道，力求在 Unity 与虚幻引擎占据的市场中开辟专属发展空间。本项目中，我负责 Qt 演示工程的动效策划、动效制作，同时感谢同事提供专业 3D 技术支持。此外我借助 AI 工具制作 IPA 演示动画，为 3D 视觉效果的开发落地提供参考依据。"
+        "这是 Qt 首款面向民用汽车领域的 HMI 演示项目，标志着 Qt 团队正式入局民用车载 3D 引擎赛道，力求在 Unity 与虚幻引擎占据的市场中开辟专属发展空间。",
+        "本项目中，我负责 Qt 演示工程的动效策划、动效制作，同时感谢同事提供专业 3D 技术支持。此外我借助 AI 工具制作 IPA 演示动画，为 3D 视觉效果的开发落地提供参考依据。"
       ]
     },
     "thumb": "thumb.webp",
