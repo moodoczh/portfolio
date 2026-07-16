@@ -546,35 +546,42 @@ window.PROJECTS = [
     }
   },
   {
-    "id": "vehicle-configurator",
+    "id": "Maya",
     "cat": "3d",
-    "folder": "works/3D/vehicle-configurator",
-    "thumb": "cover.png",
-    "cover": "cover.png",
-    "media": [],
+    "folder": "works/3D/Maya",
+    "thumb": "thumb.webp",
+    "cover": "cover.webp",
+    "media": [
+      {
+        "t": "img",
+        "src": "01.webp"
+      }
+    ],
     "year": "2026",
     "role": {
-      "en": "3D / Interaction",
-      "zh": "3D / 交互"
+      "en": "Product & 3D Design",
+      "zh": "Product & 3D Design"
     },
     "title": {
-      "en": "Vehicle Configurator",
-      "zh": "车型配置器"
+      "en": "Mayan Tzolk'in Calendar Ornament / Fridge Magnet",
+      "zh": "Mayan Tzolk'in Calendar Ornament / Fridge Magnet"
     },
     "desc": {
-      "en": "Realtime 3D configurator",
-      "zh": "实时 3D 配置"
+      "en": "Cultural and creative peripherals designed for Shanghai Museum, exquisite antique-style decorative ornaments",
+      "zh": "为上海博物馆定制文创周边，打造质感上乘的仿古工艺摆件"
     },
     "about": {
       "en": [
-        "A realtime configurator that lets buyers rotate, recolor and equip a vehicle with cinematic smoothness.",
-        "Every change renders instantly, keeping the sense of a real object in real light."
+        "I spent two weeks designing this Mayan Tzolk'in calendar ornament with gear structure. It is not overly difficult, yet the key lies in well-planned gear layout at the early stage and minimizing parts to ensure stable overall structure.",
+        "I fixed the structure by using small gears to press the panel of large gears, and added protrusions on the base to reduce sliding friction. The whole ornament is assembled with only four components.",
+        "The finished products were painted in various colors by the client, so I stick to my original intention and present the original design style."
       ],
       "zh": [
-        "实时配置器,让用户以电影级流畅度旋转、换色、选装车辆。",
-        "每次改动即时渲染,始终保持真实物体、真实光照的质感。"
+        "历时两周完成这款带齿轮传动结构的玛雅卓尔金历摆件设计。项目技术难度适中，核心难点在于前期齿轮结构布局，同时精简零部件数量，保障整体结构稳固性。设计上采用小齿轮压紧大齿轮面板实现定位固定，底座增设凸起结构以减小滑动摩擦阻力，整款摆件仅由四个零部件组装成型。",
+        "后续成品经合作方做了多彩涂装处理，我依旧保留原创设计理念，对外呈现最初的原生设计样貌。"
       ]
-    }
+    },
+    "locked": false
   },
   {
     "id": "realtime-scene",
