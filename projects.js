@@ -1125,7 +1125,8 @@ window.PROJECTS = [
       },
       {
         "t": "vid",
-        "src": "03.mp4"
+        "src": "03.mp4",
+        "col": 3
       },
       {
         "t": "img",
@@ -1203,6 +1204,104 @@ window.PROJECTS = [
       {
         "t": "img",
         "src": "09.webp"
+      }
+    ],
+    "locked": false
+  },
+  {
+    "id": "BMW Vector",
+    "cat": "hmi",
+    "folder": "works/HMI/BMW Vector",
+    "year": "2020",
+    "role": {
+      "en": "Motion",
+      "zh": "Motion"
+    },
+    "title": {
+      "en": "BMW Vector",
+      "zh": "BMW Vector"
+    },
+    "desc": {
+      "en": "Replicated all required dashboard dynamic effects for BMW with minimum cost and shortest lead time.",
+      "zh": "以最低成本、最短周期，完整复刻宝马车型所需全量仪表动态视觉效果"
+    },
+    "about": {
+      "en": [
+        "This is a vehicle riding experience test project launched by BMW in China. The Unity source files delivered from Germany require multi-level administrative approval, which normally takes up to 30 days. However, we were only given 7 days to complete the full delivery pipeline, including design, motion production and technical implementation.",
+        "",
+        "To bypass the long approval process, I performed reverse engineering on the original dashboard project files and extracted core image assets. I then recreated the complete motion effects frame-by-frame in After Effects with reference to official videos. The final solution adopted frame sequence playback, allowing developers to display corresponding frame sequences according to real-time vehicle speed, achieving accurate and efficient dynamic restoration."
+      ],
+      "zh": [
+        "本项目为 BMW 在国内开展的驾乘体验测试项目。德国总部的 Unity 源文件入境需经过多层审批，常规流程周期长达 30 天，而本次项目仅预留 7 天工期，需完成从设计、动效制作到开发落地的全流程交付。",
+        "",
+        "为突破审批周期限制，我对原厂仪表工程文件进行逆向解析，提取核心图片素材，并对照官方参考视频在 AE 中逐帧复刻全套动态效果。最终采用序列帧方案交付，开发端只需根据实时车速调用对应帧序列，即可高效还原仪表动态表现。"
+      ]
+    },
+    "thumb": "thumb.webp",
+    "cover": "cover.webp",
+    "media": [
+      {
+        "t": "vid",
+        "src": "01.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "02.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "03.mp4"
+      }
+    ],
+    "locked": false
+  },
+  {
+    "id": "Ford Rejuvenate",
+    "cat": "hmi",
+    "folder": "works/HMI/Ford Rejuvenate",
+    "year": "2021",
+    "role": {
+      "en": "Motion",
+      "zh": "Motion"
+    },
+    "title": {
+      "en": "Ford Rejuvenate",
+      "zh": "Ford Rejuvenate"
+    },
+    "desc": {
+      "en": "Loop Video for Rest Mode",
+      "zh": "小憩模式循环动态视频"
+    },
+    "about": {
+      "en": [
+        "I acted as an emergency troubleshooter in this project. After nearly a month of revisions, the solution still failed to satisfy Ford. I created a virtual immersive environment via AE visual effects, which was well received and approved by Ford's management team."
+      ],
+      "zh": [
+        "在该项目中我主要负责紧急优化救场工作。团队前期打磨近一月的方案始终未能达到福特方预期，我借助 AE 特效搭建出沉浸式虚拟场景视觉效果，最终方案顺利获得福特管理层认可。"
+      ]
+    },
+    "thumb": "thumb.webp",
+    "cover": "cover.webp",
+    "media": [
+      {
+        "t": "img",
+        "src": "01.webp"
+      },
+      {
+        "t": "img",
+        "src": "02.webp"
+      },
+      {
+        "t": "vid",
+        "src": "03.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "04.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "05.mp4"
       }
     ],
     "locked": false
