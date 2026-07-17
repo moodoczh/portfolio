@@ -418,35 +418,68 @@ window.PROJECTS = [
     "locked": false
   },
   {
-    "id": "driving-modes",
+    "id": "NETA EP41F01",
     "cat": "hmi",
-    "folder": "works/HMI/driving-modes",
-    "thumb": "cover.png",
-    "cover": "cover.png",
-    "media": [],
-    "year": "2024",
+    "folder": "works/HMI/NETA EP41F01",
+    "thumb": "thumb.webp",
+    "cover": "cover.webp",
+    "media": [
+      {
+        "t": "img",
+        "src": "01.webp"
+      },
+      {
+        "t": "vid",
+        "src": "02.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "03.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "04.mp4"
+      },
+      {
+        "t": "img",
+        "src": "05.webp"
+      },
+      {
+        "t": "img",
+        "src": "06.webp"
+      },
+      {
+        "t": "img",
+        "src": "07.webp"
+      },
+      {
+        "t": "img",
+        "src": "08.webp"
+      }
+    ],
+    "year": "2023",
     "role": {
-      "en": "Concept / UI",
-      "zh": "概念 / 界面"
+      "en": "Concept / UI / UX",
+      "zh": "Concept / UI / UX"
     },
     "title": {
-      "en": "Driving Modes",
-      "zh": "驾驶模式"
+      "en": "NETA EP41F01",
+      "zh": "NETA EP41F01"
     },
     "desc": {
-      "en": "Expressive mode switching",
-      "zh": "有表现力的模式切换"
+      "en": "HMI 3.0 interface built with atomic components and integrated AI functions",
+      "zh": "融合原子化组件体系与 AI 智能能力的 HMI 3.0 车载人机交互界面"
     },
     "about": {
       "en": [
-        "A driving-mode experience where each mode — comfort, sport, eco — carries its own color, motion and sound identity.",
-        "Switching feels like a deliberate change of character, not a settings toggle."
+        "NETA HMI 3.0 is divided into two development phases. The atomic component system was firstly implemented on female-oriented compact cars, while brand-new UI concept exploration was carried out based on the EP41 shooting brake.",
+        "The voice assistant image has been greatly upgraded to get rid of the previous rigid impression, adopting one-shot continuous animation for a more vivid visual experience. The air-conditioning interface is no longer confined to a cramped layout. Early AI-generated promotional preview images are attached below."
       ],
       "zh": [
-        "每种驾驶模式(舒适、运动、经济)都有专属的色彩、动效与声音识别。",
-        "切换像一次性格的转变,而不是一个冷冰冰的设置开关。"
+        "NETA HMI 3.0 项目分为两大研发阶段：原子化组件体系依托女性向车型完成落地搭建，全新 UI 设计理念则以 EP41 猎装车为载体开展创新探索。同时完成语音交互形象全面升级，一改以往生硬刻板的视觉风格，采用一镜到底流畅动效，整体风格灵动自然。空调交互界面也摆脱狭小局促的布局局限，视觉与操作体验全面优化。文末附早期 AI 制作的项目预热宣传效果图。"
       ]
-    }
+    },
+    "locked": false
   },
   {
     "id": "VOLVO APP",
@@ -601,12 +634,63 @@ window.PROJECTS = [
     "locked": false
   },
   {
+    "id": "Capsule Markdown",
+    "cat": "tools",
+    "folder": "works/Tools/Capsule Markdown",
+    "thumb": "thumb.webp",
+    "cover": "cover.webp",
+    "media": [
+      {
+        "t": "link",
+        "src": "https://www.figma.com/community/widget/1634425838935816136",
+        "title": "Capsule Markdown (Figma Widget)"
+      },
+      {
+        "t": "img",
+        "src": "01.webp"
+      },
+      {
+        "t": "code",
+        "title": "Update log",
+        "content": "2026/05/27\n\nNew Features\n\n\"To Do\" Status — Added a 6th marker status: To Do, with a matching purple theme.\nMarker Details List — Query results now include a full marker list with filtering (Category, Status) and sorting (newest/oldest). Each cell is clickable to jump to the marker on canvas.\nLoading Progress — Panel initialization and Query scanning now display step-by-step percentage progress instead of freezing the UI.\n\n\nBug Fixes\n\nNumBadge Text Visibility — Badge number text now adapts color per status to stay readable on dark backgrounds.\nDropdown Z-Order — Fixed filter dropdowns being clipped or hidden behind other elements.\nMarker Sequence Reset — New panels now scan existing markers to continue numbering correctly.\nFirst-Click Not Creating — Fixed the first Create click silently failing to produce a marker.\nCreate Button Lag — Removed per-click page scan, replaced with one-time initialization.\nCold Load Hang — Fixed panel getting permanently stuck on loading when opening a Figma file.\n\n\n2026/05/19\n\nNew Review status available for selection.\nAdded reply module.\nFixed the bug of incomplete type display in statistics list."
+      }
+    ],
+    "year": "2024",
+    "role": {
+      "en": "Product / Design / Development",
+      "zh": "Product / Design / Development"
+    },
+    "title": {
+      "en": "Grid System",
+      "zh": "Capsule Markdown (Figma Widget)"
+    },
+    "desc": {
+      "en": "A marker widget supporting one-click statistics and quick jump navigation, designed for tracking design feedback, defects and design notes.",
+      "zh": "可以快速统计和跳转的标记组件工具, 用于跟进设计反馈、问题缺陷与备注信息"
+    },
+    "about": {
+      "en": [
+        "Capsule Mark is a widget that lets you drop numbered markers directly onto your Figma canvas to track design feedback, issues, and notes. Each marker supports status tracking (In Progress, Done, Blocked, At Risk, Review), category tagging (New, Refine, Fix, Update, Feedback, Info), colored bracket-based comments, and a reply module for threaded conversations. Use the panel to create markers and query stats across your page with a built-in category table and status chart. Automatically reads your Figma username and avatar. Ideal for design reviews, QA annotation, and async team collaboration."
+      ],
+      "zh": [
+        "Capsule Mark 是一款 Figma 画布标记组件工具，支持将带编号的标记点直接放置在画布上，用于跟进设计反馈、问题缺陷与备注信息。",
+        "每个标记点均支持状态追踪（进行中、已完成、受阻、有风险、待审核）、分类标签（新增、优化修复、问题修正、内容更新、反馈意见、信息备注），搭配彩色边框批注功能与多层级回复对话模块。",
+        "用户可通过插件面板快速创建标记，依托内置分类数据表与状态统计图，全域查询页面内的标记数据。工具可自动读取 Figma 账号的用户名与头像，非常适用于设计评审、质检批注、团队异步协作场景。"
+      ]
+    },
+    "locked": false
+  },
+  {
     "id": "Capsule Craft",
     "cat": "tools",
     "folder": "works/Tools/Capsule Craft",
     "thumb": "thumb.webp",
     "cover": "cover.webp",
     "media": [
+      {
+        "t": "img",
+        "src": "01.webp"
+      },
       {
         "t": "code",
         "title": "Update Log",
@@ -740,83 +824,32 @@ window.PROJECTS = [
     }
   },
   {
-    "id": "Capsule Markdown",
-    "cat": "tools",
-    "folder": "works/Tools/Capsule Markdown",
-    "thumb": "thumb.webp",
-    "cover": "cover.webp",
-    "media": [
-      {
-        "t": "link",
-        "src": "https://www.figma.com/community/widget/1634425838935816136",
-        "title": "Capsule Markdown (Figma Widget)"
-      },
-      {
-        "t": "img",
-        "src": "01.webp"
-      },
-      {
-        "t": "img",
-        "src": "02.webp"
-      },
-      {
-        "t": "img",
-        "src": "03.webp"
-      },
-      {
-        "t": "code",
-        "title": "Update log",
-        "content": "2026/05/27\n\nNew Features\n\n\"To Do\" Status — Added a 6th marker status: To Do, with a matching purple theme.\nMarker Details List — Query results now include a full marker list with filtering (Category, Status) and sorting (newest/oldest). Each cell is clickable to jump to the marker on canvas.\nLoading Progress — Panel initialization and Query scanning now display step-by-step percentage progress instead of freezing the UI.\n\n\nBug Fixes\n\nNumBadge Text Visibility — Badge number text now adapts color per status to stay readable on dark backgrounds.\nDropdown Z-Order — Fixed filter dropdowns being clipped or hidden behind other elements.\nMarker Sequence Reset — New panels now scan existing markers to continue numbering correctly.\nFirst-Click Not Creating — Fixed the first Create click silently failing to produce a marker.\nCreate Button Lag — Removed per-click page scan, replaced with one-time initialization.\nCold Load Hang — Fixed panel getting permanently stuck on loading when opening a Figma file.\n\n\n2026/05/19\n\nNew Review status available for selection.\nAdded reply module.\nFixed the bug of incomplete type display in statistics list."
-      }
-    ],
-    "year": "2024",
-    "role": {
-      "en": "Product / Design / Development",
-      "zh": "Product / Design / Development"
-    },
-    "title": {
-      "en": "Grid System",
-      "zh": "Capsule Markdown (Figma Widget)"
-    },
-    "desc": {
-      "en": "A marker widget supporting one-click statistics and quick jump navigation, designed for tracking design feedback, defects and design notes.",
-      "zh": "可以快速统计和跳转的标记组件工具, 用于跟进设计反馈、问题缺陷与备注信息"
-    },
-    "about": {
-      "en": [
-        "Capsule Mark is a widget that lets you drop numbered markers directly onto your Figma canvas to track design feedback, issues, and notes. Each marker supports status tracking (In Progress, Done, Blocked, At Risk, Review), category tagging (New, Refine, Fix, Update, Feedback, Info), colored bracket-based comments, and a reply module for threaded conversations. Use the panel to create markers and query stats across your page with a built-in category table and status chart. Automatically reads your Figma username and avatar. Ideal for design reviews, QA annotation, and async team collaboration."
-      ],
-      "zh": [
-        "Capsule Mark 是一款 Figma 画布标记组件工具，支持将带编号的标记点直接放置在画布上，用于跟进设计反馈、问题缺陷与备注信息。",
-        "每个标记点均支持状态追踪（进行中、已完成、受阻、有风险、待审核）、分类标签（新增、优化修复、问题修正、内容更新、反馈意见、信息备注），搭配彩色边框批注功能与多层级回复对话模块。",
-        "用户可通过插件面板快速创建标记，依托内置分类数据表与状态统计图，全域查询页面内的标记数据。工具可自动读取 Figma 账号的用户名与头像，非常适用于设计评审、质检批注、团队异步协作场景。"
-      ]
-    },
-    "locked": false
-  },
-  {
-    "id": "QT group",
+    "id": "NETA GT",
     "cat": "hmi",
-    "folder": "works/HMI/QT group",
+    "folder": "works/HMI/NETA GT",
     "year": "2026",
     "role": {
-      "en": "Shot Planning/Motion",
-      "zh": "Shot Planning/Motion"
+      "en": "UI / Motion",
+      "zh": "UI / Motion"
     },
     "title": {
-      "en": "QT group",
-      "zh": "QT group"
+      "en": "NETA GT",
+      "zh": "NETA GT"
     },
     "desc": {
-      "en": "First Demo of Qt-based Civilian HMI Engine Trial",
-      "zh": "QT 尝试民用HMI 引擎的第一个DEMO"
+      "en": "HMI 2.0 function iteration with enhanced sport-oriented attributes",
+      "zh": "HMI 2.0 版本功能迭代升级，强化整车运动风格属性"
     },
     "about": {
       "en": [
-        "In this project, I was fully responsible for motion effect planning, development and integration of the Qt demo. I would like to thank my colleagues for providing 3D technical support. Meanwhile, I used AI tools to produce IPA demo animations, serving as references for the implementation of 3D visual effects."
+        "In this project, I aimed to deliver superior visual effects under limited system resources. I adopted pseudo-3D effects widely used in games by splitting assets into foreground, midground and background layers, and applied Lottie JS to control layered loop animations. The total resource size is only around 100KB, which effectively reduces memory usage.",
+        "",
+        "The newly added Fury Mode delivers stronger power perception. The right progress bar indicates accelerator depth while the left one shows brake depth. Once reaching the system speed limit, striking breakthrough animations will be triggered to amplify dynamic visual impact."
       ],
       "zh": [
-        "本项目中，我全权负责 Qt 演示工程的动效策划、开发与集成落地，同时感谢同事提供专业 3D 技术支持。此外我借助 AI 工具制作 IPA 演示动画，为 3D 视觉效果的开发落地提供参考依据。"
+        "本项目需在有限系统资源下呈现优质视觉表现。我借鉴游戏主流伪 3D 制作思路，将视觉素材划分为前景、中景、远景三层，借助 Lottie JS 脚本驱动分层循环动画，整体资源体积仅约 100KB，大幅严控内存占用。",
+        "",
+        "全新上线狂暴模式，视觉张力十足。界面右侧进度条实时显示油门开度，左侧展示刹车行程；车速触及系统限速阈值时，自动触发突破式动态特效，进一步强化视觉冲击与驾驶氛围感。"
       ]
     },
     "thumb": "thumb.webp",
@@ -841,19 +874,8 @@ window.PROJECTS = [
       {
         "t": "vid",
         "src": "05.mp4"
-      },
-      {
-        "t": "vid",
-        "src": "06.mp4"
-      },
-      {
-        "t": "vid",
-        "src": "07.mp4"
-      },
-      {
-        "t": "vid",
-        "src": "08.mp4"
       }
-    ]
+    ],
+    "locked": false
   }
 ];
