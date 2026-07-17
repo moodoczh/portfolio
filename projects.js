@@ -1051,5 +1051,160 @@ window.PROJECTS = [
       }
     ],
     "locked": false
+  },
+  {
+    "id": "HIFI Z",
+    "cat": "hmi",
+    "folder": "works/HMI/HIFI Z",
+    "year": "2021",
+    "role": {
+      "en": "Motion",
+      "zh": "Motion"
+    },
+    "title": {
+      "en": "HIFI Z",
+      "zh": "HIFI Z"
+    },
+    "desc": {
+      "en": "Full Component Motion Design",
+      "zh": "全量控件动效设计"
+    },
+    "about": {
+      "en": [
+        "It was a challenging project. I independently designed all component animations and delivered handoff motion data to developers via Protopie. Though it was my first time using this tool, I finished the work smoothly in the end."
+      ],
+      "zh": [
+        "该项目具备较高挑战性，我独立完成全部控件动效设计，借助 Protopie 输出可交付动效数据对接开发落地。这也是我初次实操这款工具，最终顺利完成全部工作。"
+      ]
+    },
+    "thumb": "thumb.webp",
+    "cover": "cover.webp",
+    "media": [
+      {
+        "t": "vid",
+        "src": "01.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "02.mp4"
+      }
+    ],
+    "locked": false
+  },
+  {
+    "id": "niutron os",
+    "cat": "hmi",
+    "folder": "works/HMI/niutron os",
+    "year": "2020",
+    "role": {
+      "en": "UI",
+      "zh": "UI"
+    },
+    "title": {
+      "en": "NIUTRON OS",
+      "zh": "NIUTRON OS"
+    },
+    "desc": {
+      "en": "HMI Design for NIUTRON, the automotive brand founded by the creator of NIU Electric Scooter",
+      "zh": "小牛电动创始人旗下汽车品牌自游家 NIUTRON 车载人机交互系统设计"
+    },
+    "about": {
+      "en": [],
+      "zh": []
+    },
+    "thumb": "thumb.webp",
+    "cover": "cover.webp",
+    "media": [
+      {
+        "t": "img",
+        "src": "01.webp"
+      },
+      {
+        "t": "img",
+        "src": "02.webp"
+      },
+      {
+        "t": "vid",
+        "src": "03.mp4"
+      },
+      {
+        "t": "img",
+        "src": "04.webp"
+      }
+    ],
+    "locked": false
+  },
+  {
+    "id": "TOYOTA E-palette",
+    "cat": "hmi",
+    "folder": "works/HMI/TOYOTA E-palette",
+    "year": "2020",
+    "role": {
+      "en": "Product / UI / UX",
+      "zh": "Product / UI / UX"
+    },
+    "title": {
+      "en": "TOYOTA E-palette",
+      "zh": "TOYOTA E-palette"
+    },
+    "desc": {
+      "en": "Toyota's first fully autonomous driving bus made its commercial debut during the Beijing Winter Olympics.",
+      "zh": "丰田首款全自动驾驶巴士，于北京冬奥会正式投入商业化试运行"
+    },
+    "about": {
+      "en": [
+        "This was an extremely challenging project with severe constraints. First, the onboard chip had very limited computing power and could not support real-time 3D rendering. Second, the total project budget was only 100,000 RMB, which was fully allocated to design. Both the chips and development resources were provided for free.",
+        "",
+        "To achieve stereoscopic visual effects on hardware without native 3D rendering support, I leveraged my game development experience and developed a custom coordinate conversion logic between 2D and 3D systems — namely a 2.5D algorithm. In the early conceptual stage, I also adopted corner positioning techniques to implement lightweight pseudo-3D visual effects."
+      ],
+      "zh": [
+        "本项目极具挑战，受限条件严苛。一方面，设备芯片算力薄弱，原生不支持 3D 实时渲染；另一方面，项目整体预算仅十万元，且全部投入设计环节，芯片与开发资源均为公益支持、零成本供给。",
+        "",
+        "为在无 3D 渲染能力的硬件环境中实现立体视觉效果，我结合游戏开发经验，自研一套 2D 与 3D 坐标转换逻辑，搭建专属2.5D 渲染算法。项目概念初期，还通过边角定位技术实现轻量化伪 3D 视觉效果，在极低性能设备上达成立体视觉表现。"
+      ]
+    },
+    "thumb": "thumb.webp",
+    "cover": "cover.webp",
+    "media": [
+      {
+        "t": "vid",
+        "src": "01.mp4",
+        "col": 2
+      },
+      {
+        "t": "vid",
+        "src": "02.mp4",
+        "col": 2
+      },
+      {
+        "t": "vid",
+        "src": "03.mp4"
+      },
+      {
+        "t": "img",
+        "src": "04.webp"
+      },
+      {
+        "t": "img",
+        "src": "05.webp"
+      },
+      {
+        "t": "img",
+        "src": "06.webp"
+      },
+      {
+        "t": "img",
+        "src": "07.webp"
+      },
+      {
+        "t": "img",
+        "src": "08.webp"
+      },
+      {
+        "t": "img",
+        "src": "09.webp"
+      }
+    ],
+    "locked": false
   }
 ];
