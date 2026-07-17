@@ -709,68 +709,6 @@ window.PROJECTS = [
     "locked": false
   },
   {
-    "id": "trip-planner",
-    "cat": "app",
-    "folder": "works/App/trip-planner",
-    "thumb": "cover.png",
-    "cover": "cover.png",
-    "media": [],
-    "year": "2025",
-    "role": {
-      "en": "Product Design",
-      "zh": "产品设计"
-    },
-    "title": {
-      "en": "Trip Planner",
-      "zh": "行程规划"
-    },
-    "desc": {
-      "en": "Range-aware journeys",
-      "zh": "考虑续航的行程"
-    },
-    "about": {
-      "en": [
-        "A trip planner that weaves range, charging stops and time-of-arrival into a single confident plan.",
-        "Drag to reshape the route and the whole journey recalculates in real time."
-      ],
-      "zh": [
-        "把续航、充电点与到达时间编织成一个可信赖的行程方案。",
-        "拖动即可重塑路线,整段行程实时重新计算。"
-      ]
-    }
-  },
-  {
-    "id": "profile-wallet",
-    "cat": "app",
-    "folder": "works/App/profile-wallet",
-    "thumb": "cover.png",
-    "cover": "cover.png",
-    "media": [],
-    "year": "2024",
-    "role": {
-      "en": "UI Design",
-      "zh": "界面设计"
-    },
-    "title": {
-      "en": "Profile & Wallet",
-      "zh": "账户与钱包"
-    },
-    "desc": {
-      "en": "Account & payments",
-      "zh": "账户与支付"
-    },
-    "about": {
-      "en": [
-        "A profile and wallet space that keeps identity, payment and preferences tidy and glanceable.",
-        "Personalization surfaces the right shortcuts for each driver."
-      ],
-      "zh": [
-        "账户与钱包空间,把身份、支付与偏好整理得清爽、一目了然。",
-        "个性化会为每位车主浮现最合适的快捷入口。"
-      ]
-    }
-  },
-  {
     "id": "Maya",
     "cat": "3d",
     "folder": "works/3D/Maya",
@@ -1051,6 +989,65 @@ window.PROJECTS = [
       {
         "t": "vid",
         "src": "05.mp4"
+      }
+    ],
+    "locked": false
+  },
+  {
+    "id": "FORD IVI5",
+    "cat": "hmi",
+    "folder": "works/HMI/FORD IVI5",
+    "year": "2021",
+    "role": {
+      "en": "Product / UX / UI / Motion",
+      "zh": "Product / UX / UI / Motion"
+    },
+    "title": {
+      "en": "FORD IVI5 Concept",
+      "zh": "FORD IVI5 Concept"
+    },
+    "desc": {
+      "en": "Extended Application Concept of Vehicle 360° Panoramic Vision System",
+      "zh": "车辆 360° 全景影像拓展应用创意方案"
+    },
+    "about": {
+      "en": [
+        "This is a time-limited concept verification project completed within 3 days with two team members under my lead. I was in charge of preliminary product definition, interaction framework, scenario planning and storyboard design, and independently finished all UI designs and motion demos. My teammates assisted in producing 3D models and corresponding sequence frames."
+      ],
+      "zh": [
+        "本项目为工期紧张的概念验证项目，我带领两名组员协同推进，全程仅耗时三日。我主导完成前期产品定位、交互架构、场景规划与分镜设计工作，并独立落地全部界面设计与动态效果演示 demo。团队搭档同步配合完成 3D 模型制作及配套序列帧素材输出。"
+      ]
+    },
+    "thumb": "thumb.webp",
+    "cover": "cover.webp",
+    "media": [
+      {
+        "t": "vid",
+        "src": "01.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "02.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "03.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "04.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "05.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "06.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "07.mp4"
       }
     ],
     "locked": false
