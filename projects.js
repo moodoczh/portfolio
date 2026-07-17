@@ -740,35 +740,59 @@ window.PROJECTS = [
     }
   },
   {
-    "id": "grid-system",
+    "id": "Capsule Markdown",
     "cat": "tools",
-    "folder": "works/Tools/grid-system",
-    "thumb": "cover.png",
-    "cover": "cover.png",
-    "media": [],
+    "folder": "works/Tools/Capsule Markdown",
+    "thumb": "thumb.webp",
+    "cover": "cover.webp",
+    "media": [
+      {
+        "t": "link",
+        "src": "https://www.figma.com/community/widget/1634425838935816136",
+        "title": "Capsule Markdown (Figma Widget)"
+      },
+      {
+        "t": "img",
+        "src": "01.webp"
+      },
+      {
+        "t": "img",
+        "src": "02.webp"
+      },
+      {
+        "t": "img",
+        "src": "03.webp"
+      },
+      {
+        "t": "code",
+        "title": "Update log",
+        "content": "2026/05/27\n\nNew Features\n\n\"To Do\" Status — Added a 6th marker status: To Do, with a matching purple theme.\nMarker Details List — Query results now include a full marker list with filtering (Category, Status) and sorting (newest/oldest). Each cell is clickable to jump to the marker on canvas.\nLoading Progress — Panel initialization and Query scanning now display step-by-step percentage progress instead of freezing the UI.\n\n\nBug Fixes\n\nNumBadge Text Visibility — Badge number text now adapts color per status to stay readable on dark backgrounds.\nDropdown Z-Order — Fixed filter dropdowns being clipped or hidden behind other elements.\nMarker Sequence Reset — New panels now scan existing markers to continue numbering correctly.\nFirst-Click Not Creating — Fixed the first Create click silently failing to produce a marker.\nCreate Button Lag — Removed per-click page scan, replaced with one-time initialization.\nCold Load Hang — Fixed panel getting permanently stuck on loading when opening a Figma file.\n\n\n2026/05/19\n\nNew Review status available for selection.\nAdded reply module.\nFixed the bug of incomplete type display in statistics list."
+      }
+    ],
     "year": "2024",
     "role": {
-      "en": "Design Systems",
-      "zh": "设计系统"
+      "en": "Product / Design / Development",
+      "zh": "Product / Design / Development"
     },
     "title": {
       "en": "Grid System",
-      "zh": "栅格系统"
+      "zh": "Capsule Markdown (Figma Widget)"
     },
     "desc": {
-      "en": "Responsive layout kit",
-      "zh": "响应式布局套件"
+      "en": "A marker widget supporting one-click statistics and quick jump navigation, designed for tracking design feedback, defects and design notes.",
+      "zh": "可以快速统计和跳转的标记组件工具, 用于跟进设计反馈、问题缺陷与备注信息"
     },
     "about": {
       "en": [
-        "A responsive grid and layout kit that gives every screen a predictable rhythm.",
-        "Built to flex from compact mobile to wide desktop without breaking hierarchy."
+        "Capsule Mark is a widget that lets you drop numbered markers directly onto your Figma canvas to track design feedback, issues, and notes. Each marker supports status tracking (In Progress, Done, Blocked, At Risk, Review), category tagging (New, Refine, Fix, Update, Feedback, Info), colored bracket-based comments, and a reply module for threaded conversations. Use the panel to create markers and query stats across your page with a built-in category table and status chart. Automatically reads your Figma username and avatar. Ideal for design reviews, QA annotation, and async team collaboration."
       ],
       "zh": [
-        "一套响应式栅格与布局工具,为每个屏幕建立可预期的节奏。",
-        "从紧凑的手机到宽屏桌面都能自如伸缩,不破坏层级。"
+        "Capsule Mark 是一款 Figma 画布标记组件工具，支持将带编号的标记点直接放置在画布上，用于跟进设计反馈、问题缺陷与备注信息。",
+        "每个标记点均支持状态追踪（进行中、已完成、受阻、有风险、待审核）、分类标签（新增、优化修复、问题修正、内容更新、反馈意见、信息备注），搭配彩色边框批注功能与多层级回复对话模块。",
+        "用户可通过插件面板快速创建标记，依托内置分类数据表与状态统计图，全域查询页面内的标记数据。工具可自动读取 Figma 账号的用户名与头像，非常适用于设计评审、质检批注、团队异步协作场景。"
       ]
-    }
+    },
+    "locked": false
   },
   {
     "id": "QT group",
