@@ -176,6 +176,7 @@ footer .brand2 .mark{width:22px;height:22px;border-radius:6px;background:conic-g
 .d-cover img.loaded{opacity:1}
 .d-body{max-width:760px;margin:clamp(56px,8vw,110px) 0 clamp(30px,4vw,50px);display:grid;gap:26px}
 .d-body .oh{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.d-body #dBody{display:grid;gap:26px}
 .d-body p{font-size:clamp(16px,1.5vw,20px);line-height:1.7;color:#d8d8d6}
 /* unified media: images + videos, each at its own aspect ratio (width-adaptive) */
 .d-media-h{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);padding:0 0 24px}
