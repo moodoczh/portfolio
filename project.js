@@ -55,7 +55,7 @@
       (p.videos || []).forEach(function (v) { media.push({ t: /^https?:/.test(v) ? "embed" : "vid", src: v }); });
     }
     if (!media.length) { wrap.style.display = "none"; if (h) h.style.display = "none"; return; }
-    wrap.innerHTML = media.map(function (it) {
+    function renderItem(it) {
       if (it.t === "code") {
         return "<div class='d-code reveal'>" +
           "<div class='dc-bar'><span class='dc-dots'><i></i><i></i><i></i></span>" +
@@ -93,7 +93,20 @@
       var src = (it.src.indexOf("http") === 0 || it.src.indexOf("works/") === 0) ? it.src : p.folder + "/" + it.src;
       if (it.t === "vid") return "<div class='d-m vid reveal'><video src='" + src + "' controls autoplay muted loop playsinline preload='metadata'></video></div>";
       return "<div class='d-m img reveal'><img src='" + src + "' loading='lazy' alt=''></div>";
-    }).join("");
+    }
+    /* group consecutive multi-column items (col 2/3) into row grids; others stay full width */
+    var out = "", rowOpen = 0;
+    function closeRow() { if (rowOpen) { out += "</div>"; rowOpen = 0; } }
+    media.forEach(function (it) {
+      var gridType = (it.t === "img" || it.t === "vid" || it.t === "embed");
+      var col = gridType && (it.col === 2 || it.col === 3) ? it.col : 0;
+      if (col) {
+        if (rowOpen !== col) { closeRow(); out += "<div class='d-mrow cols-" + col + "'>"; rowOpen = col; }
+        out += renderItem(it);
+      } else { closeRow(); out += renderItem(it); }
+    });
+    closeRow();
+    wrap.innerHTML = out;
   })();
 
   /* ---------- link-card modal (iframe lightbox) ---------- */

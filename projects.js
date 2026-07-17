@@ -532,6 +532,183 @@ window.PROJECTS = [
     ]
   },
   {
+    "id": "LOTUS APP",
+    "cat": "app",
+    "folder": "works/App/LOTUS APP",
+    "year": "2026",
+    "role": {
+      "en": "UI / Motion",
+      "zh": "UI / Motion"
+    },
+    "title": {
+      "en": "LOTUS APP",
+      "zh": "LOTUS APP"
+    },
+    "desc": {
+      "en": "This is a highly sophisticated APP integrating community, car sales, vehicle control, after-sales service and online mall.",
+      "zh": "这款 APP 功能架构繁杂，深度整合社区社交、车辆售卖、车载控制、售后维保与线上商城多元业务板块。"
+    },
+    "about": {
+      "en": [
+        "This app has a highly complex information architecture, deeply integrating community features, vehicle sales, remote vehicle control, after-sales services, maintenance, and an online marketplace into a single platform.",
+        "",
+        "⸻",
+        "",
+        "Lately, I’ve been studying a number of automotive apps from Chinese manufacturers, and one question keeps coming to mind:",
+        "",
+        "**Why are so many companies trying to turn their vehicle companion app into a “super app”?**",
+        "",
+        "Community forums, e-commerce, vehicle sales, insurance, maintenance services, loyalty programs, live streaming, events… almost every business related to car ownership is bundled into a single application.",
+        "",
+        "At first, I thought this approach made sense. It could increase user engagement and create more opportunities for business growth. But the more I looked at it, the more I started wondering:",
+        "",
+        "**Is this really what users want?**",
+        "",
+        "I realized there are actually two very different product philosophies at play.",
+        "",
+        "One views the app as an extension of the vehicle. Its primary purpose is simple: check vehicle status, remotely start the air conditioning, lock or unlock the car, locate the vehicle, or schedule maintenance. Users open the app with a specific task in mind, complete it, and leave.",
+        "",
+        "The other views the app as a customer engagement platform. The goal is to keep users coming back every day—browsing community content, earning rewards, shopping for accessories, watching live streams, and participating in various activities that drive long-term business value.",
+        "",
+        "The challenge is that these two objectives often compete with each other.",
+        "",
+        "When the home screen becomes crowded with promotional content, events, and shopping features, even a simple task—like remotely turning on the air conditioning—can take longer than it should.",
+        "",
+        "A car isn’t a social media platform or an e-commerce marketplace. Most of the time, people open an automotive app with a clear intention. They want to accomplish something quickly, not spend time exploring content.",
+        "",
+        "That’s why I’ve come to believe an automotive app should follow a clear hierarchy.",
+        "",
+        "First comes vehicle control.",
+        "",
+        "This should always have the highest priority because it’s the primary reason users open the app.",
+        "",
+        "Second comes vehicle services.",
+        "",
+        "Maintenance, after-sales support, charging, and insurance belong here—important features, but ones users access only when needed.",
+        "",
+        "Third comes the ecosystem.",
+        "",
+        "Community, shopping, events, and other engagement features certainly create business value, but they shouldn’t interfere with the core user journey.",
+        "",
+        "From a business perspective, consolidating everything into one app may seem like the right strategy.",
+        "",
+        "But from a product design perspective, I’d rather think of an automotive app as a digital car key, not another all-in-one super app.",
+        "",
+        "Great products aren’t necessarily the ones with the most features. They’re the ones that know which features deserve to come first."
+      ],
+      "zh": [
+        "这款 APP 功能架构繁杂，深度整合社区社交、车辆售卖、车载控制、售后维保与线上商城多元业务板块。",
+        "",
+        "//",
+        "",
+        "最近在研究一些国内车企的 App，越看越有一个疑问：**为什么很多老板都希望把车控 App 做成一个「超级 App」？**",
+        "",
+        "社区、商城、车辆售卖、保险、维保、积分、直播、活动……几乎所有和车有关的业务，都想整合到同一个应用里。",
+        "",
+        "一开始我觉得，这样似乎能提高用户活跃度，也方便做运营。但越往后想，我反而开始怀疑，这真的是用户需要的吗？",
+        "",
+        "我发现，这里面其实有两个完全不同的产品思路。",
+        "",
+        "一种思路，是把 App 当作汽车的延伸。它的职责应该很简单：查看车辆状态、远程开空调、解锁、定位、预约保养……用户打开 App，完成一个明确的任务，然后离开。",
+        "",
+        "另一种思路，则是把 App 当作车主运营平台。希望用户每天都来逛社区、刷内容、签到领积分、买周边、看直播，甚至完成各种商业转化。",
+        "",
+        "问题在于，这两种目标经常会发生冲突。",
+        "",
+        "当首页充满了推荐内容、活动入口和商城广告时，一个只想远程开空调的用户，反而需要花更多时间去寻找真正需要的功能。",
+        "",
+        "汽车和短视频、本地生活不一样。大多数情况下，用户打开汽车 App，都是带着明确目的来的，他们希望的是快速完成，而不是长时间停留。",
+        "",
+        "所以我越来越认同一种产品层级：",
+        "",
+        "第一层，是车控。",
+        "",
+        "它应该永远放在最前面，因为这是用户打开 App 最核心的理由。",
+        "",
+        "第二层，是车辆服务。",
+        "",
+        "例如保养、售后、充电、保险等，这些属于需要的时候再进入。",
+        "",
+        "第三层，才是社区、商城和运营生态。",
+        "",
+        "它们当然有价值，也能创造商业收益，但不应该挤占最核心的使用路径。",
+        "",
+        "或许，从商业角度来看，把所有业务放进一个 App 是合理的；但从产品体验来看，我更愿意把汽车 App 当作一把数字车钥匙，而不是另一个什么都有的超级应用。",
+        "",
+        "真正优秀的产品，不一定功能最少，但一定知道什么应该放在最前面。"
+      ]
+    },
+    "thumb": "thumb.webp",
+    "cover": "cover.webp",
+    "media": [
+      {
+        "t": "vid",
+        "src": "01.mp4",
+        "col": 3
+      },
+      {
+        "t": "vid",
+        "src": "02.mp4",
+        "col": 3
+      },
+      {
+        "t": "vid",
+        "src": "03.mp4",
+        "col": 3
+      },
+      {
+        "t": "vid",
+        "src": "04.mp4"
+      },
+      {
+        "t": "vid",
+        "src": "05.mp4",
+        "col": 3
+      },
+      {
+        "t": "vid",
+        "src": "06.mp4",
+        "col": 3
+      },
+      {
+        "t": "vid",
+        "src": "07.mp4",
+        "col": 3
+      },
+      {
+        "t": "vid",
+        "src": "08.mp4",
+        "col": 3
+      },
+      {
+        "t": "vid",
+        "src": "09.mp4",
+        "col": 3
+      },
+      {
+        "t": "vid",
+        "src": "10.mp4",
+        "col": 3
+      },
+      {
+        "t": "vid",
+        "src": "11.mp4",
+        "col": 3
+      },
+      {
+        "t": "vid",
+        "src": "12.mp4",
+        "col": 3
+      },
+      {
+        "t": "vid",
+        "src": "13.mp4",
+        "col": 3
+      }
+    ],
+    "locked": false
+  },
+  {
     "id": "trip-planner",
     "cat": "app",
     "folder": "works/App/trip-planner",

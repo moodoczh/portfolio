@@ -181,6 +181,12 @@ footer .brand2 .mark{width:22px;height:22px;border-radius:6px;background:conic-g
 /* unified media: images + videos, each at its own aspect ratio (width-adaptive) */
 .d-media-h{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);padding:0 0 24px}
 .d-media{display:grid;gap:clamp(16px,2.2vw,26px);padding-bottom:clamp(60px,9vw,120px)}
+/* multi-column rows: portrait videos / small shots shown N per row on desktop */
+.d-mrow{display:grid;gap:clamp(12px,1.8vw,22px)}
+.d-mrow.cols-2{grid-template-columns:repeat(2,1fr)}
+.d-mrow.cols-3{grid-template-columns:repeat(3,1fr)}
+.d-mrow .d-m video,.d-mrow .d-m img{width:100%;height:auto;display:block}
+@media(max-width:760px){.d-mrow.cols-2,.d-mrow.cols-3{grid-template-columns:1fr}}
 .d-m{border-radius:16px;overflow:hidden;border:1px solid var(--line);background:#0d0d10}
 .d-m.img img{width:100%;height:auto;display:block;opacity:0;transition:opacity .8s ease}
 .d-m.img img.loaded{opacity:1}
